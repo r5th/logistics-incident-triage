@@ -52,16 +52,16 @@ def load_policy(path: str | Path) -> Policy:
 
 
 def predicted_urgency(pred: Prediction, policy: Policy) -> str:
-    return URGENT if pred.urgent_prob >= policy.thresholds["urgent_threshold"] else ROUTINE
+    return URGENT if pred.urgent_prob >= policy.thresholds[pred.approach]["urgent_threshold"] else ROUTINE
 
 
 def routing_mode(pred: Prediction, policy: Policy) -> tuple[str, list[str]]:
     """Return ("auto" | "review", reasons). Reasons are Review Trigger names, in a fixed order."""
-    t = policy.thresholds
+    t = policy.thresholds[pred.approach]
     reasons = [TRIGGER_NAMES.get(code, code) for code in pred.triggers
                if code in policy.forcing_triggers]
     lo, hi = t["review_band"]
-    if lo <= pred.urgent_prob <= hi:
+    if lo < hi and lo <= pred.urgent_prob <= hi:
         reasons.append(UNCERTAIN_URGENCY)
     if max(pred.category_probs.values(), default=0.0) < t["min_category_prob"]:
         reasons.append(LOW_CATEGORY)

@@ -10,10 +10,37 @@
     "review": 1
   },
   "thresholds": {
-    "urgent_threshold": 0.5,
-    "review_band": [0.2, 0.8],
-    "min_category_prob": 0.5,
-    "min_destination_prob": 0.5
+    "A": {
+      "urgent_threshold": 0.5,
+      "review_band": [
+        0.2,
+        0.8
+      ],
+      "min_category_prob": 0.5,
+      "min_destination_prob": 0.5
+    },
+    "B": {
+      "urgent_threshold": 0.5,
+      "review_band": [
+        0.2,
+        0.8
+      ],
+      "min_category_prob": 0.5,
+      "min_destination_prob": 0.5
+    },
+    "C": {
+      "urgent_threshold": 0.5,
+      "review_band": [
+        0.2,
+        0.8
+      ],
+      "min_category_prob": 0.5,
+      "min_destination_prob": 0.5
+    }
   },
-  "forcing_triggers": ["invalid_output", "no_rule_matched", "conflicting_statements"]
+  "forcing_triggers": [
+    "invalid_output",
+    "no_rule_matched",
+    "conflicting_statements"
+  ]
 }
