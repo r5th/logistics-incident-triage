@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-27T00:00:00Z",
+  "title": "Design System: Logistics Incident Triage",
+  "extensions": {
+    "colorMeta": {
+      "bg": { "role": "neutral", "displayName": "Page Grey", "canonical": "#f3f5f7", "dark": "#0d141b", "tonalRamp": ["#0d141b", "#141d26", "#1b2631", "#2a3846", "#7a8796", "#d3dae1", "#e9edf1", "#f3f5f7"] },
+      "surface": { "role": "neutral", "displayName": "Surface White", "canonical": "#ffffff", "dark": "#141d26", "tonalRamp": ["#0d141b", "#141d26", "#1b2631", "#2a3846", "#d3dae1", "#e9edf1", "#f3f5f7", "#ffffff"] },
+      "text": { "role": "neutral", "displayName": "Ink", "canonical": "#111c27", "dark": "#e7edf3", "tonalRamp": ["#111c27", "#2a3846", "#4a5866", "#7a8796", "#a3b2c1", "#d3dae1", "#e7edf3", "#f3f5f7"] },
+      "shell-motorway-blue": { "role": "primary", "displayName": "Motorway Blue Shell", "canonical": "#0b4a8b", "dark": "#0a3566", "tonalRamp": ["#0a3566", "#0b4a8b", "#0b57a8", "#4a86c8", "#7db3f0", "#b7c9df", "#c8d7ea", "#e2ecf8"] },
+      "accent": { "role": "primary", "displayName": "Signal Blue Accent", "canonical": "#0b57a8", "dark": "#7db3f0", "tonalRamp": ["#0a3566", "#0b4a8b", "#0b57a8", "#4a86c8", "#7db3f0", "#b7c9df", "#dce8f7", "#e2ecf8"] },
+      "urgent": { "role": "secondary", "displayName": "Warning Red", "canonical": "#b3261e", "dark": "#ff8a7d", "tonalRamp": ["#5c1310", "#8a1d17", "#b3261e", "#d6564d", "#ff8a7d", "#ffb0a6", "#ffd1cb", "#fff0ee"] },
+      "auto-green": { "role": "secondary", "displayName": "Primary-Route Green", "canonical": "#00703c", "dark": "#12804a", "darkText": "#4fc98a", "tonalRamp": ["#00381e", "#00703c", "#12804a", "#2fa066", "#4fc98a", "#8ddcb2", "#c4eed6", "#e6f8ee"] },
+      "review-yellow": { "role": "secondary", "displayName": "Diversion Yellow", "canonical": "#f2c200", "dark": "#f2c200", "edge": "#111111", "tonalRamp": ["#111111", "#5c4900", "#9a7c00", "#c9a000", "#f2c200", "#f7d54d", "#fbe68f", "#fdf4cc"] }
+    },
+    "typographyMeta": {
+      "title": { "displayName": "Title", "purpose": "Page h1." },
+      "title-3": { "displayName": "Title 3", "purpose": "Large plates and Urgency mark in the detail header." },
+      "body": { "displayName": "Body", "purpose": "Report text (68ch max) and general copy." },
+      "small": { "displayName": "Small", "purpose": "Nav, buttons, inputs, meta." },
+      "row": { "displayName": "Row", "purpose": "Dense table rows, plates, field labels." },
+      "caption": { "displayName": "Caption", "purpose": "Column heads, legends, chips, badges." }
+    },
+    "shadows": [
+      { "name": "plate-edge", "value": "inset 0 0 0 1.5px var(--plate-ink)", "purpose": "Destination plate border (3px when large)." },
+      { "name": "review-edge", "value": "inset 0 0 0 1.5px var(--review-edge)", "purpose": "Dark edge on the yellow Review plate in every mode (2px when large)." },
+      { "name": "evidence-underline", "value": "inset 0 -2px 0 var(--evidence-line)", "purpose": "Evidence highlight underline." }
+    ],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Hover, selection and inline form open." },
+      { "name": "dur", "value": "180ms", "purpose": "Default transition; opacity only under prefers-reduced-motion." }
+    ],
+    "breakpoints": [
+      { "name": "compact", "value": "599px" },
+      { "name": "medium", "value": "1023px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Destination plate",
+      "kind": "custom",
+      "refersTo": "plate-destination",
+      "description": "White direction plate with an arrow; identical for all six Destinations.",
+      "html": "<span class=\"ds-plate ds-plate-dest\">Fleet Support <svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></span>",
+      "css": ".ds-plate { display: inline-flex; align-items: center; gap: 6px; border-radius: 4px; font-weight: 650; font-size: 0.8125rem; line-height: 1; padding: 5px 8px; white-space: nowrap; } .ds-plate-dest { background: #ffffff; color: #111c27; box-shadow: inset 0 0 0 1.5px #111c27; }"
+    },
+    {
+      "name": "Auto-route plate",
+      "kind": "custom",
+      "refersTo": "plate-auto",
+      "description": "Green Routing Mode plate with icon and word.",
+      "html": "<span class=\"ds-plate ds-plate-auto\"><svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12l5 5 9-10\"/></svg>Auto-route</span>",
+      "css": ".ds-plate { display: inline-flex; align-items: center; gap: 6px; border-radius: 4px; font-weight: 650; font-size: 0.8125rem; line-height: 1; padding: 5px 8px; white-space: nowrap; } .ds-plate-auto { background: #00703c; color: #ffffff; }"
+    },
+    {
+      "name": "Review plate",
+      "kind": "custom",
+      "refersTo": "plate-review",
+      "description": "Yellow diversion plate with a dark outline in every mode.",
+      "html": "<span class=\"ds-plate ds-plate-review\"><svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linejoin=\"round\"><path d=\"M12 3l9 9-9 9-9-9z\"/></svg>Review</span>",
+      "css": ".ds-plate { display: inline-flex; align-items: center; gap: 6px; border-radius: 4px; font-weight: 650; font-size: 0.8125rem; line-height: 1; padding: 5px 8px; white-space: nowrap; } .ds-plate-review { background: #f2c200; color: #111111; box-shadow: inset 0 0 0 1.5px #111111; }"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single primary action per view.",
+      "html": "<button class=\"ds-btn ds-btn-primary\">Accept and route</button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 6px; border: 1px solid #7a8796; background: #ffffff; color: #111c27; font: inherit; font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: background-color 180ms cubic-bezier(0.16,1,0.3,1); } .ds-btn:hover { background: #e9edf1; } .ds-btn:focus-visible { outline: 2px solid #0b57a8; outline-offset: 2px; } .ds-btn:active { transform: translateY(1px); } .ds-btn-primary { background: #0b57a8; border-color: #0b57a8; color: #ffffff; } .ds-btn-primary:hover { background: #0b57a8; filter: brightness(1.1); }"
+    },
+    {
+      "name": "Default Button",
+      "kind": "button",
+      "refersTo": "button-default",
+      "description": "Secondary actions such as Override and Escalate.",
+      "html": "<button class=\"ds-btn\">Override</button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 6px; border: 1px solid #7a8796; background: #ffffff; color: #111c27; font: inherit; font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: background-color 180ms cubic-bezier(0.16,1,0.3,1); } .ds-btn:hover { background: #e9edf1; } .ds-btn:focus-visible { outline: 2px solid #0b57a8; outline-offset: 2px; }"
+    },
+    {
+      "name": "Urgency mark",
+      "kind": "custom",
+      "refersTo": "urgent",
+      "description": "Triangle icon plus word; never colour alone.",
+      "html": "<span class=\"ds-urg\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linejoin=\"round\"><path d=\"M12 3l10 18H2z\"/><path d=\"M12 10v5M12 18v.5\"/></svg>Urgent</span>",
+      "css": ".ds-urg { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8125rem; font-weight: 600; white-space: nowrap; color: #b3261e; }"
+    },
+    {
+      "name": "Review Trigger chip",
+      "kind": "chip",
+      "refersTo": "trigger-chip",
+      "description": "Rule-code chip beside a Review Trigger name.",
+      "html": "<span class=\"ds-chip\">I3</span>",
+      "css": ".ds-chip { display: inline-block; font-size: 0.75rem; font-weight: 650; border: 1px solid #d3dae1; border-radius: 4px; padding: 1px 6px; white-space: nowrap; color: #111c27; }"
+    },
+    {
+      "name": "Evidence highlight",
+      "kind": "custom",
+      "refersTo": "evidence-highlight",
+      "description": "Supporting sentence in the Incident Report: fill plus underline.",
+      "html": "<p class=\"ds-report\">Driver reports a <mark class=\"ds-mark\">fuel leak on the A14.</mark><sup>2</sup></p>",
+      "css": ".ds-report { font-size: 1rem; line-height: 1.5; color: #111c27; max-width: 68ch; } .ds-mark { background: #dce8f7; color: inherit; box-shadow: inset 0 -2px 0 #0b57a8; border-radius: 2px; } .ds-report sup { font-size: 0.6875rem; font-weight: 700; color: #0b57a8; }"
+    },
+    {
+      "name": "Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Bordered flat container; never nested.",
+      "html": "<div class=\"ds-panel\"><h2>Triage decisions</h2><p>Borders, not shadows.</p></div>",
+      "css": ".ds-panel { background: #ffffff; border: 1px solid #d3dae1; border-radius: 8px; padding: 16px 24px; color: #111c27; } .ds-panel h2 { font-size: 1rem; font-weight: 650; margin: 0 0 12px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Route Sign",
+    "overview": "Read it like a road sign. A Destination is a white direction plate with an arrow, Review is a yellow diversion plate, Auto-route is a green plate, and Urgent is a red warning triangle with the word. Where a report goes, and whether a human holds it first, reads at thumbnail size and in a screen-share. Everything else is a plain, dense operations tool: a motorway-blue navigation rail, a table, a two-column detail. The system is flat, bordered and quiet so the plates can carry the signal.",
+    "keyCharacteristics": [
+      "Plates appear in exactly three places: the Destination column, the Routing Mode column, and the detail header's route line.",
+      "Depth comes from 1px borders and tonal surfaces, not shadows.",
+      "Status is always icon plus word, never colour alone.",
+      "Dense desktop rows (13px), 44px touch targets on phone."
+    ],
+    "rules": [
+      { "name": "The Sign Colours Rule", "body": "Red, yellow and green mean Urgent, Review and Auto-route / target met, and nothing else. Accent blue is for actions and selection, never status.", "section": "colors" },
+      { "name": "The One Plate Colour Rule", "body": "All six Destinations share the same white (dark: near-black) plate; Destinations are never coloured individually.", "section": "colors" },
+      { "name": "The Tabular Figures Rule", "body": "Ids, times, counts and probabilities use font-variant-numeric: tabular-nums.", "section": "typography" },
+      { "name": "The Rem Rule", "body": "Sizes in rem and row heights as min-height, so 200% zoom works.", "section": "typography" },
+      { "name": "The Border-Not-Shadow Rule", "body": "Separation is a 1px border or a tonal step; never a blurred or offset shadow.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use colour roles from app.css, never raw hex, so both themes swap.",
+      "Do pair every status with an icon and a word (Urgent, Review, Auto-route, Met, Missed).",
+      "Do give every yellow surface a #111111 edge, in light and dark.",
+      "Do show every probability with its threshold and Evidence beside it.",
+      "Do keep the 2px accent focus outline (white on the shell) and 44px phone targets.",
+      "Do open Override and Escalate inline and confirm logged actions in the decision history, not in toasts."
+    ],
+    "donts": [
+      "Don't put plates anywhere beyond the Destination column, Routing Mode column and detail route line.",
+      "Don't colour Destinations differently from each other.",
+      "Don't use red, yellow or green for decoration, or accent blue for status.",
+      "Don't add drop shadows, decorative gradients, glass, glow, side stripes, monospace styling or emoji icons.",
+      "Don't nest cards, use a modal for Override, or add an in-app light/dark switch.",
+      "Don't use the words ticket, case, priority, severity, flag, abstain, approve, or \"queue\" for a team."
+    ]
+  }
+}
