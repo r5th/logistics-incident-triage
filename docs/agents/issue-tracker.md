@@ -11,7 +11,7 @@ Issues and specs for this repo live as GitHub issues. Use the `gh` CLI for all o
 - **Apply / remove labels**: `gh issue edit <number> --add-label "..."` / `--remove-label "..."`
 - **Close**: `gh issue close <number> --comment "..."`
 
-The repo is **`r5th/logistics-incident-triage`**. This clone has two GitHub remotes (`origin` → `r5th/triage-system`, `origin-1` → `r5th/logistics-incident-triage`), so `gh` may resolve to the wrong one: pass `--repo r5th/logistics-incident-triage` (or `-R`) on every `gh issue` / `gh pr` call, and use `repos/r5th/logistics-incident-triage/...` in `gh api` paths.
+The repo is **`r5th/logistics-incident-triage`** (the `origin` remote).
 
 ## Pull requests as a triage surface
 

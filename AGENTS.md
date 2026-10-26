@@ -4,7 +4,7 @@
 
 ### Issue tracker
 
-Issues live in GitHub Issues on `r5th/logistics-incident-triage` (pass `--repo` explicitly; this clone has two remotes). See `docs/agents/issue-tracker.md`.
+Issues live in GitHub Issues on `r5th/logistics-incident-triage`. See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 
