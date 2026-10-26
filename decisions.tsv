@@ -1,0 +1,6 @@
+ts	phase	decision	why	evidence	result
+2026-10-26T16:12:52Z	grill	settled all 19 grilling questions on the recommended answers (Svelte for web, labelling alone, SGT deadline)	user confirmed in chat	docs/build-plan.md, GLOSSARY.md, docs/adr/	accepted
+2026-10-26T16:12:53Z	setup	stored TypeSafe key outside the repo	keep secrets out of git and shared by all worktrees	~/.config/logistics-incident-triage/.env	key length 107, smoke call ok
+2026-10-26T16:12:54Z	setup	TypeSafe smoke test: 3 calls on one report	confirm key, latency and response shape before planning around it	jev-1.14.0, 418 in / 68 out tokens	236-288 ms, category correct
+2026-10-26T16:12:54Z	setup	use python -m uv and npm instead of uv and pnpm	neither is on PATH; avoid global installs	docs/build-plan.md Tooling	uv 0.13.5 installed via pip --user
+2026-10-26T16:12:55Z	plan	100 scenarios x 4 reports instead of ~130 scenarios	gives exactly 200/80/120 with whole scenarios per split	docs/build-plan.md Data contract	open
