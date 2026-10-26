@@ -2,16 +2,16 @@
 
 ## How to read this
 
-Each Incident Report has a Category, Urgency and Destination. A Policy chooses Auto-route or Review. Missed Urgent counts urgent Incident Reports auto-routed as routine. Costs are reviewer-minute equivalents; intervals resample whole Scenarios (1,000 draws, 95%). Urgency recall ignores Routing Mode. Undefined ratios are zero; unavailable percentiles are null. Latency is in milliseconds using nearest-rank percentiles. API cost uses cached input tokens.
+Each Incident Report has a Category, Urgency and Destination. A Policy chooses Auto-route or Review. Missed Urgent counts urgent Incident Reports auto-routed as routine. Costs are reviewer-minute equivalents; intervals resample whole Scenarios (1,000 draws, 95%). Urgency recall and precision ignore Routing Mode. Urgent recall alone can be met by calling everything urgent, so read it with urgent precision. False alarms are routine reports auto-routed as urgent. Undefined ratios are zero; unavailable percentiles are null. Latency is in milliseconds using nearest-rank percentiles. API cost uses cached input tokens.
 
-| Approach | Policy | Category accuracy | Destination accuracy | Urgent recall | Review rate | Auto-route coverage | Auto-route error rate | Missed Urgent | Cost / 100 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| A | v1 | 0.6875 | 0.7125 | 1.0 | 1.0 | 0.0 | 0.0 | 0 | 100.0 |
-| A | v2 | 0.6875 | 0.7125 | 1.0 | 1.0 | 0.0 | 0.0 | 0 | 100.0 |
-| B | v1 | 0.95 | 0.9375 | 1.0 | 0.5375 | 0.4625 | 0.1351 | 0 | 66.25 |
-| B | v2 | 0.95 | 0.9375 | 1.0 | 0.5375 | 0.4625 | 0.1351 | 0 | 66.25 |
-| C | v1 | 0.925 | 0.9125 | 1.0 | 0.8 | 0.2 | 0.0 | 0 | 80.0 |
-| C | v2 | 0.925 | 0.9125 | 1.0 | 0.8 | 0.2 | 0.0 | 0 | 80.0 |
+| Approach | Policy | Category accuracy | Destination accuracy | Urgent recall | Urgent precision | Predicted urgent rate | False alarms | Review rate | Auto-route coverage | Auto-route error rate | Missed Urgent | Cost / 100 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| A | v1 | 0.6875 | 0.7125 | 1.0 | 0.3 | 1.0 | 0 | 1.0 | 0.0 | 0.0 | 0 | 100.0 |
+| A | v2 | 0.6875 | 0.7125 | 1.0 | 0.3 | 1.0 | 0 | 1.0 | 0.0 | 0.0 | 0 | 100.0 |
+| B | v1 | 0.95 | 0.9375 | 1.0 | 0.3529 | 0.85 | 5 | 0.5375 | 0.4625 | 0.1351 | 0 | 66.25 |
+| B | v2 | 0.95 | 0.9375 | 1.0 | 0.3529 | 0.85 | 5 | 0.5375 | 0.4625 | 0.1351 | 0 | 66.25 |
+| C | v1 | 0.925 | 0.9125 | 1.0 | 0.3478 | 0.8625 | 0 | 0.8 | 0.2 | 0.0 | 0 | 80.0 |
+| C | v2 | 0.925 | 0.9125 | 1.0 | 0.3478 | 0.8625 | 0 | 0.8 | 0.2 | 0.0 | 0 | 80.0 |
 
 ## A / v1
 
@@ -69,6 +69,8 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | --- | --- |
 | Urgency recall | 1.0 |
 | Urgency precision | 0.3 |
+| Urgency predicted_urgent_rate | 1.0 |
+| Urgency false_alarms | 0 |
 | Urgency count fn | 0 |
 | Urgency count fp | 56 |
 | Urgency count tn | 0 |
@@ -108,7 +110,9 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | --- | --- |
 | auto_routed_error_rate | [0.0, 0.0] |
 | cost_per_100 | [100.0, 100.0] |
+| predicted_urgent_rate | [1.0, 1.0] |
 | review_rate | [1.0, 1.0] |
+| urgent_precision | [0.1, 0.5] |
 | urgent_recall | [1.0, 1.0] |
 
 ## A / v2
@@ -167,6 +171,8 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | --- | --- |
 | Urgency recall | 1.0 |
 | Urgency precision | 0.3 |
+| Urgency predicted_urgent_rate | 1.0 |
+| Urgency false_alarms | 0 |
 | Urgency count fn | 0 |
 | Urgency count fp | 56 |
 | Urgency count tn | 0 |
@@ -206,7 +212,9 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | --- | --- |
 | auto_routed_error_rate | [0.0, 0.0] |
 | cost_per_100 | [100.0, 100.0] |
+| predicted_urgent_rate | [1.0, 1.0] |
 | review_rate | [1.0, 1.0] |
+| urgent_precision | [0.1, 0.5] |
 | urgent_recall | [1.0, 1.0] |
 
 ## B / v1
@@ -265,6 +273,8 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | --- | --- |
 | Urgency recall | 1.0 |
 | Urgency precision | 0.3529 |
+| Urgency predicted_urgent_rate | 0.85 |
+| Urgency false_alarms | 5 |
 | Urgency count fn | 0 |
 | Urgency count fp | 44 |
 | Urgency count tn | 12 |
@@ -304,7 +314,9 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | --- | --- |
 | auto_routed_error_rate | [0.0, 0.3333] |
 | cost_per_100 | [45.0, 90.0] |
+| predicted_urgent_rate | [0.7, 0.975] |
 | review_rate | [0.375, 0.7] |
+| urgent_precision | [0.1231, 0.5902] |
 | urgent_recall | [1.0, 1.0] |
 
 ## B / v2
@@ -363,6 +375,8 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | --- | --- |
 | Urgency recall | 1.0 |
 | Urgency precision | 0.3529 |
+| Urgency predicted_urgent_rate | 0.85 |
+| Urgency false_alarms | 5 |
 | Urgency count fn | 0 |
 | Urgency count fp | 44 |
 | Urgency count tn | 12 |
@@ -402,7 +416,9 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | --- | --- |
 | auto_routed_error_rate | [0.0, 0.3333] |
 | cost_per_100 | [45.0, 90.0] |
+| predicted_urgent_rate | [0.7, 0.975] |
 | review_rate | [0.375, 0.7] |
+| urgent_precision | [0.1231, 0.5902] |
 | urgent_recall | [1.0, 1.0] |
 
 ## C / v1
@@ -461,6 +477,8 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | --- | --- |
 | Urgency recall | 1.0 |
 | Urgency precision | 0.3478 |
+| Urgency predicted_urgent_rate | 0.8625 |
+| Urgency false_alarms | 0 |
 | Urgency count fn | 0 |
 | Urgency count fp | 45 |
 | Urgency count tn | 11 |
@@ -500,7 +518,9 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | --- | --- |
 | auto_routed_error_rate | [0.0, 0.0] |
 | cost_per_100 | [63.75, 93.75] |
+| predicted_urgent_rate | [0.7125, 0.9875] |
 | review_rate | [0.6375, 0.9375] |
+| urgent_precision | [0.1194, 0.5806] |
 | urgent_recall | [1.0, 1.0] |
 
 ## C / v2
@@ -559,6 +579,8 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | --- | --- |
 | Urgency recall | 1.0 |
 | Urgency precision | 0.3478 |
+| Urgency predicted_urgent_rate | 0.8625 |
+| Urgency false_alarms | 0 |
 | Urgency count fn | 0 |
 | Urgency count fp | 45 |
 | Urgency count tn | 11 |
@@ -598,5 +620,7 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | --- | --- |
 | auto_routed_error_rate | [0.0, 0.0] |
 | cost_per_100 | [63.75, 93.75] |
+| predicted_urgent_rate | [0.7125, 0.9875] |
 | review_rate | [0.6375, 0.9375] |
+| urgent_precision | [0.1194, 0.5806] |
 | urgent_recall | [1.0, 1.0] |

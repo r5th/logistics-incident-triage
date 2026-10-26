@@ -114,6 +114,8 @@ def decision_rows(predictions, labels, reports, policy):
                      'scenario_id': reports[pred.report_id].scenario_id,
                      'review': mode == REVIEW, 'urgent': label.urgency == 'urgent',
                      'predicted_urgent': urgency == 'urgent', 'missed_urgent': missed,
+                     'false_alarm': mode == AUTO and label.urgency == 'routine'
+                         and urgency == 'urgent',
                      'auto_error': mode == AUTO and (pred.category != label.category
                          or pred.destination != label.destination or urgency != label.urgency),
                      'cost_terms': terms, 'cost': sum(terms.values()), 'triggers': triggers})
@@ -125,6 +127,10 @@ def operating_statistics(rows):
     reviews = sum(r['review'] for r in rows)
     return {'urgent_recall': ratio(sum(r['urgent'] and r['predicted_urgent'] for r in rows),
                                    sum(r['urgent'] for r in rows)),
+            'urgent_precision': ratio(
+                sum(r['urgent'] and r['predicted_urgent'] for r in rows),
+                sum(r['predicted_urgent'] for r in rows)),
+            'predicted_urgent_rate': ratio(sum(r['predicted_urgent'] for r in rows), n),
             'review_rate': ratio(reviews, n),
             'auto_routed_error_rate': ratio(sum(r['auto_error'] for r in rows), n - reviews),
             'cost_per_100': ratio(sum(r['cost'] for r in rows) * 100, n)}
@@ -143,7 +149,9 @@ def evaluate(preds, labels, reports, policy):
         for decision, enum in [('category', Category), ('destination', Destination)]}
     result.update({
         'n': n,
-        'urgency': {'recall': stats['urgent_recall'], 'precision': ratio(tp, tp + fp),
+        'urgency': {'recall': stats['urgent_recall'], 'precision': stats['urgent_precision'],
+                    'predicted_urgent_rate': stats['predicted_urgent_rate'],
+                    'false_alarms': sum(r['false_alarm'] for r in rows),
                     'counts': {'tp': tp, 'fp': fp, 'fn': fn, 'tn': n - tp - fp - fn}},
         'routing': {'review_rate': stats['review_rate'],
                     'auto_route_coverage': ratio(sum(not r['review'] for r in rows), n),
@@ -186,19 +194,24 @@ def markdown(results):
              ('Each Incident Report has a Category, Urgency and Destination. A Policy chooses '
              'Auto-route or Review. Missed Urgent counts urgent Incident Reports auto-routed '
              'as routine. Costs are reviewer-minute equivalents; intervals resample whole '
-             'Scenarios (1,000 draws, 95%). Urgency recall ignores Routing Mode. Undefined '
-             'ratios are zero; unavailable percentiles are null. Latency is in milliseconds '
+             'Scenarios (1,000 draws, 95%). Urgency recall and precision ignore Routing Mode. '
+             'Urgent recall alone can be met by calling everything urgent, so read it with '
+             'urgent precision. False alarms are routine reports auto-routed as urgent. '
+             'Undefined ratios are zero; unavailable percentiles are null. Latency is in milliseconds '
              'using nearest-rank percentiles. API cost uses cached input tokens.'), '']
     summary = []
     for a, policies in results.items():
         for v, m in policies.items():
             summary.append([a, v, m['category']['accuracy'], m['destination']['accuracy'],
-                            m['urgency']['recall'], m['routing']['review_rate'],
+                            m['urgency']['recall'], m['urgency']['precision'],
+                            m['urgency']['predicted_urgent_rate'],
+                            m['urgency']['false_alarms'], m['routing']['review_rate'],
                             m['routing']['auto_route_coverage'],
                             m['routing']['auto_routed_error_rate'],
                             m['routing']['missed_urgent_count'], m['cost']['per_100']])
     lines += [table(['Approach', 'Policy', 'Category accuracy', 'Destination accuracy',
-                     'Urgent recall', 'Review rate', 'Auto-route coverage', 'Auto-route error rate',
+                     'Urgent recall', 'Urgent precision', 'Predicted urgent rate',
+                     'False alarms', 'Review rate', 'Auto-route coverage', 'Auto-route error rate',
                      'Missed Urgent', 'Cost / 100'], summary), '']
     for a, policies in results.items():
         for v, m in policies.items():
@@ -217,7 +230,7 @@ def markdown(results):
                                            for p in labels]] for label in labels]), '']
             lines += ['### Urgency, reliability and tokens', '',
                       table(['Measure', 'Value'],
-                            [[f'Urgency {k}', m['urgency'][k]] for k in ('recall', 'precision')]
+                            [[f'Urgency {k}', m['urgency'][k]] for k in ('recall', 'precision', 'predicted_urgent_rate', 'false_alarms')]
                             + [[f'Urgency count {k}', v]
                                for k, v in m['urgency']['counts'].items()]
                             + [[f'Reliability {k}', v] for k, v in m['reliability'].items()]

@@ -154,6 +154,8 @@ export interface ApproachPolicyMetrics {
 	urgency: {
 		recall: number;
 		precision: number;
+		predicted_urgent_rate: number;
+		false_alarms: number;
 		counts?: { tp: number; fp: number; fn: number; tn: number };
 	};
 	routing: {
@@ -173,7 +175,15 @@ export interface ApproachPolicyMetrics {
 	tokens: { mean_input: number; mean_output: number };
 	api_cost_per_1000_usd: number;
 	bootstrap_95_ci?: Partial<
-		Record<'urgent_recall' | 'review_rate' | 'auto_routed_error_rate' | 'cost_per_100', Interval>
+		Record<
+			| 'urgent_recall'
+			| 'urgent_precision'
+			| 'predicted_urgent_rate'
+			| 'review_rate'
+			| 'auto_routed_error_rate'
+			| 'cost_per_100',
+			Interval
+		>
 	>;
 }
 

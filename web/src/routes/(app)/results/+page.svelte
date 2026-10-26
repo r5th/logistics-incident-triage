@@ -51,6 +51,8 @@
 	// Targets from docs/build-plan.md "Goal".
 	const ROWS: RowDef[] = [
 		{ label: 'Urgent recall', target: '≥ 0.98', value: (x) => p2(x.urgency.recall), met: (x) => x.urgency.recall >= 0.98, ci: (x) => x.bootstrap_95_ci?.urgent_recall, ciFmt: p2 },
+		{ label: 'Urgent precision', value: (x) => p2(x.urgency.precision), ci: (x) => x.bootstrap_95_ci?.urgent_precision, ciFmt: p2 },
+		{ label: 'Predicted urgent', value: (x) => pct(x.urgency.predicted_urgent_rate), ci: (x) => x.bootstrap_95_ci?.predicted_urgent_rate, ciFmt: pct },
 		{ label: 'Missed Urgent', value: (x) => String(x.routing.missed_urgent_count) },
 		{ label: 'Review rate', target: '≤ 25%', value: (x) => pct(x.routing.review_rate), met: (x) => x.routing.review_rate <= 0.25, ci: (x) => x.bootstrap_95_ci?.review_rate, ciFmt: pct },
 		{ label: 'Auto-routed error rate', value: (x) => pct(x.routing.auto_routed_error_rate), ci: (x) => x.bootstrap_95_ci?.auto_routed_error_rate, ciFmt: pct },
@@ -144,6 +146,7 @@
 				{sameOp.length === APPROACHES.length ? 'For every approach' : `For ${sameOp.join(' and ')}`}, Policies v1 and v2 froze the same thresholds on validation, so their columns match.
 			</p>
 		{/if}
+		<p class="muted small">Urgent recall is easy to meet by calling everything urgent; read it with urgent precision.</p>
 		<p class="muted small">Cost is in reviewer-minutes under each Policy's error costs. Ranges are 95% intervals from resampling whole Scenarios. The highlighted column is the approach and Policy picked in the menu.</p>
 	</section>
 

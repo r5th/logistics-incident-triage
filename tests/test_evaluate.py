@@ -47,6 +47,7 @@ def test_evaluate_hand_computed_and_byte_identical(workspace):
     before = [p.read_bytes() for p in paths]
     m = json.loads(before[0])['A']['v1']
     assert m['urgency'] == {'recall': .6667, 'precision': .6667,
+                            'predicted_urgent_rate': .75, 'false_alarms': 1,
                             'counts': {'tp': 2, 'fp': 1, 'fn': 1, 'tn': 0}}
     assert m['routing']['missed_urgent_count'] == 1
     assert m['routing']['auto_routed_error_rate'] == .5
@@ -61,6 +62,20 @@ def test_evaluate_hand_computed_and_byte_identical(workspace):
     assert '| shipment_damage | 1.0 | 1.0 | 1.0 |' in before[1].decode()
     evaluate.main(args)
     assert [p.read_bytes() for p in paths] == before
+
+
+def test_all_urgent_predictions_meet_recall_but_precision_is_base_rate(workspace):
+    path = workspace / 'results/predictions/A_validation.jsonl'
+    preds = [replace(p, urgent_prob=1.0) for p in load_predictions(path)]
+    write_predictions(path, preds)
+    evaluate.main(['--root', str(workspace), '--split', 'validation', '--labels', 'seeded'])
+    m = json.loads((workspace / 'results/metrics_validation_seeded.json')
+                   .read_text(encoding='utf-8'))['A']['v1']
+    assert m['urgency']['recall'] == 1
+    assert m['urgency']['precision'] == .75  # 3 of 4 Labels are urgent
+    assert m['urgency']['predicted_urgent_rate'] == 1
+    assert m['urgency']['false_alarms'] == 1
+    assert set(m['bootstrap_95_ci']) >= {'urgent_precision', 'predicted_urgent_rate'}
 
 
 def test_label_precedence_and_restrictions(workspace):

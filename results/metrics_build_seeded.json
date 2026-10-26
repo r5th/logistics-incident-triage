@@ -11,9 +11,17 @@
           100.0,
           100.0
         ],
+        "predicted_urgent_rate": [
+          1.0,
+          1.0
+        ],
         "review_rate": [
           1.0,
           1.0
+        ],
+        "urgent_precision": [
+          0.18,
+          0.42
         ],
         "urgent_recall": [
           1.0,
@@ -248,7 +256,9 @@
           "tn": 0,
           "tp": 60
         },
+        "false_alarms": 0,
         "precision": 0.3,
+        "predicted_urgent_rate": 1.0,
         "recall": 1.0
       }
     },
@@ -263,9 +273,17 @@
           100.0,
           100.0
         ],
+        "predicted_urgent_rate": [
+          1.0,
+          1.0
+        ],
         "review_rate": [
           1.0,
           1.0
+        ],
+        "urgent_precision": [
+          0.18,
+          0.42
         ],
         "urgent_recall": [
           1.0,
@@ -500,7 +518,9 @@
           "tn": 0,
           "tp": 60
         },
+        "false_alarms": 0,
         "precision": 0.3,
+        "predicted_urgent_rate": 1.0,
         "recall": 1.0
       }
     }
@@ -517,9 +537,17 @@
           60.5,
           108.5
         ],
+        "predicted_urgent_rate": [
+          0.69,
+          0.89
+        ],
         "review_rate": [
           0.345,
           0.59
+        ],
+        "urgent_precision": [
+          0.2395,
+          0.5096
         ],
         "urgent_recall": [
           1.0,
@@ -754,7 +782,9 @@
           "tn": 41,
           "tp": 60
         },
+        "false_alarms": 15,
         "precision": 0.3774,
+        "predicted_urgent_rate": 0.795,
         "recall": 1.0
       }
     },
@@ -769,9 +799,17 @@
           60.5,
           108.5
         ],
+        "predicted_urgent_rate": [
+          0.69,
+          0.89
+        ],
         "review_rate": [
           0.345,
           0.59
+        ],
+        "urgent_precision": [
+          0.2395,
+          0.5096
         ],
         "urgent_recall": [
           1.0,
@@ -1006,7 +1044,9 @@
           "tn": 41,
           "tp": 60
         },
+        "false_alarms": 15,
         "precision": 0.3774,
+        "predicted_urgent_rate": 0.795,
         "recall": 1.0
       }
     }
@@ -1023,9 +1063,17 @@
           94.0,
           102.5
         ],
+        "predicted_urgent_rate": [
+          0.915,
+          0.99
+        ],
         "review_rate": [
           0.9,
           0.985
+        ],
+        "urgent_precision": [
+          0.1905,
+          0.4421
         ],
         "urgent_recall": [
           1.0,
@@ -1260,7 +1308,9 @@
           "tn": 8,
           "tp": 60
         },
+        "false_alarms": 0,
         "precision": 0.3125,
+        "predicted_urgent_rate": 0.96,
         "recall": 1.0
       }
     },
@@ -1275,9 +1325,17 @@
           94.0,
           102.5
         ],
+        "predicted_urgent_rate": [
+          0.915,
+          0.99
+        ],
         "review_rate": [
           0.9,
           0.985
+        ],
+        "urgent_precision": [
+          0.1905,
+          0.4421
         ],
         "urgent_recall": [
           1.0,
@@ -1512,7 +1570,9 @@
           "tn": 8,
           "tp": 60
         },
+        "false_alarms": 0,
         "precision": 0.3125,
+        "predicted_urgent_rate": 0.96,
         "recall": 1.0
       }
     }
