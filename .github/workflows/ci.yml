@@ -1,0 +1,59 @@
+# Re-runs the evaluation from cached Predictions and fails if any committed result drifts.
+# No TypeSafe key is needed or used: nothing here calls the API.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync
+      - run: uv run pytest -q
+      - name: Re-evaluate cached predictions
+        shell: bash
+        run: |
+          set -euo pipefail
+          for s in build validation; do
+            if ls results/predictions/*_"$s".jsonl >/dev/null 2>&1; then
+              uv run python eval/evaluate.py --split "$s" --labels seeded
+            fi
+          done
+          uv run python eval/tune.py --curve validation
+          if [ -f results/predictions/A_test.jsonl ] && { [ -f data/labels/adjudicated_test.json ] || [ -f data/labels/blind_test.json ]; }; then
+            uv run python eval/evaluate.py --split test --labels final
+            uv run python eval/evaluate.py --split test --labels seeded
+            uv run python eval/agreement.py
+            uv run python eval/tune.py --curve test
+          fi
+          uv run python eval/export_web.py
+      - name: Fail on drift
+        run: git diff --exit-code results/ web/static/data/
+
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+        env:
+          BASE_PATH: /logistics-incident-triage
