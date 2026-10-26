@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Incident triage · Results sketch (Route sign)</title>
+<link rel="stylesheet" href="shared/route-sign.css">
+<style>
+:root { --sA: #7C4DBA; --sB: #D06A0A; --sC: #14866D; --ok: #00703C; }
+@media (prefers-color-scheme: dark) { :root { --sA: #9271D4; --sB: #CF7630; --sC: #22A07E; --ok: #5BC48A; } }
+.cols3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s4); margin-bottom: var(--s5); }
+.ap h2 { display: flex; align-items: center; gap: 8px; }
+.ap h2 i { width: 12px; height: 12px; border-radius: 3px; background: var(--c); }
+.ap .what { font-size: .8125rem; color: var(--text-2); margin: -6px 0 10px; }
+.m { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; padding: 7px 0; border-top: 1px solid var(--sep); font-size: .875rem; align-items: center; }
+.m .v { font-weight: 650; font-variant-numeric: tabular-nums; }
+.m .t { font-size: .75rem; display: inline-flex; gap: 4px; align-items: center; min-width: 78px; }
+.m .t.ok { color: var(--ok); } .m .t.miss { color: var(--urgent); font-weight: 650; }
+.m .t .ic { width: 13px; height: 13px; }
+.two { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: var(--s4); }
+.headline { font-size: 1.125rem; font-weight: 600; margin: 0 0 var(--s4); max-width: 80ch; }
+svg text { fill: var(--text-2); font: 12px var(--font); }
+.axis { stroke: var(--sep); }
+.legend2 { display: flex; gap: 16px; font-size: .8125rem; margin-bottom: 8px; color: var(--text-2); }
+.legend2 span::before { content: ""; display: inline-block; width: 14px; height: 3px; border-radius: 2px; background: var(--c); vertical-align: middle; margin-right: 6px; }
+.mu td { height: 40px; }
+.cols3 .panel, .two .panel { margin-top: 0; }
+.mu .rid { white-space: nowrap; }
+.sketch { display: inline-block; font-size: .75rem; font-weight: 650; border: 1.5px dashed var(--text-2); color: var(--text-2); border-radius: 4px; padding: 2px 8px; }
+</style>
+</head>
+<body>
+<script src="shared/icons.js"></script>
+<script src="shared/data.js"></script>
+<div id="root"></div>
+<script>
+const R = RESULTS.approaches, col = { A: "var(--sA)", B: "var(--sB)", C: "var(--sC)" };
+const what = { A: "Transparent rules, no model calls", B: "TypeSafe on every report", C: "Rules when confident, else TypeSafe" };
+const t = (ok, txt) => `<span class="t ${ok ? "ok" : "miss"}">${ic(ok ? "check" : "x")}${ok ? "Target met" : "Missed"}</span>`;
+const card = (a) => `<section class="panel ap" style="--c:${col[a.key]}"><h2><i></i>${a.key} · ${a.name}</h2><p class="what">${what[a.key]}</p>
+  <div class="m"><span>Urgent recall <span class="muted">≥ 0.98</span></span><span class="v">${p2(a.recall)}</span>${t(a.recall >= 0.98)}</div>
+  <div class="m"><span>Missed Urgent <span class="muted">of 36 urgent</span></span><span class="v">${a.missed}</span><span class="t"></span></div>
+  <div class="m"><span>Review rate <span class="muted">≤ 25%</span></span><span class="v">${Math.round(a.review * 100)}%</span>${t(a.review <= 0.25)}</div>
+  <div class="m"><span>Destination accuracy</span><span class="v">${p2(a.destAcc)}</span><span class="t"></span></div>
+  <div class="m"><span>p95 latency <span class="muted">&lt; 1 s</span></span><span class="v">${a.p95} ms</span>${t(a.p95 < 1000)}</div>
+  <div class="m"><span>Cost per 1,000 <span class="muted">&lt; US$1</span></span><span class="v">US$${a.cost.toFixed(2)}</span>${t(a.cost < 1)}</div></section>`;
+
+// Operating-point curve: x = review rate, y = Missed Urgent count. Placeholder shapes.
+const W = 620, H = 280, L = 44, B = 36, x = (r) => L + (r / 0.5) * (W - L - 16), y = (m) => H - B - (m / 8) * (H - B - 12);
+const curves = {
+  A: [[0.08, 7], [0.15, 5], [0.24, 3.4], [0.31, 2], [0.42, 1], [0.5, 1]],
+  B: [[0.06, 6], [0.12, 3.6], [0.18, 2], [0.22, 1], [0.32, 0.4], [0.5, 0]],
+  C: [[0.05, 5.4], [0.1, 3], [0.15, 1.8], [0.19, 1], [0.28, 0.3], [0.5, 0]],
+};
+const path = (pts) => pts.map(([r, m], i) => `${i ? "L" : "M"}${x(r).toFixed(1)},${y(m).toFixed(1)}`).join(" ");
+const chart = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Operating-point curves for approaches A, B and C, with Policy v1 and v2 marked on C">
+  <line class="axis" x1="${L}" y1="${H - B}" x2="${W - 8}" y2="${H - B}"/><line class="axis" x1="${L}" y1="8" x2="${L}" y2="${H - B}"/>
+  ${[0, 2, 4, 6, 8].map((m) => `<text x="${L - 8}" y="${y(m) + 4}" text-anchor="end">${m}</text><line class="axis" stroke-dasharray="2 4" x1="${L}" x2="${W - 8}" y1="${y(m)}" y2="${y(m)}"/>`).join("")}
+  ${[0, 0.1, 0.2, 0.3, 0.4, 0.5].map((r) => `<text x="${x(r)}" y="${H - B + 18}" text-anchor="middle">${r * 100}%</text>`).join("")}
+  <text x="${(W + L) / 2}" y="${H - 2}" text-anchor="middle">Review rate</text>
+  <text x="12" y="${(H - B) / 2}" transform="rotate(-90 12 ${(H - B) / 2})" text-anchor="middle">Missed Urgent</text>
+  <line x1="${x(0.25)}" x2="${x(0.25)}" y1="8" y2="${H - B}" stroke="var(--text-2)" stroke-dasharray="4 3"/><text x="${x(0.25) + 6}" y="20">25% review target</text>
+  ${Object.entries(curves).map(([k, pts]) => `<path d="${path(pts)}" fill="none" stroke="${col[k]}" stroke-width="2"/><text x="${x(pts[0][0]) + 6}" y="${y(pts[0][1]) - 6}" style="fill:var(--text);font-weight:600">${k}</text>`).join("")}
+  <circle cx="${x(0.19)}" cy="${y(1)}" r="6" fill="var(--sC)" stroke="var(--surface)" stroke-width="2"/><text x="${x(0.19) - 10}" y="${y(1) + 20}" text-anchor="end" style="fill:var(--text);font-weight:600">v1 · 19%, 1 missed</text>
+  <rect x="${x(0.28) - 6}" y="${y(0.3) - 6}" width="12" height="12" fill="var(--sC)" stroke="var(--surface)" stroke-width="2"/><text x="${x(0.28) + 10}" y="${y(0.3) - 8}" style="fill:var(--text);font-weight:600">v2 · 28%, 0 missed</text>
+</svg>`;
+const missed = [
+  ["R-0254", "A, B, C", "Routine · Customer Desk", "No urgent sign in the text (incomplete report)"],
+  ["R-0120", "A", "Routine · Safety Desk", "Rules read “nearly killed” as tone only"],
+];
+document.getElementById("root").innerHTML = `<div class="app">
+<nav class="rail" aria-label="Main"><div class="brand"><span class="brand-mark">${ic("arrow")}</span>Incident triage</div>
+  <div class="nav"><a href="#">${ic("queue")}Queue<span class="badge num">2</span></a><a href="#" aria-current="page">${ic("results")}Results</a><a href="#">${ic("label")}Labeller</a><a href="#">${ic("about")}About</a></div>
+  <div class="ctx"><div><div class="ctx-label">Policy</div><div class="seg-shell"><button aria-pressed="true">v1</button><button aria-pressed="false">v2</button></div></div></div>
+  <div class="foot">Synthetic reports · test split</div></nav>
+<main class="main">
+  <div class="page-head"><h1>Results</h1><span class="sub">Test split · 120 reports from 30 Scenarios · Policy v1</span><span class="sketch">Sketch · placeholder numbers</span></div>
+  <p class="headline">Cascade C meets all four targets on test; the rules baseline misses urgent recall and the review-rate target.</p>
+  <div class="cols3">${R.map(card).join("")}</div>
+  <div class="two">
+    <section class="panel"><h2>Operating Points</h2><p class="meta" style="margin:-6px 0 8px">Each curve sweeps one approach’s thresholds. Policy v2 prices a Missed Urgent at 100 reviewer-minutes instead of 20, so it buys more Review.</p>
+      <div class="legend2"><span style="--c:var(--sA)">A rules</span><span style="--c:var(--sB)">B TypeSafe</span><span style="--c:var(--sC)">C cascade</span><span style="--c:transparent">● v1 ■ v2</span></div>${chart}</section>
+    <section class="panel"><h2>Missed Urgent cases</h2>
+      <table class="mu"><thead><tr><th>Report</th><th>Missed by</th><th>Routed as</th><th>Why</th></tr></thead><tbody>
+      ${missed.map(([id, by, as, why]) => `<tr><td class="rid">${id}</td><td>${by}</td><td>${as}</td><td class="muted">${why}</td></tr>`).join("")}</tbody></table>
+      <h2 style="margin-top:20px">Reproduce these numbers</h2><p class="meta" style="font-size:.8125rem">Run <code>python -m uv run python eval/evaluate.py</code>. It reads the cached predictions and writes the same JSON this page shows.</p></section>
+  </div>
+</main></div>`;
+</script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Incident triage · design directions, round 1</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --bg: #F3F5F7; --text: #111C27; --text-2: #4A5866; --sep: #D3DAE1;
+  --accent: #0B57A8; --tint: #E2ECF8; --shot-h: 240px;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0D141B; --text: #E7EDF3; --text-2: #A3B2C1; --sep: #2A3846; --accent: #7DB3F0; --tint: #172F4B; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.5; padding: 32px 40px 64px; }
+h1 { font-size: 1.5rem; margin: 0 0 4px; }
+.lede { color: var(--text-2); margin: 0 0 32px; max-width: 90ch; font-size: .9375rem; }
+section.surface { margin-bottom: 40px; }
+h2 { font-size: 1.25rem; margin: 0; }
+.job { color: var(--text-2); margin: 2px 0 16px; font-size: .9375rem; }
+.dir { padding: 14px 16px 16px; border-radius: 10px; border: 2px solid transparent; margin-bottom: 12px; }
+.dir.rec { border-color: var(--accent); }
+.dir-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.dir-head b { font-size: 1rem; }
+.dir-head .thesis { color: var(--text-2); font-size: .875rem; }
+.tag { font-size: .75rem; font-weight: 700; color: var(--bg); background: var(--accent); border-radius: 4px; padding: 1px 8px; }
+.strip { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 4px; }
+figure { margin: 0; flex: none; }
+figure img { display: block; height: var(--shot-h); width: auto; border: 1px solid var(--sep); border-radius: 6px; }
+figcaption { font-size: .75rem; color: var(--text-2); margin-top: 4px; }
+.why { background: var(--tint); border-radius: 10px; padding: 18px 22px; max-width: 110ch; }
+.why h2 { margin-bottom: 8px; }
+.why p, .why li { font-size: .9375rem; }
+.why ul { padding-left: 1.2em; margin: 6px 0; }
+.why p { margin: 6px 0; }
+</style>
+</head>
+<body>
+<h1>Incident triage: design directions, round 1</h1>
+<p class="lede">Three directions for the Queue and Incident detail, each at 1440 and 390 wide, light and dark. Report texts are synthetic paraphrases of build-split Scenarios; every probability and metric is a placeholder. The roll assigned Tachograph; Route sign was my own top candidate; Interchange is the challenger that held one axis. Results is sketched in the recommended direction only.</p>
+
+<section class="surface">
+  <h2>Queue</h2>
+  <p class="job">Show the reviewer where attention goes first: what waits in Review, how urgent it is, and where everything else was routed.</p>
+
+  <div class="dir">
+    <div class="dir-head"><b>Tachograph</b><span class="thesis">Time on the desk is the signal: every report carries a tachograph-style trace, so a long wait in Review shows before you read a word.</span></div>
+    <div class="strip">
+      <figure><img src="shots/d1-tachograph--queue--desktop--light.png" alt="Tachograph Queue, desktop, light"><figcaption>Desktop light: list with trace column, preview pane</figcaption></figure>
+      <figure><img src="shots/d1-tachograph--queue--desktop--dark.png" alt="Tachograph Queue, desktop, dark"><figcaption>Desktop dark</figcaption></figure>
+      <figure><img src="shots/d1-tachograph--queue--phone--light.png" alt="Tachograph Queue, phone, light"><figcaption>Phone light</figcaption></figure>
+      <figure><img src="shots/d1-tachograph--queue--phone--dark.png" alt="Tachograph Queue, phone, dark"><figcaption>Phone dark</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="dir rec">
+    <div class="dir-head"><b>Route sign</b><span class="tag">Recommended</span><span class="thesis">Read it like a road sign: Destination is a direction plate, Review is a yellow diversion, Urgent is a warning triangle.</span></div>
+    <div class="strip">
+      <figure><img src="shots/d2-route-sign--queue--desktop--light.png" alt="Route sign Queue, desktop, light"><figcaption>Desktop light: rail, awaiting review first</figcaption></figure>
+      <figure><img src="shots/d2-route-sign--queue--desktop--dark.png" alt="Route sign Queue, desktop, dark"><figcaption>Desktop dark</figcaption></figure>
+      <figure><img src="shots/d2-route-sign--queue--phone--light.png" alt="Route sign Queue, phone, light"><figcaption>Phone light: list rows, tab bar</figcaption></figure>
+      <figure><img src="shots/d2-route-sign--queue--phone--dark.png" alt="Route sign Queue, phone, dark"><figcaption>Phone dark</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="dir">
+    <div class="dir-head"><b>Interchange</b><span class="thesis">Every Destination is a line and Review is the interchange: the Queue is grouped by line, and each report's route is drawn from received to Destination.</span></div>
+    <div class="strip">
+      <figure><img src="shots/d3-interchange--queue--desktop--light.png" alt="Interchange Queue, desktop, light"><figcaption>Desktop light: grouped by Destination line</figcaption></figure>
+      <figure><img src="shots/d3-interchange--queue--desktop--dark.png" alt="Interchange Queue, desktop, dark"><figcaption>Desktop dark</figcaption></figure>
+      <figure><img src="shots/d3-interchange--queue--phone--light.png" alt="Interchange Queue, phone, light"><figcaption>Phone light</figcaption></figure>
+      <figure><img src="shots/d3-interchange--queue--phone--dark.png" alt="Interchange Queue, phone, dark"><figcaption>Phone dark</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="surface">
+  <h2>Incident detail</h2>
+  <p class="job">Let a reviewer check the proposed decisions against the Evidence and the Review Triggers, then accept, override or escalate.</p>
+
+  <div class="dir">
+    <div class="dir-head"><b>Tachograph</b><span class="thesis">The report's time on the desk as a trace above the decision history; decisions read as a ruled ledger of value, runner-up and threshold.</span></div>
+    <div class="strip">
+      <figure><img src="shots/d1-tachograph--detail--desktop--light.png" alt="Tachograph detail, desktop, light"><figcaption>Desktop light: R-0142 awaiting review</figcaption></figure>
+      <figure><img src="shots/d1-tachograph--detail--desktop--dark.png" alt="Tachograph detail, desktop, dark"><figcaption>Desktop dark</figcaption></figure>
+      <figure><img src="shots/d1-tachograph--detail--phone--light.png" alt="Tachograph detail, phone, light"><figcaption>Phone light: action bar above tabs</figcaption></figure>
+      <figure><img src="shots/d1-tachograph--detail--phone--dark.png" alt="Tachograph detail, phone, dark"><figcaption>Phone dark</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="dir rec">
+    <div class="dir-head"><b>Route sign</b><span class="tag">Recommended</span><span class="thesis">The header is the sign: Urgent, Review, then the Destination plate; actions sit beside it, Evidence and probabilities below.</span></div>
+    <div class="strip">
+      <figure><img src="shots/d2-route-sign--detail--desktop--light.png" alt="Route sign detail, desktop, light"><figcaption>Desktop light: R-0142, two Review Triggers</figcaption></figure>
+      <figure><img src="shots/d2-route-sign--detail--desktop--dark.png" alt="Route sign detail, desktop, dark"><figcaption>Desktop dark</figcaption></figure>
+      <figure><img src="shots/d2-route-sign--detail--phone--light.png" alt="Route sign detail, phone, light"><figcaption>Phone light: Evidence first, actions pinned</figcaption></figure>
+      <figure><img src="shots/d2-route-sign--detail--phone--dark.png" alt="Route sign detail, phone, dark"><figcaption>Phone dark</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="dir">
+    <div class="dir-head"><b>Interchange</b><span class="thesis">A route diagram heads the page (Received, Triage, Review, Destination), then report, decisions and triggers in three columns.</span></div>
+    <div class="strip">
+      <figure><img src="shots/d3-interchange--detail--desktop--light.png" alt="Interchange detail, desktop, light"><figcaption>Desktop light: route diagram</figcaption></figure>
+      <figure><img src="shots/d3-interchange--detail--desktop--dark.png" alt="Interchange detail, desktop, dark"><figcaption>Desktop dark</figcaption></figure>
+      <figure><img src="shots/d3-interchange--detail--phone--light.png" alt="Interchange detail, phone, light"><figcaption>Phone light</figcaption></figure>
+      <figure><img src="shots/d3-interchange--detail--phone--dark.png" alt="Interchange detail, phone, dark"><figcaption>Phone dark</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="surface">
+  <h2>Results (sketch)</h2>
+  <p class="job">Let the assessor trust the numbers: three approaches side by side against the targets, the operating-point curve with v1 and v2, and every Missed Urgent case.</p>
+  <div class="dir rec">
+    <div class="dir-head"><b>Route sign</b><span class="tag">Recommended</span><span class="thesis">Lower fidelity, recommended direction only; targets show met or missed with an icon and a word, never colour alone.</span></div>
+    <div class="strip">
+      <figure><img src="shots/d2-results--results--desktop--light.png" alt="Results sketch, desktop, light"><figcaption>Desktop light: placeholder numbers</figcaption></figure>
+      <figure><img src="shots/d2-results--results--desktop--dark.png" alt="Results sketch, desktop, dark"><figcaption>Desktop dark</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<div class="why">
+  <h2>Why Route sign</h2>
+  <p><b>Pick: Route sign.</b> It answers the demo's question ("where does this report go, and why?") in the vocabulary every UK road user already reads. A Destination plate, a yellow diversion for Review and a warning triangle for Urgent read at thumbnail size and in a screen-share, and the layout stays a standard rail-and-table tool the assessor needs no lesson for.</p>
+  <p><b>What it borrows:</b></p>
+  <ul>
+    <li>From Tachograph: a "waiting" time in the Queue (minutes since received for anything awaiting review) and the ruled, dense table discipline, with fewer type sizes doing more work.</li>
+    <li>From Interchange: the stacked probability bar that shows the runner-up beside the top choice, and the "/" shortcut to jump to a report id.</li>
+  </ul>
+  <p><b>Against the alternatives:</b></p>
+  <ul>
+    <li>Tachograph: the trace ranks by age, but triage ranks by urgency. A fresh urgent report shows as a hairline tick and looks less important than an old routine one, which is the wrong first impression for this product.</li>
+    <li>Interchange: six line colours on top of the status colours overload colour, and grouping by Destination scatters the reports waiting in Review across six boxes, so "what needs me now" stops being one list.</li>
+  </ul>
+  <p><b>Honest risk of the pick:</b> it is the most familiar of the three. The plates are its only signature, so the build has to keep them crisp and use them only for Destination and Routing Mode, or the screen turns into a themed motorway.</p>
+</div>
+</body>
+</html>

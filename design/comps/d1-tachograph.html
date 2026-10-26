@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Incident triage · Tachograph comp</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --bg: #F4F3EE; --surface: #FBFAF7; --surface-2: #ECEAE3; --rule: #D8D5CB; --rule-strong: #B9B5A8;
+  --ink: #1A1A18; --ink-2: #57564F;
+  --bar: #1A1A18; --bar-text: #F4F3EE; --bar-text-2: #B8B6AD;
+  --accent: #0E6A51; --on-accent: #FFFFFF; --accent-tint: #DCEDE5;
+  --urgent: #B42318; --urgent-tint: #F8E4E1;
+  --trace: #1A1A18; --wait: #0E6A51;
+  --evidence: #DCEDE5; --evidence-line: #0E6A51;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121311; --surface: #181917; --surface-2: #20211E; --rule: #2E2F2B; --rule-strong: #45463F;
+    --ink: #ECEBE6; --ink-2: #A9A79F;
+    --bar: #0A0A09; --bar-text: #ECEBE6; --bar-text-2: #9C9A92;
+    --accent: #5FC7A0; --on-accent: #0B1A14; --accent-tint: #183229;
+    --urgent: #FF8A7D; --urgent-tint: #3A1A17;
+    --trace: #ECEBE6; --wait: #5FC7A0;
+    --evidence: #1B3A2F; --evidence-line: #5FC7A0;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--font); font-size: 1rem; line-height: 1.5; color: var(--ink); background: var(--bg); }
+::selection { background: var(--accent); color: var(--on-accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ic { width: 1em; height: 1em; flex: none; vertical-align: -0.125em; }
+.num { font-variant-numeric: tabular-nums; }
+.muted { color: var(--ink-2); }
+
+.top { background: var(--bar); color: var(--bar-text); display: flex; align-items: center; gap: 28px; padding: 0 24px; height: 52px; }
+.brand { font-weight: 650; display: flex; gap: 10px; align-items: center; }
+.brand .disc { width: 20px; height: 20px; border-radius: 50%; border: 2px solid currentColor; position: relative; }
+.brand .disc::after { content: ""; position: absolute; left: 50%; top: 2px; width: 2px; height: 6px; background: currentColor; transform: translateX(-50%); }
+.top nav { display: flex; gap: 4px; height: 100%; }
+.top nav a { display: flex; align-items: center; padding: 0 12px; color: var(--bar-text-2); text-decoration: none; font-size: .875rem; font-weight: 500; border-bottom: 2px solid transparent; }
+.top nav a[aria-current="page"] { color: var(--bar-text); border-bottom-color: var(--accent); font-weight: 600; }
+.top .ctx { margin-left: auto; display: flex; gap: 8px; }
+.pick { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--rule-strong); border-color: #45463F; border-radius: 4px; padding: 4px 10px; font-size: .8125rem; color: var(--bar-text); }
+.pick .ic { color: var(--bar-text-2); }
+
+.split { display: grid; grid-template-columns: minmax(0, 1fr) 520px; height: calc(100vh - 52px); }
+.listpane { overflow: hidden; border-right: 1px solid var(--rule); display: flex; flex-direction: column; }
+.listhead { display: flex; align-items: center; gap: 16px; padding: 16px 24px 12px; }
+h1 { font-size: 1.375rem; margin: 0; font-weight: 650; letter-spacing: -0.01em; }
+.sub { font-size: .8125rem; color: var(--ink-2); }
+.filters { display: flex; gap: 0; padding: 0 24px 12px; border-bottom: 1px solid var(--rule); align-items: center; }
+.filters button { border: 1px solid var(--rule-strong); background: var(--surface); padding: 4px 12px; font: inherit; font-size: .8125rem; font-weight: 600; color: var(--ink-2); margin-left: -1px; }
+.filters button:first-child { border-radius: 4px 0 0 4px; margin-left: 0; }
+.filters button:nth-child(4) { border-radius: 0 4px 4px 0; }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.filters .search { margin-left: auto; display: flex; gap: 6px; align-items: center; font-size: .8125rem; color: var(--ink-2); border-bottom: 1px solid var(--rule-strong); padding: 3px 2px; width: 200px; }
+
+/* Table with a trace column: the signature move */
+table { width: 100%; border-collapse: collapse; font-size: .8125rem; }
+th { text-align: left; font-weight: 600; font-size: .75rem; color: var(--ink-2); padding: 6px 12px; border-bottom: 1px solid var(--rule-strong); white-space: nowrap; }
+th:first-child, td:first-child { padding-left: 24px; }
+td { padding: 7px 12px; border-bottom: 1px solid var(--rule); height: 44px; vertical-align: middle; }
+tr.sel td { background: var(--accent-tint); }
+tr.sel { outline: 1px solid var(--accent); outline-offset: -1px; }
+.rid { font-weight: 650; font-variant-numeric: tabular-nums; margin-right: 8px; }
+.ex { color: var(--ink-2); }
+.cellclip { display: block; max-width: 36ch; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.urg { display: inline-flex; gap: 5px; align-items: center; font-weight: 650; white-space: nowrap; }
+.urg-urgent { color: var(--urgent); }
+.urg-routine { color: var(--ink-2); font-weight: 500; }
+.mode { display: inline-flex; gap: 5px; align-items: center; white-space: nowrap; font-weight: 600; }
+.mode-review { color: var(--ink); }
+.mode-auto { color: var(--ink-2); font-weight: 500; }
+.scale { position: relative; height: 16px; font-size: .6875rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.scale span { position: absolute; transform: translateX(-50%); top: 0; }
+.trace { position: relative; height: 22px; width: 100%; background:
+  repeating-linear-gradient(90deg, var(--rule) 0 1px, transparent 1px calc(100% / 8)); }
+.trace .base { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--rule-strong); }
+.trace .tick { position: absolute; top: 3px; width: 2px; height: 16px; background: var(--trace); }
+.trace .band { position: absolute; top: 5px; height: 12px; background: var(--wait); border-radius: 1px; }
+.trace .band.open { background: repeating-linear-gradient(135deg, var(--wait) 0 3px, transparent 3px 6px); box-shadow: inset 0 0 0 1.5px var(--wait); }
+.trace .act { position: absolute; top: 1px; width: 10px; height: 20px; transform: translateX(-50%); display: grid; place-items: center; color: var(--ink); }
+.trace .act .ic { width: 12px; height: 12px; stroke-width: 3; }
+
+.prev { overflow: auto; padding: 20px 28px; background: var(--surface); }
+.prev h2, .panel h2 { font-size: .9375rem; margin: 0 0 8px; font-weight: 650; }
+.prevhead { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+.prevhead h1 { font-size: 1.25rem; }
+.chips { display: flex; gap: 16px; margin: 12px 0 16px; flex-wrap: wrap; font-size: .875rem; }
+.big-trace { margin: 8px 0 20px; }
+.big-trace .trace { height: 34px; }
+.big-trace .trace .tick { height: 28px; top: 3px; }
+.big-trace .trace .band { height: 20px; top: 7px; }
+.big-trace .labels { position: relative; height: 34px; font-size: .75rem; }
+.big-trace .labels span { position: absolute; top: 2px; white-space: nowrap; }
+.report { font-size: 1rem; line-height: 1.65; margin: 0 0 8px; max-width: 66ch; }
+.report mark { background: var(--evidence); color: inherit; box-shadow: inset 0 -2px 0 var(--evidence-line); padding: 1px 2px; }
+.report sup { font-size: .6875rem; font-weight: 700; color: var(--accent); margin-left: 2px; }
+.report sup.muted { color: var(--ink-2); }
+.rows { border-top: 1px solid var(--rule-strong); margin: 4px 0 16px; }
+.row { display: grid; grid-template-columns: 100px 1fr 60px; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--rule); font-size: .875rem; }
+.row .lab { color: var(--ink-2); font-size: .8125rem; }
+.row .v { font-weight: 650; }
+.row .alt { display: block; font-weight: 400; font-size: .75rem; color: var(--ink-2); }
+.row .p { text-align: right; font-weight: 650; font-variant-numeric: tabular-nums; }
+.row .p small { display: block; font-weight: 500; font-size: .6875rem; color: var(--ink-2); }
+.row .p.low { color: var(--urgent); }
+.trig { display: grid; grid-template-columns: 18px 1fr auto; gap: 8px; font-size: .875rem; padding: 6px 0; }
+.trig .ic { width: 16px; height: 16px; margin-top: 2px; }
+.trig b { font-weight: 650; display: block; }
+.code { font-size: .75rem; font-weight: 650; border: 1px solid var(--rule-strong); border-radius: 3px; padding: 0 5px; color: var(--ink-2); align-self: start; }
+.actions { display: flex; gap: 8px; margin-top: 16px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 4px; border: 1px solid var(--rule-strong); background: var(--surface); color: var(--ink); font: inherit; font-weight: 600; font-size: .875rem; }
+.btn .ic { width: 16px; height: 16px; }
+.btn-primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+
+/* Full detail page */
+.page { max-width: 1240px; margin: 0 auto; padding: 20px 32px 48px; }
+.crumb { display: inline-flex; align-items: center; gap: 4px; color: var(--accent); text-decoration: none; font-size: .875rem; font-weight: 600; margin-bottom: 8px; }
+.dgrid { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: 32px; align-items: start; }
+.panel { border-top: 2px solid var(--ink); padding-top: 12px; margin-bottom: 24px; }
+.hist { list-style: none; margin: 0; padding: 0; font-size: .8125rem; }
+.hist li { display: grid; grid-template-columns: 70px 90px 1fr; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--rule); }
+.hist time { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.hist .who { font-weight: 600; }
+
+/* Phone */
+.plist, .tabbar, .appbar, .actionbar { display: none; }
+@media (max-width: 599px) {
+  .listhead h1, .top, .split .prev, table, .filters .search, .listhead .sub, .crumb, .page > .dhead { display: none; }
+  .split { display: block; height: auto; }
+  .listpane { border: 0; }
+  .appbar { display: flex; align-items: center; gap: 12px; background: var(--bar); color: var(--bar-text); height: 52px; padding: 0 16px; position: sticky; top: 0; z-index: 2; }
+  .appbar b { font-size: 1.0625rem; }
+  .appbar .pick { margin-left: auto; min-height: 32px; }
+  .appbar a { color: var(--bar-text); text-decoration: none; display: inline-flex; align-items: center; gap: 2px; min-height: 44px; }
+  .listhead { padding: 12px 16px 8px; }
+  .filters { padding: 0 16px 10px; overflow-x: auto; }
+  .filters button { min-height: 36px; white-space: nowrap; }
+  .plist { display: block; padding-bottom: 72px; }
+  .pli { padding: 10px 16px; border-bottom: 1px solid var(--rule); }
+  .pli.sel { background: var(--accent-tint); outline: 1px solid var(--accent); outline-offset: -1px; }
+  .pli-top { display: flex; gap: 10px; align-items: center; font-size: .8125rem; }
+  .pli-top .t { margin-left: auto; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .pli-ex { font-size: .875rem; color: var(--ink-2); margin: 3px 0 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pli-meta { display: flex; gap: 12px; font-size: .8125rem; margin-bottom: 6px; }
+  .tabbar { display: grid; grid-template-columns: repeat(4, 1fr); position: fixed; left: 0; right: 0; bottom: 0; background: var(--surface); border-top: 1px solid var(--rule-strong); z-index: 2; }
+  .tabbar a { min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: .6875rem; font-weight: 600; color: var(--ink-2); text-decoration: none; }
+  .tabbar a .ic { width: 22px; height: 22px; }
+  .tabbar a[aria-current="page"] { color: var(--accent); }
+  .page { padding: 12px 16px 140px; }
+  .dgrid { display: flex; flex-direction: column; gap: 0; align-items: stretch; }
+  .dgrid > div { display: contents; }
+  .o1 { order: 1; } .o2 { order: 2; } .o3 { order: 3; } .o4 { order: 4; } .o5 { order: 5; }
+  .panel.desk { display: none; }
+  .actionbar { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 8px; position: fixed; left: 0; right: 0; bottom: 57px; padding: 8px 16px; background: var(--surface); border-top: 1px solid var(--rule); z-index: 2; }
+  .actionbar .btn { min-height: 44px; justify-content: center; padding: 0 8px; }
+  .hist li { grid-template-columns: 62px 1fr; }
+  .hist li span:last-child { grid-column: 2; }
+  .row { grid-template-columns: 88px 1fr 52px; }
+}
+</style>
+</head>
+<body>
+<script src="shared/icons.js"></script>
+<script src="shared/data.js"></script>
+<div id="root"></div>
+<script>
+const q = new URLSearchParams(location.search);
+const view = q.get("view") || "queue";
+const id = q.get("id") || "R-0142";
+// Desk window 06:00–08:00 drawn like a tachograph scale. "Now" is 08:00.
+const T0 = 6 * 60, T1 = 8 * 60;
+const pos = (hm) => { const [h, m] = hm.split(":").map(Number); return ((h * 60 + m - T0) / (T1 - T0)) * 100; };
+const actTime = (r) => { const h = r.history.find((x) => x[1] === "Reviewer"); return h ? h[0].slice(0, 5) : null; };
+const trace = (r) => {
+  const a = pos(r.received);
+  if (r.mode === "auto") return `<div class="trace" aria-label="Auto-routed at ${r.received}"><div class="base"></div><div class="tick" style="left:${a}%"></div></div>`;
+  const t = actTime(r);
+  const end = t ? pos(t) : 100;
+  const icon = { overridden: "override", escalated: "escalate", accepted: "check" }[r.status];
+  return `<div class="trace" aria-label="In Review from ${r.received}${t ? " to " + t : ", still waiting"}"><div class="base"></div><div class="tick" style="left:${a}%"></div>
+    <div class="band${t ? "" : " open"}" style="left:${a}%;width:${end - a}%"></div>${t ? `<div class="act" style="left:${end}%">${ic(icon)}</div>` : ""}</div>`;
+};
+const scale = () => `<div class="scale">${["06:00", "06:15", "06:30", "06:45", "07:00", "07:15", "07:30", "07:45", "08:00"].map((t, i) => `<span style="left:${i * 12.5}%">${i % 2 ? "" : t}</span>`).join("")}</div>`;
+const urg = (r) => r.urgency.top === "urgent" ? `<span class="urg urg-urgent">${ic("urgent")}Urgent</span>` : `<span class="urg urg-routine">${ic("routine")}Routine</span>`;
+const mode = (r) => r.mode === "auto" ? `<span class="mode mode-auto">${ic("auto")}Auto-route</span>` : `<span class="mode mode-review">${ic("review")}Review${r.status && r.status !== "awaiting" ? ` · ${STATUS[r.status].toLowerCase()}` : ""}</span>`;
+const topbar = (cur) => `<header class="top"><span class="brand"><span class="disc"></span>Incident triage</span>
+  <nav aria-label="Main"><a href="#" ${cur === "queue" ? 'aria-current="page"' : ""}>Queue</a><a href="#">Results</a><a href="#">Labeller</a><a href="#">About</a></nav>
+  <div class="ctx"><span class="pick">Approach C · cascade ${ic("chev")}</span><span class="pick">Policy v1 ${ic("chev")}</span></div></header>`;
+const tabbar = () => `<nav class="tabbar" aria-label="Main"><a href="#" aria-current="page">${ic("queue")}Queue</a><a href="#">${ic("results")}Results</a><a href="#">${ic("label")}Labeller</a><a href="#">${ic("about")}About</a></nav>`;
+
+function text(r) {
+  const sup = { category: "C", urgency: "U", destination: "D" }, ev = {};
+  for (const k in sup) for (const i of r.evidence[k]) (ev[i] ||= []).push(sup[k]);
+  return r.text.map((s, i) => ev[i] ? `<mark>${s}</mark><sup>${i + 1} ${ev[i].join(" ")}</sup> ` : `${s}<sup class="muted">${i + 1}</sup> `).join("");
+}
+function decisions(r) {
+  const row = (lab, d, names, th) => {
+    const v = names ? names[d.top] : d.top === "urgent" ? `<span class="urg urg-urgent">${ic("urgent")}Urgent</span>` : "Routine";
+    const alt = d.alt[0] ? `next: ${names ? names[d.alt[0][0]] : d.alt[0][0]} ${p2(d.alt[0][1])}` : "";
+    return `<div class="row"><span class="lab">${lab}</span><span class="v">${v}<span class="alt">${alt}</span></span><span class="p${d.p < th ? " low" : ""}">${p2(d.p)}<small>min ${p2(th)}</small></span></div>`;
+  };
+  return `<div class="rows">${row("Category", r.category, CAT, 0.75)}${row("Urgency", r.urgency, null, 0.85)}${row("Destination", r.destination, DEST, 0.8)}</div>`;
+}
+const triggers = (r) => r.triggers.map((t) => `<div class="trig">${ic("review")}<div><b>${t.name}</b><span class="muted">${t.detail}</span></div><span class="code">${t.rule}</span></div>`).join("");
+const actions = () => `<div class="actions"><button class="btn btn-primary">${ic("check")}Accept and route</button><button class="btn">${ic("override")}Override</button><button class="btn">${ic("escalate")}Escalate</button></div>`;
+
+function queueView() {
+  const r = REPORTS.find((x) => x.id === id);
+  const rows = QUEUE.map((x) => `<tr class="${x.id === id ? "sel" : ""}" tabindex="0"><td>${urg(x)}</td>
+    <td><span class="cellclip"><span class="rid">${x.id}</span><span class="ex">${firstLine(x)}</span></span></td>
+    <td>${DEST[x.destination.top]}</td><td>${mode(x)}</td><td style="width:220px">${trace(x)}</td></tr>`).join("");
+  const plist = QUEUE.map((x) => `<div class="pli${x.id === id ? " sel" : ""}"><div class="pli-top">${urg(x)}<span class="rid">${x.id}</span><span class="t">${x.received}</span></div>
+    <div class="pli-ex">${x.text.join(" ")}</div><div class="pli-meta"><b>${DEST[x.destination.top]}</b>${mode(x)}</div>${trace(x)}</div>`).join("");
+  return `${topbar("queue")}<header class="appbar"><b>Queue</b><span class="pick">C · v1 ${ic("chev")}</span></header>
+  <div class="split"><section class="listpane">
+    <div class="listhead"><h1>Queue</h1><span class="sub num">13 reports since 06:00 · 2 waiting in Review · longest wait 55 min</span></div>
+    <div class="filters"><button aria-pressed="true">Waiting</button><button aria-pressed="false">All</button><button aria-pressed="false">Reviewed</button><button aria-pressed="false">Auto-routed</button><span class="search">${ic("search")}Search reports</span></div>
+    <table><thead><tr><th>Urgency</th><th>Report</th><th>Destination</th><th>Routing Mode</th><th>${scale()}</th></tr></thead><tbody>${rows}</tbody></table>
+    <div class="plist">${plist}</div>
+  </section>
+  <aside class="prev" aria-label="Selected report">
+    <div class="prevhead"><h1 class="num">${r.id}</h1><span class="sub">${ROLE[r.role]} · ${CHANNEL[r.channel]} · ${r.received}</span></div>
+    <div class="chips">${urg(r)}${mode(r)}<b>${ic("arrow")} ${DEST[r.destination.top]}</b></div>
+    <h2>Incident Report</h2><p class="report">${text(r)}</p>
+    <h2 style="margin-top:16px">Triage decisions</h2>${decisions(r)}
+    <h2>Review Triggers</h2>${triggers(r)}${actions()}
+  </aside></div>${tabbar()}`;
+}
+
+function detailView() {
+  const r = REPORTS.find((x) => x.id === id);
+  const a = pos(r.received);
+  const hist = r.history.map(([t, w, s]) => `<li><time>${t}</time><span class="who">${w}</span><span>${s}</span></li>`).join("")
+    + (r.status === "awaiting" ? `<li><time>—</time><span class="who">Reviewer</span><span class="muted">Waiting for a Reviewer Action · 2 min so far</span></li>` : "");
+  return `${topbar("queue")}<header class="appbar"><a href="#">${ic("back")}Queue</a><b class="num">${r.id}</b></header>
+  <main class="page">
+    <div class="dhead"><a class="crumb" href="#">${ic("back")}Queue</a>
+    <div class="prevhead"><h1 class="num">${r.id}</h1><span class="sub">${ROLE[r.role]} · ${CHANNEL[r.channel]} · received ${r.received} · synthetic</span></div></div>
+    <div class="chips" style="font-size:1rem">${urg(r)}${mode(r)}<b>${ic("arrow")} ${DEST[r.destination.top]}</b></div>
+    <div class="dgrid"><div>
+      <section class="panel o1"><h2>Incident Report</h2><p class="report">${text(r)}</p></section>
+      <section class="panel o4"><h2>Time on the desk</h2>
+        <div class="big-trace">${scale()}${trace(r).replace('class="trace"', 'class="trace" style="height:34px"')}
+        <div class="sub" style="display:flex;justify-content:space-between;margin-top:6px"><span>Hatched band: waiting in Review. Solid band: reviewed. Tick: received.</span><span class="num">Received ${r.received} · waiting 2 min</span></div></div>
+        <ol class="hist">${hist}</ol></section>
+    </div><div>
+      <section class="panel o2"><h2>Triage decisions</h2>${decisions(r)}</section>
+      <section class="panel o3"><h2>Review Triggers</h2>${triggers(r)}</section>
+      <section class="panel desk"><h2>Reviewer Action</h2>${actions()}</section>
+    </div></div>
+  </main>
+  <div class="actionbar"><button class="btn btn-primary">${ic("check")}Accept</button><button class="btn">${ic("override")}Override</button><button class="btn">${ic("escalate")}Escalate</button></div>${tabbar()}`;
+}
+document.getElementById("root").innerHTML = view === "detail" ? detailView() : queueView();
+</script>
+</body>
+</html>

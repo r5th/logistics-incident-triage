@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Incident triage · Route sign comp</title>
+<link rel="stylesheet" href="shared/route-sign.css">
+</head>
+<body>
+<script src="shared/icons.js"></script>
+<script src="shared/data.js"></script>
+<div id="root"></div>
+<script>
+const q = new URLSearchParams(location.search);
+const view = q.get("view") || "queue";
+const id = q.get("id") || "R-0142";
+
+const urg = (r) => r.urgency.top === "urgent"
+  ? `<span class="urg urg-urgent">${ic("urgent")}Urgent</span>`
+  : `<span class="urg urg-routine">${ic("routine")}Routine</span>`;
+const dest = (k, lg) => `<span class="plate plate-dest${lg ? " plate-lg" : ""}">${DEST[k]}${ic("arrow")}</span>`;
+const mode = (r, lg) => r.mode === "auto"
+  ? `<span class="plate plate-auto${lg ? " plate-lg" : ""}">${ic("auto")}Auto-route</span>`
+  : `<span class="plate plate-review${lg ? " plate-lg" : ""}">${ic("review")}Review</span>`;
+const status = (r) => {
+  if (!r.status) return `<span class="muted">—</span>`;
+  const icon = { awaiting: "clock", accepted: "check", overridden: "override", escalated: "escalate" }[r.status];
+  return `<span class="status status-${r.status}">${ic(icon)}${STATUS[r.status]}</span>`;
+};
+
+const rail = (cur) => `
+<nav class="rail" aria-label="Main">
+  <div class="brand"><span class="brand-mark">${ic("arrow")}</span>Incident triage</div>
+  <div class="nav">
+    <a href="#" ${cur === "queue" ? 'aria-current="page"' : ""}>${ic("queue")}Queue<span class="badge num">2</span></a>
+    <a href="#" ${cur === "results" ? 'aria-current="page"' : ""}>${ic("results")}Results</a>
+    <a href="#">${ic("label")}Labeller</a>
+    <a href="#">${ic("about")}About</a>
+  </div>
+  <div class="ctx">
+    <div><div class="ctx-label">Approach</div><div class="seg-shell" role="group" aria-label="Approach"><button aria-pressed="false">A</button><button aria-pressed="false">B</button><button aria-pressed="true">C</button></div><div class="ctx-label" style="margin:6px 0 0">C cascade: rules first, TypeSafe when the rules are unsure</div></div>
+    <div><div class="ctx-label">Policy</div><div class="seg-shell" role="group" aria-label="Policy"><button aria-pressed="true">v1</button><button aria-pressed="false">v2</button></div></div>
+  </div>
+  <div class="foot">Synthetic reports · test split</div>
+</nav>`;
+const tabbar = (cur) => `
+<nav class="tabbar" aria-label="Main">
+  <a href="#" ${cur === "queue" ? 'aria-current="page"' : ""}>${ic("queue")}Queue</a>
+  <a href="#" ${cur === "results" ? 'aria-current="page"' : ""}>${ic("results")}Results</a>
+  <a href="#">${ic("label")}Labeller</a>
+  <a href="#">${ic("about")}About</a>
+</nav>`;
+
+function queueView() {
+  const awaiting = QUEUE.filter((r) => r.status === "awaiting");
+  const rest = QUEUE.filter((r) => r.status !== "awaiting");
+  const row = (r) => `<tr class="${r.id === id ? "sel" : ""}" tabindex="0">
+      <td>${urg(r)}</td>
+      <td><span class="rid">${r.id}</span><span class="excerpt">${firstLine(r)}</span></td>
+      <td>${CAT[r.category.top]}</td>
+      <td>${dest(r.destination.top)}</td>
+      <td>${mode(r)}</td>
+      <td>${status(r)}</td>
+      <td class="num muted">${r.received}</td></tr>`;
+  const li = (r) => `<a class="li${r.id === id ? " sel" : ""}" href="#">
+      <div class="li-top">${urg(r)}<span class="rid">${r.id}</span><time>${r.received}</time></div>
+      <div class="li-text">${r.text.join(" ")}</div>
+      <div class="li-plates">${mode(r)}${dest(r.destination.top)}</div></a>`;
+  return `<div class="app">${rail("queue")}
+  <header class="appbar"><h1>Queue</h1><span class="ctxchip">C · Policy v1</span></header>
+  <main class="main">
+    <div class="page-head"><h1>Queue</h1><span class="sub num">13 reports · 4 sent to Review · 2 awaiting a Reviewer Action</span></div>
+    <div class="toolbar">
+      <div class="tabs" role="tablist" aria-label="Show">
+        <button role="tab" aria-selected="true">Awaiting review <span class="count num">2</span></button>
+        <button role="tab" aria-selected="false">All <span class="count num">13</span></button>
+        <button role="tab" aria-selected="false">Reviewed <span class="count num">2</span></button>
+        <button role="tab" aria-selected="false">Auto-routed <span class="count num">9</span></button>
+      </div>
+      <span class="select">Urgency: any ${ic("chev")}</span>
+      <span class="select">Destination: any ${ic("chev")}</span>
+      <label class="search">${ic("search")}Search report text</label>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Urgency</th><th>Report</th><th>Category</th><th>Destination</th><th>Routing Mode</th><th>Reviewer Action</th><th>Received ${ic("chev")}</th></tr></thead>
+      <tbody>
+        <tr class="section-row"><td colspan="7">Awaiting review · urgent first</td></tr>
+        ${awaiting.map(row).join("")}
+        <tr class="section-row"><td colspan="7">Everything else · newest first</td></tr>
+        ${rest.map(row).join("")}
+      </tbody></table></div>
+    <div class="list">
+      <div class="li-group">Awaiting review · urgent first</div>${awaiting.map(li).join("")}
+      <div class="li-group">Everything else</div>${rest.map(li).join("")}
+    </div>
+    <p class="note-synth desk">All reports are synthetic. Probabilities in this comp are placeholders.</p>
+  </main>${tabbar("queue")}</div>`;
+}
+
+function detailView() {
+  const r = REPORTS.find((x) => x.id === id);
+  const sup = { category: "C", urgency: "U", destination: "D" };
+  const evSet = {};
+  for (const k of ["category", "urgency", "destination"]) for (const i of r.evidence[k]) (evSet[i] ||= []).push(sup[k]);
+  const text = r.text.map((s, i) => evSet[i]
+    ? `<mark class="s">${s}</mark><sup>${i + 1} ${evSet[i].join(" ")}</sup> `
+    : `<span class="s">${s}</span><sup class="muted">${i + 1}</sup> `).join("");
+  const decision = (label, d, names, key, threshold) => {
+    const low = d.p < threshold;
+    const top = names ? names[d.top] : d.top[0].toUpperCase() + d.top.slice(1);
+    const lead = key === "urgency" && d.top === "urgent" ? `<span class="urg urg-urgent" style="font-size:1rem">${ic("urgent")}Urgent</span>` : key === "destination" ? dest(d.top) : top;
+    const alt = d.alt[0] ? `Next: ${names ? names[d.alt[0][0]] : d.alt[0][0]} ${p2(d.alt[0][1])}` : "No runner-up";
+    return `<div class="dec"><dt>${label}</dt><dd>
+      <div class="val">${lead}<span class="prob">${p2(d.p)}</span></div>
+      <div class="bar${low ? " low" : ""}" title="Policy v1 threshold ${p2(threshold)}"><i style="width:${d.p * 100}%"></i><b style="left:${threshold * 100}%"></b></div>
+      <div class="meta">${alt} · threshold ${p2(threshold)}${low ? " (below)" : ""} · Evidence ${r.evidence[key].map((i) => i + 1).join(", ")}</div></dd></div>`;
+  };
+  const hist = r.history.map(([t, who, what]) => `<li><time>${t}</time><span class="who">${who}</span><span>${what}</span></li>`).join("")
+    + (r.status === "awaiting" ? `<li><time>—</time><span class="who">Reviewer</span><span class="pending">Awaiting a Reviewer Action</span></li>` : "");
+  return `<div class="app detail">${rail("queue")}
+  <header class="appbar"><a class="back" href="#">${ic("back")}Queue</a><h1 class="num">${r.id}</h1></header>
+  <main class="main">
+    <a class="crumb" href="#">${ic("back")}Queue</a>
+    <div class="detail-head"><div>
+      <h1 class="num">${r.id}</h1>
+      <div class="sub">${ROLE[r.role]} · ${CHANNEL[r.channel]} · received <span class="num">${r.received}</span> · synthetic</div>
+      <div class="route">${urg(r).replace('class="urg', 'style="font-size:1rem" class="urg')}${mode(r, true)}<span class="sep">${ic("arrow")}</span>${dest(r.destination.top, true)}</div>
+    </div>
+    <div class="head-actions"><div class="actions"><button class="btn btn-primary">${ic("check")}Accept and route</button><button class="btn">${ic("override")}Override</button><button class="btn">${ic("escalate")}Escalate</button></div>
+      <p class="meta" style="margin:6px 0 0;text-align:right">Override and escalate ask for a note, logged in the decision history</p></div></div>
+    <div class="grid">
+      <div>
+        <section class="panel o1"><h2>Incident Report</h2><p class="report">${text}</p>
+          <div class="legend"><span><span class="sw"></span>Evidence sentence</span><span>C Category · U Urgency · D Destination</span></div></section>
+        <section class="panel o4"><h2>Decision history</h2><ol class="hist">${hist}</ol></section>
+      </div>
+      <div>
+        <section class="panel o2"><h2>Triage decisions</h2><dl style="margin:0">
+          ${decision("Category", r.category, CAT, "category", 0.75)}
+          ${decision("Urgency", r.urgency, null, "urgency", 0.85)}
+          ${decision("Destination", r.destination, DEST, "destination", 0.8)}</dl></section>
+        <section class="panel o3"><h2>Review Triggers</h2>
+          ${r.triggers.map((t) => `<div class="trig">${ic("review")}<div><b>${t.name}</b><span class="muted">${t.detail}</span></div><span class="code">${t.rule}</span></div>`).join("")}</section>
+      </div>
+    </div>
+  </main>
+  <div class="actionbar"><button class="btn btn-primary">${ic("check")}Accept</button><button class="btn">${ic("override")}Override</button><button class="btn">${ic("escalate")}Escalate</button></div>
+  ${tabbar("queue")}</div>`;
+}
+document.getElementById("root").innerHTML = view === "detail" ? detailView() : queueView();
+</script>
+</body>
+</html>

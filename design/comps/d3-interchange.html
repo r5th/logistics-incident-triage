@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Incident triage · Interchange comp</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --bg: #F6F7F9; --surface: #FFFFFF; --surface-2: #EDEFF3; --sep: #D8DCE3;
+  --text: #0F1A2E; --text-2: #4B5568;
+  --bar: #14213D; --bar-text: #FFFFFF; --bar-text-2: #B4BED2;
+  --accent: #14213D; --on-accent: #FFFFFF; --accent-tint: #E4E8F0; --focus: #2457C5;
+  --ink-chip: #0F1A2E; --on-ink-chip: #FFFFFF;
+  --evidence: #FFF1C2; --evidence-line: #8A6100;
+  --l-fleet_support: #B45309; --l-customer_desk: #1D4ED8; --l-claims: #15803D;
+  --l-security_investigations: #7E22CE; --l-compliance: #0E7490; --l-safety_desk: #BE123C;
+  --station: #FFFFFF;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0E1729; --surface: #142038; --surface-2: #1B2945; --sep: #283857;
+    --text: #E8EDF6; --text-2: #A5B1C7;
+    --bar: #0A1222; --bar-text: #FFFFFF; --bar-text-2: #95A3BD;
+    --accent: #E8EDF6; --on-accent: #0E1729; --accent-tint: #1F2F50; --focus: #8AB4FF;
+    --ink-chip: #E8EDF6; --on-ink-chip: #0E1729;
+    --evidence: #3A3014; --evidence-line: #F2C94C;
+    --l-fleet_support: #F59E0B; --l-customer_desk: #6EA0FF; --l-claims: #4ADE80;
+    --l-security_investigations: #C084FC; --l-compliance: #22D3EE; --l-safety_desk: #FB7185;
+    --station: #0E1729;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--font); font-size: 1rem; line-height: 1.5; color: var(--text); background: var(--bg); }
+::selection { background: var(--focus); color: #fff; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.ic { width: 1em; height: 1em; flex: none; vertical-align: -0.125em; }
+.num { font-variant-numeric: tabular-nums; }
+.muted { color: var(--text-2); }
+
+.top { background: var(--bar); color: var(--bar-text); display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; padding: 0 24px; height: 56px; }
+.brand { font-weight: 650; display: flex; align-items: center; gap: 10px; }
+.roundel { width: 22px; height: 22px; border-radius: 50%; border: 4px solid var(--bar-text); position: relative; }
+.roundel::after { content: ""; position: absolute; left: -7px; right: -7px; top: 50%; height: 4px; transform: translateY(-50%); background: var(--bar-text); }
+.cmd { justify-self: center; width: min(520px, 100%); display: flex; align-items: center; gap: 8px; background: rgb(255 255 255 / .1); border-radius: 8px; padding: 7px 12px; font-size: .875rem; color: var(--bar-text-2); }
+.cmd kbd { margin-left: auto; font: inherit; font-size: .75rem; border: 1px solid rgb(255 255 255 / .25); border-radius: 4px; padding: 0 6px; }
+.top nav { display: flex; gap: 4px; }
+.top nav a { color: var(--bar-text-2); text-decoration: none; font-size: .875rem; font-weight: 500; padding: 6px 10px; border-radius: 6px; }
+.top nav a[aria-current="page"] { color: var(--bar-text); background: rgb(255 255 255 / .14); font-weight: 600; }
+
+.wrap { max-width: 1320px; margin: 0 auto; padding: 20px 32px 48px; }
+.head { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
+h1 { font-size: 1.5rem; margin: 0; font-weight: 700; letter-spacing: -0.01em; }
+.sub { font-size: .875rem; color: var(--text-2); }
+.ctx { margin-left: auto; display: flex; gap: 8px; }
+.pick { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--sep); background: var(--surface); border-radius: 8px; padding: 5px 10px; font-size: .8125rem; font-weight: 600; }
+
+/* Line filter: each Destination is a line */
+.lines { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.line-chip { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--sep); background: var(--surface); border-radius: 999px; padding: 4px 12px 4px 8px; font-size: .8125rem; font-weight: 600; }
+.line-chip i { width: 18px; height: 6px; border-radius: 3px; background: var(--c); }
+.line-chip .n { color: var(--text-2); font-weight: 500; }
+.line-chip[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.line-chip[aria-pressed="true"] .n { color: inherit; opacity: .8; }
+
+.board { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.group { background: var(--surface); border: 1px solid var(--sep); border-radius: 12px; overflow: hidden; }
+.group h2 { font-size: .9375rem; margin: 0; padding: 12px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--sep); }
+.group h2 .n { color: var(--text-2); font-weight: 500; }
+.stn { position: relative; display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; padding: 10px 16px 10px 12px; min-height: 56px; align-items: start; }
+.stn + .stn { border-top: 1px solid var(--sep); }
+.stn.sel { background: var(--accent-tint); }
+.stn .rail { position: absolute; left: 25px; top: 0; bottom: 0; width: 6px; background: var(--c); }
+.stn:first-of-type .rail { top: 22px; }
+.stn:last-child .rail { bottom: calc(100% - 22px); }
+.stn .dot { position: relative; z-index: 1; margin: 8px 0 0 7px; width: 14px; height: 14px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 3px var(--surface); }
+.stn.review .dot { margin: 5px 0 0 4px; width: 20px; height: 20px; background: var(--station); border: 4px solid var(--text); box-shadow: 0 0 0 2px var(--surface); }
+.stn-main { min-width: 0; }
+.stn-top { display: flex; gap: 8px; align-items: center; font-size: .8125rem; flex-wrap: wrap; }
+.rid { font-weight: 700; font-variant-numeric: tabular-nums; }
+.ex { font-size: .875rem; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+.t { font-size: .8125rem; color: var(--text-2); font-variant-numeric: tabular-nums; padding-top: 2px; }
+.urg { display: inline-flex; align-items: center; gap: 4px; font-size: .75rem; font-weight: 700; border-radius: 4px; padding: 1px 6px 1px 4px; white-space: nowrap; }
+.urg-urgent { background: var(--ink-chip); color: var(--on-ink-chip); }
+.urg-routine { color: var(--text-2); font-weight: 500; padding-left: 0; }
+.mode { font-size: .75rem; font-weight: 600; color: var(--text-2); display: inline-flex; gap: 4px; align-items: center; }
+.mode-review { color: var(--text); }
+
+/* Detail: route diagram */
+.crumb { display: inline-flex; align-items: center; gap: 4px; color: var(--text); text-decoration: none; font-size: .875rem; font-weight: 600; margin-bottom: 8px; }
+.route { background: var(--surface); border: 1px solid var(--sep); border-radius: 12px; padding: 20px 28px 16px; margin-bottom: 20px; }
+.track { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); }
+.track::before { content: ""; position: absolute; left: 12.5%; right: 12.5%; top: 13px; height: 6px; background: linear-gradient(90deg, var(--text-2) 0 66.6%, var(--c) 66.6%); border-radius: 3px; }
+.halt { position: relative; text-align: center; font-size: .8125rem; }
+.halt .d { width: 32px; height: 32px; margin: 0 auto 6px; border-radius: 50%; background: var(--station); border: 6px solid var(--text-2); position: relative; z-index: 1; }
+.halt.ix .d { border-color: var(--text); width: 32px; height: 32px; }
+.halt.end .d { border-radius: 6px; background: var(--c); border-color: var(--c); }
+.halt b { display: block; font-size: .9375rem; }
+.cols { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, .9fr); gap: 20px; align-items: start; }
+.card { background: var(--surface); border: 1px solid var(--sep); border-radius: 12px; padding: 16px 20px; }
+.card + .card { margin-top: 16px; }
+.card h2 { font-size: .9375rem; margin: 0 0 10px; }
+.report { margin: 0; line-height: 1.65; }
+.report mark { background: var(--evidence); color: inherit; box-shadow: inset 0 -2px 0 var(--evidence-line); padding: 1px 2px; }
+.report sup { font-size: .6875rem; font-weight: 700; margin-left: 2px; }
+.dec { padding: 10px 0; border-top: 1px solid var(--sep); }
+.dec:first-of-type { border-top: 0; padding-top: 0; }
+.dec .lab { font-size: .75rem; color: var(--text-2); }
+.dec .v { display: flex; justify-content: space-between; align-items: center; font-weight: 650; }
+.dec .p { font-variant-numeric: tabular-nums; }
+.dists { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin-top: 6px; background: var(--surface-2); }
+.dists i { display: block; height: 100%; }
+.dec .alt { font-size: .75rem; color: var(--text-2); margin-top: 4px; }
+.trig { display: grid; grid-template-columns: 18px 1fr auto; gap: 8px; font-size: .875rem; padding: 6px 0; }
+.trig .ic { width: 16px; height: 16px; margin-top: 2px; }
+.trig b { display: block; }
+.code { font-size: .75rem; font-weight: 700; border: 1px solid var(--sep); border-radius: 4px; padding: 0 5px; color: var(--text-2); align-self: start; }
+.btns { display: grid; gap: 8px; }
+.btn { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; border-radius: 8px; border: 1px solid var(--sep); background: var(--surface); color: var(--text); font: inherit; font-weight: 650; font-size: .875rem; }
+.btn .ic { width: 16px; height: 16px; }
+.btn-primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.hist { list-style: none; margin: 0; padding: 0; font-size: .8125rem; }
+.hist li { display: grid; grid-template-columns: 64px 1fr; gap: 8px; padding: 6px 0; border-top: 1px solid var(--sep); }
+.hist li:first-child { border-top: 0; }
+.hist time { color: var(--text-2); font-variant-numeric: tabular-nums; }
+
+/* Phone */
+.tabbar, .actionbar { display: none; }
+@media (max-width: 599px) {
+  .top { grid-template-columns: auto 1fr; height: 52px; padding: 0 16px; }
+  .top nav, .cmd kbd, .head .ctx { display: none; }
+  .crumb { min-height: 44px; margin: -8px 0 0; }
+  .cmd { justify-self: end; width: 44px; height: 44px; padding: 0; justify-content: center; background: none; font-size: 0; }
+  .cmd .ic { width: 22px; height: 22px; }
+  .wrap { padding: 12px 16px 120px; }
+  .head h1 { font-size: 1.25rem; }
+  .lines { flex-wrap: nowrap; overflow-x: auto; margin: 0 -16px 12px; padding: 0 16px; }
+  .line-chip { min-height: 36px; white-space: nowrap; }
+  .board { display: block; }
+  .group + .group { margin-top: 12px; }
+  .tabbar { display: grid; grid-template-columns: repeat(4, 1fr); position: fixed; left: 0; right: 0; bottom: 0; background: var(--surface); border-top: 1px solid var(--sep); z-index: 2; }
+  .tabbar a { min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: .6875rem; font-weight: 600; color: var(--text-2); text-decoration: none; }
+  .tabbar a .ic { width: 22px; height: 22px; }
+  .tabbar a[aria-current="page"] { color: var(--text); }
+  .route { padding: 14px 8px 10px; }
+  .halt { font-size: .6875rem; }
+  .halt b { font-size: .75rem; }
+  .cols { display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+  .cols > div { display: contents; }
+  .card + .card { margin-top: 0; }
+  .o1 { order: 1; } .o2 { order: 2; } .o3 { order: 3; } .o4 { order: 4; }
+  .card.desk { display: none; }
+  .actionbar { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 8px; position: fixed; left: 0; right: 0; bottom: 57px; background: var(--surface); border-top: 1px solid var(--sep); padding: 8px 16px; z-index: 2; }
+  .actionbar .btn { min-height: 44px; }
+}
+</style>
+</head>
+<body>
+<script src="shared/icons.js"></script>
+<script src="shared/data.js"></script>
+<div id="root"></div>
+<script>
+const q = new URLSearchParams(location.search);
+const view = q.get("view") || "queue";
+const id = q.get("id") || "R-0142";
+const C = (k) => `var(--l-${k})`;
+const urg = (r) => r.urgency.top === "urgent" ? `<span class="urg urg-urgent">${ic("urgent")}Urgent</span>` : `<span class="urg urg-routine">${ic("routine")}Routine</span>`;
+const mode = (r) => r.mode === "auto" ? `<span class="mode">${ic("auto")}Auto-route</span>` : `<span class="mode mode-review">${ic("review")}Review · ${STATUS[r.status].toLowerCase()}</span>`;
+const topbar = () => `<header class="top"><span class="brand"><span class="roundel"></span>Incident triage</span>
+  <span class="cmd">${ic("search")}Search reports or jump to an id<kbd>/</kbd></span>
+  <nav aria-label="Main"><a href="#" aria-current="page">Queue</a><a href="#">Results</a><a href="#">Labeller</a><a href="#">About</a></nav></header>`;
+const tabbar = () => `<nav class="tabbar" aria-label="Main"><a href="#" aria-current="page">${ic("queue")}Queue</a><a href="#">${ic("results")}Results</a><a href="#">${ic("label")}Labeller</a><a href="#">${ic("about")}About</a></nav>`;
+
+function queueView() {
+  const order = ["safety_desk", "fleet_support", "security_investigations", "customer_desk", "compliance", "claims"];
+  const counts = {}; for (const r of REPORTS) counts[r.destination.top] = (counts[r.destination.top] || 0) + 1;
+  const chips = `<button class="line-chip" aria-pressed="true">All lines <span class="n num">13</span></button>` +
+    Object.keys(DEST).map((k) => `<button class="line-chip" style="--c:${C(k)}"><i></i>${DEST[k]} <span class="n num">${counts[k] || 0}</span></button>`).join("");
+  const groups = order.filter((k) => counts[k]).map((k) => {
+    const rs = QUEUE.filter((r) => r.destination.top === k);
+    return `<section class="group" style="--c:${C(k)}"><h2><span style="width:18px;height:6px;border-radius:3px;background:${C(k)}"></span>${DEST[k]} <span class="n num">${rs.length}</span></h2>
+      ${rs.map((r) => `<div class="stn${r.mode === "review" ? " review" : ""}${r.id === id ? " sel" : ""}" tabindex="0"><span class="rail"></span><span class="dot"></span>
+        <div class="stn-main"><div class="stn-top">${urg(r)}<span class="rid">${r.id}</span>${mode(r)}</div><div class="ex">${firstLine(r)}</div></div><span class="t">${r.received}</span></div>`).join("")}</section>`;
+  }).join("");
+  return `${topbar()}<main class="wrap">
+    <div class="head"><h1>Queue</h1><span class="sub num">13 reports · ◎ interchange = sent to Review · 2 awaiting</span>
+      <div class="ctx"><span class="pick">Approach C cascade ${ic("chev")}</span><span class="pick">Policy v1 ${ic("chev")}</span></div></div>
+    <div class="lines" role="group" aria-label="Filter by Destination">${chips}</div>
+    <div class="board">${groups}</div></main>${tabbar()}`;
+}
+
+function detailView() {
+  const r = REPORTS.find((x) => x.id === id);
+  const sup = { category: "C", urgency: "U", destination: "D" }, ev = {};
+  for (const k in sup) for (const i of r.evidence[k]) (ev[i] ||= []).push(sup[k]);
+  const text = r.text.map((s, i) => ev[i] ? `<mark>${s}</mark><sup>${i + 1} ${ev[i].join(" ")}</sup> ` : `${s}<sup class="muted">${i + 1}</sup> `).join("");
+  const dec = (lab, d, names, th) => {
+    const name = (k) => names ? names[k] : k[0].toUpperCase() + k.slice(1);
+    const parts = [[d.top, d.p], ...d.alt];
+    const fill = (k, i) => names === DEST ? C(k) : i === 0 ? "var(--text)" : "var(--text-2)";
+    return `<div class="dec"><div class="lab">${lab}</div><div class="v"><span>${d.top === "urgent" ? urg(r) : name(d.top)}</span><span class="p">${p2(d.p)}</span></div>
+      <div class="dists">${parts.map(([k, p], i) => `<i style="width:${p * 100}%;background:${fill(k, i)};opacity:${i ? 0.45 : 1}"></i>`).join("")}</div>
+      <div class="alt">${d.alt[0] ? `Next: ${name(d.alt[0][0])} ${p2(d.alt[0][1])} · ` : ""}Policy v1 needs ${p2(th)}${d.p < th ? " · below" : ""}</div></div>`;
+  };
+  const hist = r.history.map(([t, w, s]) => `<li><time>${t.slice(0, 5)}</time><span><b>${w}</b> · ${s}</span></li>`).join("");
+  return `${topbar()}<main class="wrap" style="--c:${C(r.destination.top)}">
+    <a class="crumb" href="#">${ic("back")}Queue</a>
+    <div class="head"><h1 class="num">${r.id}</h1>${urg(r)}<span class="sub">${ROLE[r.role]} · ${CHANNEL[r.channel]} · synthetic</span></div>
+    <section class="route" aria-label="Route of this report"><div class="track">
+      <div class="halt"><div class="d"></div><b>Received</b><span class="muted num">${r.received}</span></div>
+      <div class="halt"><div class="d"></div><b>Triage</b><span class="muted">Approach C · 238 ms</span></div>
+      <div class="halt ix"><div class="d"></div><b>Review</b><span class="muted">Awaiting a Reviewer Action</span></div>
+      <div class="halt end"><div class="d"></div><b>${DEST[r.destination.top]}</b><span class="muted">Proposed Destination</span></div>
+    </div></section>
+    <div class="cols"><div>
+      <section class="card o1"><h2>Incident Report</h2><p class="report">${text}</p></section>
+      <section class="card o4"><h2>Decision history</h2><ol class="hist">${hist}</ol></section>
+    </div><div>
+      <section class="card o2"><h2>Triage decisions</h2>${dec("Category", r.category, CAT, 0.75)}${dec("Urgency", r.urgency, null, 0.85)}${dec("Destination", r.destination, DEST, 0.8)}</section>
+    </div><div>
+      <section class="card o3"><h2>Review Triggers</h2>${r.triggers.map((t) => `<div class="trig">${ic("review")}<div><b>${t.name}</b><span class="muted">${t.detail}</span></div><span class="code">${t.rule}</span></div>`).join("")}</section>
+      <section class="card desk"><h2>Reviewer Action</h2><div class="btns"><button class="btn btn-primary">${ic("check")}Accept and route</button><button class="btn">${ic("override")}Override</button><button class="btn">${ic("escalate")}Escalate</button></div></section>
+    </div></div></main>
+    <div class="actionbar"><button class="btn btn-primary">${ic("check")}Accept</button><button class="btn">${ic("override")}Override</button><button class="btn">${ic("escalate")}Escalate</button></div>${tabbar()}`;
+}
+document.getElementById("root").innerHTML = view === "detail" ? detailView() : queueView();
+</script>
+</body>
+</html>
