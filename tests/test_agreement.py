@@ -30,3 +30,14 @@ def test_agreement_uses_pass_1_and_paired_pass_2_only(workspace):
     write_json(workspace / 'data/labels/blind_test.json', rows[1:])
     with pytest.raises(ValueError, match='cover all'):
         agreement.main(['--root', str(workspace)])
+
+
+def test_pass_2_protocol_reports_count_and_delay():
+    from eval.agreement import pass_2_protocol
+    p1 = [{'report_id': f'R-{i}', 'pass': 1, 'labelled_at': '2026-10-27T02:00:00Z'} for i in range(30)]
+    early = [{'report_id': 'R-1', 'pass': 2, 'labelled_at': '2026-10-27T02:30:00Z'}] * 2
+    assert pass_2_protocol(p1 + early) == {'n': 2, 'required_n': 25, 'hours_after_pass_1': 0.5,
+                                           'required_hours': 4, 'meets_protocol': False}
+    late = [{'report_id': f'R-{i}', 'pass': 2, 'labelled_at': '2026-10-27T06:30:00Z'}
+            for i in range(25)]
+    assert pass_2_protocol(p1 + late)['meets_protocol'] is True

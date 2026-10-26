@@ -1,3 +1,4 @@
+import hashlib
 import importlib.util
 import json
 import shutil
@@ -34,10 +35,18 @@ def workspace(tmp_path):
 
 
 def _freeze(workspace, *versions):
+    """Freeze like eval/tune.py --freeze: frozen flag plus validation-prediction hashes."""
+    tuned_on = _out(workspace, "A_validation.jsonl")
+    if not tuned_on.exists():
+        tuned_on.parent.mkdir(parents=True, exist_ok=True)
+        tuned_on.write_text("", encoding="utf-8")
     for v in versions:
         path = workspace / "policies" / f"{v}.json"
         raw = json.loads(path.read_text(encoding="utf-8"))
         raw["frozen"] = True
+        raw["frozen_on"] = {"split": "validation", "predictions_sha256": {
+            "results/predictions/A_validation.jsonl":
+                hashlib.sha256(tuned_on.read_bytes()).hexdigest()}}
         path.write_text(json.dumps(raw), encoding="utf-8")
 
 
@@ -87,7 +96,7 @@ def test_test_split_runs_once_both_policies_are_frozen_and_flag_passed(workspace
 def test_b_on_test_refuses_to_overwrite_an_existing_run(workspace):
     _freeze(workspace, "v1", "v2")
     out = _out(workspace, "B_test.jsonl")
-    out.parent.mkdir(parents=True)
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("existing\n", encoding="utf-8")
     with pytest.raises(SystemExit, match="B_test.jsonl already exists"):
         _run(workspace, "--approach", "B", "--split", "test", FLAG)
@@ -113,3 +122,49 @@ def test_c_needs_cached_b(workspace):
     _run(workspace, "--approach", "A", "--split", "build")
     with pytest.raises(SystemExit, match="B_build.jsonl"):
         _run(workspace, "--approach", "C", "--split", "build")
+
+
+def test_test_split_is_refused_when_validation_predictions_changed_after_freeze(workspace):
+    _freeze(workspace, "v1", "v2")
+    _out(workspace, "A_validation.jsonl").write_text("changed\n", encoding="utf-8")
+    with pytest.raises(SystemExit, match="provenance"):
+        _run(workspace, "--approach", "A", "--split", "test", FLAG)
+    assert not _out(workspace, "A_test.jsonl").exists()
+
+
+@pytest.mark.parametrize("approach", ["A", "C"])
+def test_no_approach_overwrites_its_test_run(workspace, approach):
+    _freeze(workspace, "v1", "v2")
+    out = _out(workspace, f"{approach}_test.jsonl")
+    out.write_text("existing\n", encoding="utf-8")
+    with pytest.raises(SystemExit, match=f"{approach}_test.jsonl already exists"):
+        _run(workspace, "--approach", approach, "--split", "test", FLAG)
+    assert out.read_text(encoding="utf-8") == "existing\n"
+
+
+def test_interrupted_b_test_run_resumes_without_repeating_calls(workspace, monkeypatch):
+    from triage import baseline
+    _freeze(workspace, "v1", "v2")
+    calls = []
+
+    class Fake:
+        def __init__(self, **_):
+            pass
+
+        def predict(self, report):
+            calls.append(report.report_id)
+            if len(calls) == 3:
+                raise KeyboardInterrupt  # interrupted mid-run
+            p = baseline.predict(report)
+            return p.__class__(**{**p.__dict__, "approach": "B", "version": "b-v1"})
+
+    monkeypatch.setattr(run_predictions, "TypeSafeTriager", Fake)
+    monkeypatch.setattr(run_predictions, "SpendGuard", lambda *_: None)
+    with pytest.raises(KeyboardInterrupt):
+        _run(workspace, "--approach", "B", "--split", "test", FLAG)
+    assert not _out(workspace, "B_test.jsonl").exists()
+    _run(workspace, "--approach", "B", "--split", "test", FLAG)
+    ids = [p.report_id for p in load_predictions(_out(workspace, "B_test.jsonl"))]
+    assert len(ids) == 7 and len(calls) == 3 + 5  # 2 kept, the interrupted one retried
+    assert len(set(calls)) == 7  # every report called, only the interrupted one twice
+    assert not _out(workspace, "B_test.partial.jsonl").exists()
