@@ -121,7 +121,7 @@ notes, tachograph records, driver cards and permits.
 ### C6 `safety_incident`
 
 **Definition.** Anything where a person was hurt, was or is at risk, or could have been: injury,
-a driver taken ill at work, collision of any size (including with a bollard or bridge), fire,
+a driver taken ill at work, collision of any size (including with a bollard or bridge; a collision means a vehicle or forklift striking a person, another vehicle or a structure — striking only the goods is `C3`), fire,
 leak or spill of dangerous goods cargo, an unsafe or shifting load, threats or violence against
 staff, a near miss, or a hazard report about a site or vehicle.
 

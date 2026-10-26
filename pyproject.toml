@@ -17,6 +17,8 @@ packages = ["src/triage"]
 
 [tool.ruff]
 line-length = 100
+# Codex-written one-off generator, kept as written for provenance.
+extend-exclude = ["scripts/build_reports.py"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

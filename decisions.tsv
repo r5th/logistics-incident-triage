@@ -21,3 +21,6 @@ ts	phase	decision	why	evidence	result
 2026-10-26T17:16:55Z	engine	accepted engine: A rules, B TypeSafe one call per report, C cascade, Policy routing and cost	137 tests green, live B smoke right on 3 of 3	35bca64	tests green
 2026-10-26T17:16:56Z	web	accepted SvelteKit demo on sample data incl. blind labelling route	check/build clean; screenshots reviewed (detail light, label dark)	1e4f07c, design/build-shots/	accepted; real data pending export
 2026-10-26T17:16:57Z	web	evidence is one shared list per Prediction, not per decision	B asks two evidence Choices but the schema stores one list; per-decision highlight dropped	1e4f07c report	accepted limitation
+2026-10-26T17:18:03Z	data	accepted J1 reports despite low variety (2x3 passages per scenario, 37-73 words)	redo costs ~1h; scenario splits prevent leakage; limitation documented	b1bc5bd, docs/provenance-generation.md	accepted with limitation
+2026-10-26T17:18:04Z	data	clarified label guide: forklift striking only goods is C3 not a collision	J1 flagged S-070 ambiguity (build split)	docs/label-guide.md:124	done
+2026-10-26T17:18:04Z	eval	merged J2 eval harness after scope check (16 files, all in scope)	Codex offload test; tests 157 green after merge	f96f18e, a6be246	tests green

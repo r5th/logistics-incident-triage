@@ -50,3 +50,11 @@ unchanged:
 
 Validation: `python scripts/check_scenarios.py --reports data/reports.jsonl` ended
 with `PASS`. The brief's Label-name and rule-code leak check printed nothing.
+
+## Limitations noted at review (Claude Code, 27 October 2026)
+
+- The four reports of a Scenario are built from two phrasings of three passages, so they share
+  more wording than independent paraphrases would. Reports run 37–73 words (median 52), shorter
+  than the 30–180 asked for, and customers write only 6 of 400. Real reports would be longer,
+  messier and more varied, so measured accuracy here is likely optimistic.
+- Splits are by Scenario, so shared wording never crosses build, validation and test.
