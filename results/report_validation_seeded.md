@@ -6,62 +6,62 @@ Each Incident Report has a Category, Urgency and Destination. A Policy chooses A
 
 | Approach | Policy | Category accuracy | Destination accuracy | Urgent recall | Review rate | Auto-route coverage | Auto-route error rate | Missed Urgent | Cost / 100 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| A | v1 | 0.7 | 0.675 | 0.6667 | 0.3125 | 0.6875 | 0.2909 | 7 | 268.75 |
-| A | v2 | 0.7 | 0.675 | 0.6667 | 0.3125 | 0.6875 | 0.2909 | 7 | 968.75 |
+| A | v1 | 0.6875 | 0.7125 | 0.6667 | 0.3125 | 0.6875 | 0.2909 | 7 | 268.75 |
+| A | v2 | 0.6875 | 0.7125 | 0.6667 | 0.3125 | 0.6875 | 0.2909 | 7 | 968.75 |
 | B | v1 | 0.95 | 0.9375 | 0.75 | 0.275 | 0.725 | 0.1724 | 2 | 115.0 |
 | B | v2 | 0.95 | 0.9375 | 0.75 | 0.275 | 0.725 | 0.1724 | 2 | 315.0 |
-| C | v1 | 0.925 | 0.9 | 0.625 | 0.1625 | 0.8375 | 0.209 | 7 | 241.25 |
-| C | v2 | 0.925 | 0.9 | 0.625 | 0.1625 | 0.8375 | 0.209 | 7 | 941.25 |
+| C | v1 | 0.925 | 0.9125 | 0.625 | 0.1625 | 0.8375 | 0.209 | 7 | 236.25 |
+| C | v2 | 0.925 | 0.9125 | 0.625 | 0.1625 | 0.8375 | 0.209 | 7 | 936.25 |
 
 ## A / v1
 
 ### Category
 
-Macro-F1: 0.7337
+Macro-F1: 0.7003
 
 | Label | Precision | Recall | F1 |
 | --- | --- | --- | --- |
 | vehicle_breakdown | 1.0 | 0.6667 | 0.8 |
-| delivery_delay | 0.7143 | 0.625 | 0.6667 |
+| delivery_delay | 0.4242 | 0.875 | 0.5714 |
 | shipment_damage | 0.8571 | 0.75 | 0.8 |
 | missing_shipment | 1.0 | 0.75 | 0.8571 |
 | documentation_issue | 1.0 | 0.75 | 0.8571 |
-| safety_incident | 0.3077 | 0.6667 | 0.4211 |
+| safety_incident | 0.4286 | 0.25 | 0.3158 |
 
 Confusion matrix: rows are Labels; columns are Predictions.
 
 | Label / Prediction | vehicle_breakdown | delivery_delay | shipment_damage | missing_shipment | documentation_issue | safety_incident |
 | --- | --- | --- | --- | --- | --- | --- |
-| vehicle_breakdown | 8 | 0 | 0 | 0 | 0 | 4 |
-| delivery_delay | 0 | 10 | 0 | 0 | 0 | 6 |
-| shipment_damage | 0 | 0 | 12 | 0 | 0 | 4 |
-| missing_shipment | 0 | 0 | 0 | 12 | 0 | 4 |
+| vehicle_breakdown | 8 | 2 | 0 | 0 | 0 | 2 |
+| delivery_delay | 0 | 14 | 0 | 0 | 0 | 2 |
+| shipment_damage | 0 | 4 | 12 | 0 | 0 | 0 |
+| missing_shipment | 0 | 4 | 0 | 12 | 0 | 0 |
 | documentation_issue | 0 | 0 | 2 | 0 | 6 | 0 |
-| safety_incident | 0 | 4 | 0 | 0 | 0 | 8 |
+| safety_incident | 0 | 9 | 0 | 0 | 0 | 3 |
 
 ### Destination
 
-Macro-F1: 0.7084
+Macro-F1: 0.7091
 
 | Label | Precision | Recall | F1 |
 | --- | --- | --- | --- |
 | fleet_support | 1.0 | 0.6667 | 0.8 |
-| customer_desk | 1.0 | 0.4 | 0.5714 |
+| customer_desk | 0.5926 | 0.8 | 0.6809 |
 | claims | 0.8571 | 0.75 | 0.8 |
 | security_investigations | 0.8 | 1.0 | 0.8889 |
 | compliance | 0.7143 | 0.8333 | 0.7692 |
-| safety_desk | 0.3077 | 0.6667 | 0.4211 |
+| safety_desk | 0.4286 | 0.25 | 0.3158 |
 
 Confusion matrix: rows are Labels; columns are Predictions.
 
 | Label / Prediction | fleet_support | customer_desk | claims | security_investigations | compliance | safety_desk |
 | --- | --- | --- | --- | --- | --- | --- |
-| fleet_support | 8 | 0 | 0 | 0 | 0 | 4 |
-| customer_desk | 0 | 8 | 0 | 2 | 0 | 10 |
-| claims | 0 | 0 | 12 | 0 | 0 | 4 |
+| fleet_support | 8 | 2 | 0 | 0 | 0 | 2 |
+| customer_desk | 0 | 16 | 0 | 2 | 0 | 2 |
+| claims | 0 | 4 | 12 | 0 | 0 | 0 |
 | security_investigations | 0 | 0 | 0 | 8 | 0 | 0 |
 | compliance | 0 | 0 | 2 | 0 | 10 | 0 |
-| safety_desk | 0 | 0 | 0 | 0 | 4 | 8 |
+| safety_desk | 0 | 5 | 0 | 0 | 4 | 3 |
 
 ### Urgency, reliability and tokens
 
@@ -95,10 +95,10 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Latency max | 1.5871 |
+| Latency max | 1.687 |
 | Latency n | 80 |
-| Latency p50 | 1.0019 |
-| Latency p95 | 1.2848 |
+| Latency p50 | 1.0257 |
+| Latency p95 | 1.3168 |
 | Cost per_100 | 268.75 |
 | Cost total | 215 |
 | API USD / 1,000 | 0.0 |
@@ -122,51 +122,51 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 ### Category
 
-Macro-F1: 0.7337
+Macro-F1: 0.7003
 
 | Label | Precision | Recall | F1 |
 | --- | --- | --- | --- |
 | vehicle_breakdown | 1.0 | 0.6667 | 0.8 |
-| delivery_delay | 0.7143 | 0.625 | 0.6667 |
+| delivery_delay | 0.4242 | 0.875 | 0.5714 |
 | shipment_damage | 0.8571 | 0.75 | 0.8 |
 | missing_shipment | 1.0 | 0.75 | 0.8571 |
 | documentation_issue | 1.0 | 0.75 | 0.8571 |
-| safety_incident | 0.3077 | 0.6667 | 0.4211 |
+| safety_incident | 0.4286 | 0.25 | 0.3158 |
 
 Confusion matrix: rows are Labels; columns are Predictions.
 
 | Label / Prediction | vehicle_breakdown | delivery_delay | shipment_damage | missing_shipment | documentation_issue | safety_incident |
 | --- | --- | --- | --- | --- | --- | --- |
-| vehicle_breakdown | 8 | 0 | 0 | 0 | 0 | 4 |
-| delivery_delay | 0 | 10 | 0 | 0 | 0 | 6 |
-| shipment_damage | 0 | 0 | 12 | 0 | 0 | 4 |
-| missing_shipment | 0 | 0 | 0 | 12 | 0 | 4 |
+| vehicle_breakdown | 8 | 2 | 0 | 0 | 0 | 2 |
+| delivery_delay | 0 | 14 | 0 | 0 | 0 | 2 |
+| shipment_damage | 0 | 4 | 12 | 0 | 0 | 0 |
+| missing_shipment | 0 | 4 | 0 | 12 | 0 | 0 |
 | documentation_issue | 0 | 0 | 2 | 0 | 6 | 0 |
-| safety_incident | 0 | 4 | 0 | 0 | 0 | 8 |
+| safety_incident | 0 | 9 | 0 | 0 | 0 | 3 |
 
 ### Destination
 
-Macro-F1: 0.7084
+Macro-F1: 0.7091
 
 | Label | Precision | Recall | F1 |
 | --- | --- | --- | --- |
 | fleet_support | 1.0 | 0.6667 | 0.8 |
-| customer_desk | 1.0 | 0.4 | 0.5714 |
+| customer_desk | 0.5926 | 0.8 | 0.6809 |
 | claims | 0.8571 | 0.75 | 0.8 |
 | security_investigations | 0.8 | 1.0 | 0.8889 |
 | compliance | 0.7143 | 0.8333 | 0.7692 |
-| safety_desk | 0.3077 | 0.6667 | 0.4211 |
+| safety_desk | 0.4286 | 0.25 | 0.3158 |
 
 Confusion matrix: rows are Labels; columns are Predictions.
 
 | Label / Prediction | fleet_support | customer_desk | claims | security_investigations | compliance | safety_desk |
 | --- | --- | --- | --- | --- | --- | --- |
-| fleet_support | 8 | 0 | 0 | 0 | 0 | 4 |
-| customer_desk | 0 | 8 | 0 | 2 | 0 | 10 |
-| claims | 0 | 0 | 12 | 0 | 0 | 4 |
+| fleet_support | 8 | 2 | 0 | 0 | 0 | 2 |
+| customer_desk | 0 | 16 | 0 | 2 | 0 | 2 |
+| claims | 0 | 4 | 12 | 0 | 0 | 0 |
 | security_investigations | 0 | 0 | 0 | 8 | 0 | 0 |
 | compliance | 0 | 0 | 2 | 0 | 10 | 0 |
-| safety_desk | 0 | 0 | 0 | 0 | 4 | 8 |
+| safety_desk | 0 | 5 | 0 | 0 | 4 | 3 |
 
 ### Urgency, reliability and tokens
 
@@ -200,10 +200,10 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Latency max | 1.5871 |
+| Latency max | 1.687 |
 | Latency n | 80 |
-| Latency p50 | 1.0019 |
-| Latency p95 | 1.2848 |
+| Latency p50 | 1.0257 |
+| Latency p95 | 1.3168 |
 | Cost per_100 | 968.75 |
 | Cost total | 775 |
 | API USD / 1,000 | 0.0 |
@@ -451,22 +451,22 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 ### Destination
 
-Macro-F1: 0.893
+Macro-F1: 0.9067
 
 | Label | Precision | Recall | F1 |
 | --- | --- | --- | --- |
-| fleet_support | 1.0 | 0.8333 | 0.9091 |
+| fleet_support | 1.0 | 0.9167 | 0.9565 |
 | customer_desk | 0.9091 | 1.0 | 0.9524 |
 | claims | 1.0 | 1.0 | 1.0 |
 | security_investigations | 1.0 | 1.0 | 1.0 |
 | compliance | 0.7143 | 0.8333 | 0.7692 |
-| safety_desk | 0.8 | 0.6667 | 0.7273 |
+| safety_desk | 0.8889 | 0.6667 | 0.7619 |
 
 Confusion matrix: rows are Labels; columns are Predictions.
 
 | Label / Prediction | fleet_support | customer_desk | claims | security_investigations | compliance | safety_desk |
 | --- | --- | --- | --- | --- | --- | --- |
-| fleet_support | 10 | 0 | 0 | 0 | 0 | 2 |
+| fleet_support | 11 | 0 | 0 | 0 | 0 | 1 |
 | customer_desk | 0 | 20 | 0 | 0 | 0 | 0 |
 | claims | 0 | 0 | 16 | 0 | 0 | 0 |
 | security_investigations | 0 | 0 | 0 | 8 | 0 | 0 |
@@ -486,8 +486,8 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
-| Tokens mean_input | 1298.1875 |
-| Tokens mean_output | 188.425 |
+| Tokens mean_input | 1327.6 |
+| Tokens mean_output | 192.6875 |
 
 ### Missed Urgent
 
@@ -505,26 +505,26 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Latency max | 296.22 |
+| Latency max | 296.2984 |
 | Latency n | 80 |
-| Latency p50 | 214.7112 |
-| Latency p95 | 248.5422 |
-| Cost per_100 | 241.25 |
-| Cost total | 193 |
-| API USD / 1,000 | 0.0545 |
+| Latency p50 | 214.7498 |
+| Latency p95 | 248.5584 |
+| Cost per_100 | 236.25 |
+| Cost total | 189 |
+| API USD / 1,000 | 0.0558 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
 | false_alarm | 0 | 0.0 |
 | missed_urgent | 140 | 175.0 |
 | review | 13 | 16.25 |
-| wrong_category_same_destination | 0 | 0.0 |
-| wrong_destination | 40 | 50.0 |
+| wrong_category_same_destination | 1 | 1.25 |
+| wrong_destination | 35 | 43.75 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
 | auto_routed_error_rate | [0.0571, 0.4] |
-| cost_per_100 | [51.25, 500.0] |
+| cost_per_100 | [46.25, 495.0] |
 | review_rate | [0.0375, 0.325] |
 | urgent_recall | [0.3125, 0.9167] |
 
@@ -556,22 +556,22 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 ### Destination
 
-Macro-F1: 0.893
+Macro-F1: 0.9067
 
 | Label | Precision | Recall | F1 |
 | --- | --- | --- | --- |
-| fleet_support | 1.0 | 0.8333 | 0.9091 |
+| fleet_support | 1.0 | 0.9167 | 0.9565 |
 | customer_desk | 0.9091 | 1.0 | 0.9524 |
 | claims | 1.0 | 1.0 | 1.0 |
 | security_investigations | 1.0 | 1.0 | 1.0 |
 | compliance | 0.7143 | 0.8333 | 0.7692 |
-| safety_desk | 0.8 | 0.6667 | 0.7273 |
+| safety_desk | 0.8889 | 0.6667 | 0.7619 |
 
 Confusion matrix: rows are Labels; columns are Predictions.
 
 | Label / Prediction | fleet_support | customer_desk | claims | security_investigations | compliance | safety_desk |
 | --- | --- | --- | --- | --- | --- | --- |
-| fleet_support | 10 | 0 | 0 | 0 | 0 | 2 |
+| fleet_support | 11 | 0 | 0 | 0 | 0 | 1 |
 | customer_desk | 0 | 20 | 0 | 0 | 0 | 0 |
 | claims | 0 | 0 | 16 | 0 | 0 | 0 |
 | security_investigations | 0 | 0 | 0 | 8 | 0 | 0 |
@@ -591,8 +591,8 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
-| Tokens mean_input | 1298.1875 |
-| Tokens mean_output | 188.425 |
+| Tokens mean_input | 1327.6 |
+| Tokens mean_output | 192.6875 |
 
 ### Missed Urgent
 
@@ -610,25 +610,25 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Latency max | 296.22 |
+| Latency max | 296.2984 |
 | Latency n | 80 |
-| Latency p50 | 214.7112 |
-| Latency p95 | 248.5422 |
-| Cost per_100 | 941.25 |
-| Cost total | 753 |
-| API USD / 1,000 | 0.0545 |
+| Latency p50 | 214.7498 |
+| Latency p95 | 248.5584 |
+| Cost per_100 | 936.25 |
+| Cost total | 749 |
+| API USD / 1,000 | 0.0558 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
 | false_alarm | 0 | 0.0 |
 | missed_urgent | 700 | 875.0 |
 | review | 13 | 16.25 |
-| wrong_category_same_destination | 0 | 0.0 |
-| wrong_destination | 40 | 50.0 |
+| wrong_category_same_destination | 1 | 1.25 |
+| wrong_destination | 35 | 43.75 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
 | auto_routed_error_rate | [0.0571, 0.4] |
-| cost_per_100 | [52.5, 2181.25] |
+| cost_per_100 | [46.25, 2176.25] |
 | review_rate | [0.0375, 0.325] |
 | urgent_recall | [0.3125, 0.9167] |

@@ -21,13 +21,13 @@
         ]
       },
       "category": {
-        "accuracy": 0.7,
+        "accuracy": 0.6875,
         "confusion_matrix": {
           "delivery_delay": {
-            "delivery_delay": 10,
+            "delivery_delay": 14,
             "documentation_issue": 0,
             "missing_shipment": 0,
-            "safety_incident": 6,
+            "safety_incident": 2,
             "shipment_damage": 0,
             "vehicle_breakdown": 0
           },
@@ -40,44 +40,44 @@
             "vehicle_breakdown": 0
           },
           "missing_shipment": {
-            "delivery_delay": 0,
+            "delivery_delay": 4,
             "documentation_issue": 0,
             "missing_shipment": 12,
-            "safety_incident": 4,
+            "safety_incident": 0,
             "shipment_damage": 0,
             "vehicle_breakdown": 0
           },
           "safety_incident": {
-            "delivery_delay": 4,
+            "delivery_delay": 9,
             "documentation_issue": 0,
             "missing_shipment": 0,
-            "safety_incident": 8,
+            "safety_incident": 3,
             "shipment_damage": 0,
             "vehicle_breakdown": 0
           },
           "shipment_damage": {
-            "delivery_delay": 0,
+            "delivery_delay": 4,
             "documentation_issue": 0,
             "missing_shipment": 0,
-            "safety_incident": 4,
+            "safety_incident": 0,
             "shipment_damage": 12,
             "vehicle_breakdown": 0
           },
           "vehicle_breakdown": {
-            "delivery_delay": 0,
+            "delivery_delay": 2,
             "documentation_issue": 0,
             "missing_shipment": 0,
-            "safety_incident": 4,
+            "safety_incident": 2,
             "shipment_damage": 0,
             "vehicle_breakdown": 8
           }
         },
-        "macro_f1": 0.7337,
+        "macro_f1": 0.7003,
         "per_class": {
           "delivery_delay": {
-            "f1": 0.6667,
-            "precision": 0.7143,
-            "recall": 0.625
+            "f1": 0.5714,
+            "precision": 0.4242,
+            "recall": 0.875
           },
           "documentation_issue": {
             "f1": 0.8571,
@@ -90,9 +90,9 @@
             "recall": 0.75
           },
           "safety_incident": {
-            "f1": 0.4211,
-            "precision": 0.3077,
-            "recall": 0.6667
+            "f1": 0.3158,
+            "precision": 0.4286,
+            "recall": 0.25
           },
           "shipment_damage": {
             "f1": 0.8,
@@ -133,14 +133,14 @@
         "total": 215
       },
       "destination": {
-        "accuracy": 0.675,
+        "accuracy": 0.7125,
         "confusion_matrix": {
           "claims": {
             "claims": 12,
             "compliance": 0,
-            "customer_desk": 0,
+            "customer_desk": 4,
             "fleet_support": 0,
-            "safety_desk": 4,
+            "safety_desk": 0,
             "security_investigations": 0
           },
           "compliance": {
@@ -154,25 +154,25 @@
           "customer_desk": {
             "claims": 0,
             "compliance": 0,
-            "customer_desk": 8,
+            "customer_desk": 16,
             "fleet_support": 0,
-            "safety_desk": 10,
+            "safety_desk": 2,
             "security_investigations": 2
           },
           "fleet_support": {
             "claims": 0,
             "compliance": 0,
-            "customer_desk": 0,
+            "customer_desk": 2,
             "fleet_support": 8,
-            "safety_desk": 4,
+            "safety_desk": 2,
             "security_investigations": 0
           },
           "safety_desk": {
             "claims": 0,
             "compliance": 4,
-            "customer_desk": 0,
+            "customer_desk": 5,
             "fleet_support": 0,
-            "safety_desk": 8,
+            "safety_desk": 3,
             "security_investigations": 0
           },
           "security_investigations": {
@@ -184,7 +184,7 @@
             "security_investigations": 8
           }
         },
-        "macro_f1": 0.7084,
+        "macro_f1": 0.7091,
         "per_class": {
           "claims": {
             "f1": 0.8,
@@ -197,9 +197,9 @@
             "recall": 0.8333
           },
           "customer_desk": {
-            "f1": 0.5714,
-            "precision": 1.0,
-            "recall": 0.4
+            "f1": 0.6809,
+            "precision": 0.5926,
+            "recall": 0.8
           },
           "fleet_support": {
             "f1": 0.8,
@@ -207,9 +207,9 @@
             "recall": 0.6667
           },
           "safety_desk": {
-            "f1": 0.4211,
-            "precision": 0.3077,
-            "recall": 0.6667
+            "f1": 0.3158,
+            "precision": 0.4286,
+            "recall": 0.25
           },
           "security_investigations": {
             "f1": 0.8889,
@@ -219,10 +219,10 @@
         }
       },
       "latency": {
-        "max": 1.5871,
+        "max": 1.687,
         "n": 80,
-        "p50": 1.0019,
-        "p95": 1.2848
+        "p50": 1.0257,
+        "p95": 1.3168
       },
       "n": 80,
       "reliability": {
@@ -323,13 +323,13 @@
         ]
       },
       "category": {
-        "accuracy": 0.7,
+        "accuracy": 0.6875,
         "confusion_matrix": {
           "delivery_delay": {
-            "delivery_delay": 10,
+            "delivery_delay": 14,
             "documentation_issue": 0,
             "missing_shipment": 0,
-            "safety_incident": 6,
+            "safety_incident": 2,
             "shipment_damage": 0,
             "vehicle_breakdown": 0
           },
@@ -342,44 +342,44 @@
             "vehicle_breakdown": 0
           },
           "missing_shipment": {
-            "delivery_delay": 0,
+            "delivery_delay": 4,
             "documentation_issue": 0,
             "missing_shipment": 12,
-            "safety_incident": 4,
+            "safety_incident": 0,
             "shipment_damage": 0,
             "vehicle_breakdown": 0
           },
           "safety_incident": {
-            "delivery_delay": 4,
+            "delivery_delay": 9,
             "documentation_issue": 0,
             "missing_shipment": 0,
-            "safety_incident": 8,
+            "safety_incident": 3,
             "shipment_damage": 0,
             "vehicle_breakdown": 0
           },
           "shipment_damage": {
-            "delivery_delay": 0,
+            "delivery_delay": 4,
             "documentation_issue": 0,
             "missing_shipment": 0,
-            "safety_incident": 4,
+            "safety_incident": 0,
             "shipment_damage": 12,
             "vehicle_breakdown": 0
           },
           "vehicle_breakdown": {
-            "delivery_delay": 0,
+            "delivery_delay": 2,
             "documentation_issue": 0,
             "missing_shipment": 0,
-            "safety_incident": 4,
+            "safety_incident": 2,
             "shipment_damage": 0,
             "vehicle_breakdown": 8
           }
         },
-        "macro_f1": 0.7337,
+        "macro_f1": 0.7003,
         "per_class": {
           "delivery_delay": {
-            "f1": 0.6667,
-            "precision": 0.7143,
-            "recall": 0.625
+            "f1": 0.5714,
+            "precision": 0.4242,
+            "recall": 0.875
           },
           "documentation_issue": {
             "f1": 0.8571,
@@ -392,9 +392,9 @@
             "recall": 0.75
           },
           "safety_incident": {
-            "f1": 0.4211,
-            "precision": 0.3077,
-            "recall": 0.6667
+            "f1": 0.3158,
+            "precision": 0.4286,
+            "recall": 0.25
           },
           "shipment_damage": {
             "f1": 0.8,
@@ -435,14 +435,14 @@
         "total": 775
       },
       "destination": {
-        "accuracy": 0.675,
+        "accuracy": 0.7125,
         "confusion_matrix": {
           "claims": {
             "claims": 12,
             "compliance": 0,
-            "customer_desk": 0,
+            "customer_desk": 4,
             "fleet_support": 0,
-            "safety_desk": 4,
+            "safety_desk": 0,
             "security_investigations": 0
           },
           "compliance": {
@@ -456,25 +456,25 @@
           "customer_desk": {
             "claims": 0,
             "compliance": 0,
-            "customer_desk": 8,
+            "customer_desk": 16,
             "fleet_support": 0,
-            "safety_desk": 10,
+            "safety_desk": 2,
             "security_investigations": 2
           },
           "fleet_support": {
             "claims": 0,
             "compliance": 0,
-            "customer_desk": 0,
+            "customer_desk": 2,
             "fleet_support": 8,
-            "safety_desk": 4,
+            "safety_desk": 2,
             "security_investigations": 0
           },
           "safety_desk": {
             "claims": 0,
             "compliance": 4,
-            "customer_desk": 0,
+            "customer_desk": 5,
             "fleet_support": 0,
-            "safety_desk": 8,
+            "safety_desk": 3,
             "security_investigations": 0
           },
           "security_investigations": {
@@ -486,7 +486,7 @@
             "security_investigations": 8
           }
         },
-        "macro_f1": 0.7084,
+        "macro_f1": 0.7091,
         "per_class": {
           "claims": {
             "f1": 0.8,
@@ -499,9 +499,9 @@
             "recall": 0.8333
           },
           "customer_desk": {
-            "f1": 0.5714,
-            "precision": 1.0,
-            "recall": 0.4
+            "f1": 0.6809,
+            "precision": 0.5926,
+            "recall": 0.8
           },
           "fleet_support": {
             "f1": 0.8,
@@ -509,9 +509,9 @@
             "recall": 0.6667
           },
           "safety_desk": {
-            "f1": 0.4211,
-            "precision": 0.3077,
-            "recall": 0.6667
+            "f1": 0.3158,
+            "precision": 0.4286,
+            "recall": 0.25
           },
           "security_investigations": {
             "f1": 0.8889,
@@ -521,10 +521,10 @@
         }
       },
       "latency": {
-        "max": 1.5871,
+        "max": 1.687,
         "n": 80,
-        "p50": 1.0019,
-        "p95": 1.2848
+        "p50": 1.0257,
+        "p95": 1.3168
       },
       "n": 80,
       "reliability": {
@@ -1155,15 +1155,15 @@
   },
   "C": {
     "v1": {
-      "api_cost_per_1000_usd": 0.0545,
+      "api_cost_per_1000_usd": 0.0558,
       "bootstrap_95_ci": {
         "auto_routed_error_rate": [
           0.0571,
           0.4
         ],
         "cost_per_100": [
-          51.25,
-          500.0
+          46.25,
+          495.0
         ],
         "review_rate": [
           0.0375,
@@ -1261,7 +1261,7 @@
         }
       },
       "cost": {
-        "per_100": 241.25,
+        "per_100": 236.25,
         "terms": {
           "false_alarm": {
             "per_100": 0.0,
@@ -1276,18 +1276,18 @@
             "total": 13
           },
           "wrong_category_same_destination": {
-            "per_100": 0.0,
-            "total": 0
+            "per_100": 1.25,
+            "total": 1
           },
           "wrong_destination": {
-            "per_100": 50.0,
-            "total": 40
+            "per_100": 43.75,
+            "total": 35
           }
         },
-        "total": 193
+        "total": 189
       },
       "destination": {
-        "accuracy": 0.9,
+        "accuracy": 0.9125,
         "confusion_matrix": {
           "claims": {
             "claims": 16,
@@ -1317,8 +1317,8 @@
             "claims": 0,
             "compliance": 0,
             "customer_desk": 0,
-            "fleet_support": 10,
-            "safety_desk": 2,
+            "fleet_support": 11,
+            "safety_desk": 1,
             "security_investigations": 0
           },
           "safety_desk": {
@@ -1338,7 +1338,7 @@
             "security_investigations": 8
           }
         },
-        "macro_f1": 0.893,
+        "macro_f1": 0.9067,
         "per_class": {
           "claims": {
             "f1": 1.0,
@@ -1356,13 +1356,13 @@
             "recall": 1.0
           },
           "fleet_support": {
-            "f1": 0.9091,
+            "f1": 0.9565,
             "precision": 1.0,
-            "recall": 0.8333
+            "recall": 0.9167
           },
           "safety_desk": {
-            "f1": 0.7273,
-            "precision": 0.8,
+            "f1": 0.7619,
+            "precision": 0.8889,
             "recall": 0.6667
           },
           "security_investigations": {
@@ -1373,10 +1373,10 @@
         }
       },
       "latency": {
-        "max": 296.22,
+        "max": 296.2984,
         "n": 80,
-        "p50": 214.7112,
-        "p95": 248.5422
+        "p50": 214.7498,
+        "p95": 248.5584
       },
       "n": 80,
       "reliability": {
@@ -1442,8 +1442,8 @@
         "review_rate": 0.1625
       },
       "tokens": {
-        "mean_input": 1298.1875,
-        "mean_output": 188.425
+        "mean_input": 1327.6,
+        "mean_output": 192.6875
       },
       "urgency": {
         "counts": {
@@ -1457,15 +1457,15 @@
       }
     },
     "v2": {
-      "api_cost_per_1000_usd": 0.0545,
+      "api_cost_per_1000_usd": 0.0558,
       "bootstrap_95_ci": {
         "auto_routed_error_rate": [
           0.0571,
           0.4
         ],
         "cost_per_100": [
-          52.5,
-          2181.25
+          46.25,
+          2176.25
         ],
         "review_rate": [
           0.0375,
@@ -1563,7 +1563,7 @@
         }
       },
       "cost": {
-        "per_100": 941.25,
+        "per_100": 936.25,
         "terms": {
           "false_alarm": {
             "per_100": 0.0,
@@ -1578,18 +1578,18 @@
             "total": 13
           },
           "wrong_category_same_destination": {
-            "per_100": 0.0,
-            "total": 0
+            "per_100": 1.25,
+            "total": 1
           },
           "wrong_destination": {
-            "per_100": 50.0,
-            "total": 40
+            "per_100": 43.75,
+            "total": 35
           }
         },
-        "total": 753
+        "total": 749
       },
       "destination": {
-        "accuracy": 0.9,
+        "accuracy": 0.9125,
         "confusion_matrix": {
           "claims": {
             "claims": 16,
@@ -1619,8 +1619,8 @@
             "claims": 0,
             "compliance": 0,
             "customer_desk": 0,
-            "fleet_support": 10,
-            "safety_desk": 2,
+            "fleet_support": 11,
+            "safety_desk": 1,
             "security_investigations": 0
           },
           "safety_desk": {
@@ -1640,7 +1640,7 @@
             "security_investigations": 8
           }
         },
-        "macro_f1": 0.893,
+        "macro_f1": 0.9067,
         "per_class": {
           "claims": {
             "f1": 1.0,
@@ -1658,13 +1658,13 @@
             "recall": 1.0
           },
           "fleet_support": {
-            "f1": 0.9091,
+            "f1": 0.9565,
             "precision": 1.0,
-            "recall": 0.8333
+            "recall": 0.9167
           },
           "safety_desk": {
-            "f1": 0.7273,
-            "precision": 0.8,
+            "f1": 0.7619,
+            "precision": 0.8889,
             "recall": 0.6667
           },
           "security_investigations": {
@@ -1675,10 +1675,10 @@
         }
       },
       "latency": {
-        "max": 296.22,
+        "max": 296.2984,
         "n": 80,
-        "p50": 214.7112,
-        "p95": 248.5422
+        "p50": 214.7498,
+        "p95": 248.5584
       },
       "n": 80,
       "reliability": {
@@ -1744,8 +1744,8 @@
         "review_rate": 0.1625
       },
       "tokens": {
-        "mean_input": 1298.1875,
-        "mean_output": 188.425
+        "mean_input": 1327.6,
+        "mean_output": 192.6875
       },
       "urgency": {
         "counts": {

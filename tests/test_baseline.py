@@ -118,3 +118,46 @@ def test_rules_are_deterministic(fixture_reports):
     a, b = predict(fixture_reports["F09"]), predict(fixture_reports["F09"])
     assert (a.category_probs, a.destination_probs, a.evidence) == (
         b.category_probs, b.destination_probs, b.evidence)
+
+
+def test_a_v2_no_rule_matched_defaults_to_delay_not_safety():
+    pred = predict(_report("Please call me back about the thing from this morning."))
+    assert pred.category == Category.DELIVERY_DELAY
+    assert "no_rule_matched" in pred.triggers
+
+
+def test_a_v2_collision_that_is_someone_elses_is_not_a_safety_incident():
+    pred = predict(_report("A14 westbound has shut for somebody else's collision. We are three "
+                           "hours late with ambient tins."))
+    assert pred.category == Category.DELIVERY_DELAY
+
+
+def test_a_v2_cleared_engine_light_found_no_fault_is_not_a_breakdown():
+    pred = predict(_report("The engine light cleared at services and checks found no fault. "
+                           "Queues on the M1 mean we are running late."))
+    assert pred.category == Category.DELIVERY_DELAY
+
+
+def test_a_v2_near_miss_without_a_banksman_is_safety_even_though_nobody_hurt():
+    pred = predict(_report("A shunter reversed in the yard without a banksman and nearly hit a "
+                           "pedestrian. Nobody was hurt."))
+    assert (pred.category, pred.urgent_prob) == (Category.SAFETY_INCIDENT, 0.05)
+
+
+def test_a_v2_own_fuel_tank_split_by_debris_is_breakdown():
+    pred = predict(_report("Debris split the vehicle's diesel tank on the A38 and fuel is running "
+                           "out onto the road. No collision or injuries."))
+    assert (pred.category, pred.urgent_prob) == (Category.VEHICLE_BREAKDOWN, 0.95)
+
+
+def test_a_v2_medical_load_that_cannot_reach_its_window_is_urgent():
+    pred = predict(_report("Insulin cartons for the hospital pharmacy were crushed. We can't get "
+                           "replacement stock there before the four o'clock window."))
+    assert pred.urgent_prob == 0.95
+
+
+def test_a_v2_wrong_store_delivery_with_error_goes_to_customer_desk():
+    pred = predict(_report("Four pallets were delivered to the Northampton store instead of "
+                           "Kettering. Driver made an error reading the drop sheet."))
+    assert (pred.category, pred.destination) == (Category.MISSING_SHIPMENT,
+                                                 Destination.CUSTOMER_DESK)

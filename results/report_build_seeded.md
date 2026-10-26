@@ -6,73 +6,73 @@ Each Incident Report has a Category, Urgency and Destination. A Policy chooses A
 
 | Approach | Policy | Category accuracy | Destination accuracy | Urgent recall | Review rate | Auto-route coverage | Auto-route error rate | Missed Urgent | Cost / 100 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| A | v1 | 0.885 | 0.875 | 0.8167 | 0.13 | 0.87 | 0.1379 | 10 | 146.5 |
-| A | v2 | 0.885 | 0.875 | 0.8167 | 0.13 | 0.87 | 0.1379 | 10 | 546.5 |
+| A | v1 | 0.96 | 0.96 | 0.9833 | 0.08 | 0.92 | 0.0326 | 1 | 28.5 |
+| A | v2 | 0.96 | 0.96 | 0.9833 | 0.08 | 0.92 | 0.0326 | 1 | 68.5 |
 | B | v1 | 0.9 | 0.905 | 0.9333 | 0.27 | 0.73 | 0.0959 | 0 | 56.0 |
 | B | v2 | 0.9 | 0.905 | 0.9333 | 0.27 | 0.73 | 0.0959 | 0 | 56.0 |
-| C | v1 | 0.91 | 0.91 | 0.85 | 0.1 | 0.9 | 0.1556 | 9 | 142.0 |
-| C | v2 | 0.91 | 0.91 | 0.85 | 0.1 | 0.9 | 0.1556 | 9 | 502.0 |
+| C | v1 | 0.95 | 0.96 | 0.9833 | 0.09 | 0.91 | 0.0549 | 1 | 35.5 |
+| C | v2 | 0.95 | 0.96 | 0.9833 | 0.09 | 0.91 | 0.0549 | 1 | 75.5 |
 
 ## A / v1
 
 ### Category
 
-Macro-F1: 0.8881
+Macro-F1: 0.9609
 
 | Label | Precision | Recall | F1 |
 | --- | --- | --- | --- |
-| vehicle_breakdown | 1.0 | 0.8333 | 0.9091 |
-| delivery_delay | 0.8333 | 0.7812 | 0.8065 |
+| vehicle_breakdown | 1.0 | 0.9444 | 0.9714 |
+| delivery_delay | 0.8378 | 0.9688 | 0.8986 |
 | shipment_damage | 1.0 | 0.9375 | 0.9677 |
-| missing_shipment | 0.9655 | 0.875 | 0.918 |
-| documentation_issue | 0.9697 | 0.8889 | 0.9275 |
-| safety_incident | 0.6667 | 1.0 | 0.8 |
+| missing_shipment | 0.9697 | 1.0 | 0.9846 |
+| documentation_issue | 0.9706 | 0.9167 | 0.9429 |
+| safety_incident | 1.0 | 1.0 | 1.0 |
 
 Confusion matrix: rows are Labels; columns are Predictions.
 
 | Label / Prediction | vehicle_breakdown | delivery_delay | shipment_damage | missing_shipment | documentation_issue | safety_incident |
 | --- | --- | --- | --- | --- | --- | --- |
-| vehicle_breakdown | 30 | 1 | 0 | 0 | 0 | 5 |
-| delivery_delay | 0 | 25 | 0 | 0 | 1 | 6 |
-| shipment_damage | 0 | 0 | 30 | 1 | 0 | 1 |
-| missing_shipment | 0 | 1 | 0 | 28 | 0 | 3 |
-| documentation_issue | 0 | 3 | 0 | 0 | 32 | 1 |
+| vehicle_breakdown | 34 | 2 | 0 | 0 | 0 | 0 |
+| delivery_delay | 0 | 31 | 0 | 0 | 1 | 0 |
+| shipment_damage | 0 | 1 | 30 | 1 | 0 | 0 |
+| missing_shipment | 0 | 0 | 0 | 32 | 0 | 0 |
+| documentation_issue | 0 | 3 | 0 | 0 | 33 | 0 |
 | safety_incident | 0 | 0 | 0 | 0 | 0 | 32 |
 
 ### Destination
 
-Macro-F1: 0.8815
+Macro-F1: 0.9618
 
 | Label | Precision | Recall | F1 |
 | --- | --- | --- | --- |
-| fleet_support | 0.9286 | 0.8125 | 0.8667 |
-| customer_desk | 0.9444 | 0.7727 | 0.85 |
+| fleet_support | 1.0 | 0.9062 | 0.9508 |
+| customer_desk | 0.8958 | 0.9773 | 0.9348 |
 | claims | 1.0 | 0.9286 | 0.963 |
-| security_investigations | 0.9032 | 0.875 | 0.8889 |
-| compliance | 0.9355 | 0.9062 | 0.9206 |
-| safety_desk | 0.6667 | 1.0 | 0.8 |
+| security_investigations | 0.9412 | 1.0 | 0.9697 |
+| compliance | 0.9677 | 0.9375 | 0.9524 |
+| safety_desk | 1.0 | 1.0 | 1.0 |
 
 Confusion matrix: rows are Labels; columns are Predictions.
 
 | Label / Prediction | fleet_support | customer_desk | claims | security_investigations | compliance | safety_desk |
 | --- | --- | --- | --- | --- | --- | --- |
-| fleet_support | 26 | 1 | 0 | 0 | 1 | 4 |
-| customer_desk | 0 | 34 | 0 | 2 | 1 | 7 |
-| claims | 0 | 0 | 26 | 1 | 0 | 1 |
-| security_investigations | 2 | 0 | 0 | 28 | 0 | 2 |
-| compliance | 0 | 1 | 0 | 0 | 29 | 2 |
+| fleet_support | 29 | 2 | 0 | 0 | 1 | 0 |
+| customer_desk | 0 | 43 | 0 | 1 | 0 | 0 |
+| claims | 0 | 1 | 26 | 1 | 0 | 0 |
+| security_investigations | 0 | 0 | 0 | 32 | 0 | 0 |
+| compliance | 0 | 2 | 0 | 0 | 30 | 0 |
 | safety_desk | 0 | 0 | 0 | 0 | 0 | 32 |
 
 ### Urgency, reliability and tokens
 
 | Measure | Value |
 | --- | --- |
-| Urgency recall | 0.8167 |
-| Urgency precision | 0.8596 |
-| Urgency count fn | 11 |
+| Urgency recall | 0.9833 |
+| Urgency precision | 0.8806 |
+| Urgency count fn | 1 |
 | Urgency count fp | 8 |
 | Urgency count tn | 132 |
-| Urgency count tp | 49 |
+| Urgency count tp | 59 |
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
@@ -83,104 +83,95 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Report | Scenario | Text | Urgent probability | Review Triggers |
 | --- | --- | --- | --- | --- |
-| R-0010 | S-048 | Caller: At 09:30 during trans-shipping at Northvale Daventry depot, a forklift crushed two Halcyon Medical insulin cartons. Desk: Right, go on. Caller: Two Halc | 0.05 |  |
-| R-0100 | S-048 | Hello, passing on the driver's account below.  We can't get replacement insulin to the hospital pharmacy before today's four o'clock window. No one was hurt. Th | 0.05 |  |
-| R-0120 | S-015 | Hello, passing on the depot's account below.  NVT 5120, loaded with Sable Electronics laptops, is showing a move away from Northvale Thurrock yard towards the A | 0.05 |  |
-| R-0160 | S-048 | Driver's report, as received: The insulin pens inside are broken; nobody hurt. We can't get replacement insulin to the hospital pharmacy before today's four o'c | 0.05 | location_missing |
-| R-0168 | S-045 | NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate. Reefer fuel shows about two hours left | 0.05 |  |
-| R-0184 | S-045 | Hello, passing on the driver's account below.  The inspection area at Dover won't allow refuelling of chilled trailer NV20 TCH's reefer. Box reading four degree | 0.05 |  |
-| R-0188 | S-100 | Driver's report, as received: They're for a hospital laboratory in Carlisle by 18:00. Tacho shows driver has reached nine hours driving and must stop. A timing  | 0.05 |  |
 | R-0292 | S-045 | Caller: NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate. Desk: Right, go on. Caller: It | 0.05 |  |
-| R-0368 | S-048 | At 09:30 during trans-shipping at Northvale Daventry depot, a forklift crushed two Halcyon Medical insulin cartons. The insulin pens inside are broken; nobody h | 0.05 |  |
-| R-0370 | S-100 | Hello, passing on the driver's account below.  A timing update on NV70 HSE, Halcyon Medical reagents for blood testing at a Carlisle hospital lab, due six this  | 0.05 |  |
 
 ### Latency and cost
 
 | Measure | Value |
 | --- | --- |
-| Latency max | 7.1075 |
+| Latency max | 1.7525 |
 | Latency n | 200 |
-| Latency p50 | 1.2298 |
-| Latency p95 | 2.8846 |
-| Cost per_100 | 146.5 |
-| Cost total | 293 |
+| Latency p50 | 1.03 |
+| Latency p95 | 1.2985 |
+| Cost per_100 | 28.5 |
+| Cost total | 57 |
 | API USD / 1,000 | 0.0 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
 | false_alarm | 0 | 0.0 |
-| missed_urgent | 200 | 100.0 |
-| review | 26 | 13.0 |
-| wrong_category_same_destination | 2 | 1.0 |
-| wrong_destination | 65 | 32.5 |
+| missed_urgent | 20 | 10.0 |
+| review | 16 | 8.0 |
+| wrong_category_same_destination | 1 | 0.5 |
+| wrong_destination | 20 | 10.0 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
-| auto_routed_error_rate | [0.0621, 0.2295] |
-| cost_per_100 | [56.5, 273.5] |
-| review_rate | [0.065, 0.205] |
-| urgent_recall | [0.625, 0.9737] |
+| auto_routed_error_rate | [0.0105, 0.0585] |
+| cost_per_100 | [10.5, 56.5] |
+| review_rate | [0.025, 0.155] |
+| urgent_recall | [0.9412, 1.0] |
 
 ## A / v2
 
 ### Category
 
-Macro-F1: 0.8881
+Macro-F1: 0.9609
 
 | Label | Precision | Recall | F1 |
 | --- | --- | --- | --- |
-| vehicle_breakdown | 1.0 | 0.8333 | 0.9091 |
-| delivery_delay | 0.8333 | 0.7812 | 0.8065 |
+| vehicle_breakdown | 1.0 | 0.9444 | 0.9714 |
+| delivery_delay | 0.8378 | 0.9688 | 0.8986 |
 | shipment_damage | 1.0 | 0.9375 | 0.9677 |
-| missing_shipment | 0.9655 | 0.875 | 0.918 |
-| documentation_issue | 0.9697 | 0.8889 | 0.9275 |
-| safety_incident | 0.6667 | 1.0 | 0.8 |
+| missing_shipment | 0.9697 | 1.0 | 0.9846 |
+| documentation_issue | 0.9706 | 0.9167 | 0.9429 |
+| safety_incident | 1.0 | 1.0 | 1.0 |
 
 Confusion matrix: rows are Labels; columns are Predictions.
 
 | Label / Prediction | vehicle_breakdown | delivery_delay | shipment_damage | missing_shipment | documentation_issue | safety_incident |
 | --- | --- | --- | --- | --- | --- | --- |
-| vehicle_breakdown | 30 | 1 | 0 | 0 | 0 | 5 |
-| delivery_delay | 0 | 25 | 0 | 0 | 1 | 6 |
-| shipment_damage | 0 | 0 | 30 | 1 | 0 | 1 |
-| missing_shipment | 0 | 1 | 0 | 28 | 0 | 3 |
-| documentation_issue | 0 | 3 | 0 | 0 | 32 | 1 |
+| vehicle_breakdown | 34 | 2 | 0 | 0 | 0 | 0 |
+| delivery_delay | 0 | 31 | 0 | 0 | 1 | 0 |
+| shipment_damage | 0 | 1 | 30 | 1 | 0 | 0 |
+| missing_shipment | 0 | 0 | 0 | 32 | 0 | 0 |
+| documentation_issue | 0 | 3 | 0 | 0 | 33 | 0 |
 | safety_incident | 0 | 0 | 0 | 0 | 0 | 32 |
 
 ### Destination
 
-Macro-F1: 0.8815
+Macro-F1: 0.9618
 
 | Label | Precision | Recall | F1 |
 | --- | --- | --- | --- |
-| fleet_support | 0.9286 | 0.8125 | 0.8667 |
-| customer_desk | 0.9444 | 0.7727 | 0.85 |
+| fleet_support | 1.0 | 0.9062 | 0.9508 |
+| customer_desk | 0.8958 | 0.9773 | 0.9348 |
 | claims | 1.0 | 0.9286 | 0.963 |
-| security_investigations | 0.9032 | 0.875 | 0.8889 |
-| compliance | 0.9355 | 0.9062 | 0.9206 |
-| safety_desk | 0.6667 | 1.0 | 0.8 |
+| security_investigations | 0.9412 | 1.0 | 0.9697 |
+| compliance | 0.9677 | 0.9375 | 0.9524 |
+| safety_desk | 1.0 | 1.0 | 1.0 |
 
 Confusion matrix: rows are Labels; columns are Predictions.
 
 | Label / Prediction | fleet_support | customer_desk | claims | security_investigations | compliance | safety_desk |
 | --- | --- | --- | --- | --- | --- | --- |
-| fleet_support | 26 | 1 | 0 | 0 | 1 | 4 |
-| customer_desk | 0 | 34 | 0 | 2 | 1 | 7 |
-| claims | 0 | 0 | 26 | 1 | 0 | 1 |
-| security_investigations | 2 | 0 | 0 | 28 | 0 | 2 |
-| compliance | 0 | 1 | 0 | 0 | 29 | 2 |
+| fleet_support | 29 | 2 | 0 | 0 | 1 | 0 |
+| customer_desk | 0 | 43 | 0 | 1 | 0 | 0 |
+| claims | 0 | 1 | 26 | 1 | 0 | 0 |
+| security_investigations | 0 | 0 | 0 | 32 | 0 | 0 |
+| compliance | 0 | 2 | 0 | 0 | 30 | 0 |
 | safety_desk | 0 | 0 | 0 | 0 | 0 | 32 |
 
 ### Urgency, reliability and tokens
 
 | Measure | Value |
 | --- | --- |
-| Urgency recall | 0.8167 |
-| Urgency precision | 0.8596 |
-| Urgency count fn | 11 |
+| Urgency recall | 0.9833 |
+| Urgency precision | 0.8806 |
+| Urgency count fn | 1 |
 | Urgency count fp | 8 |
 | Urgency count tn | 132 |
-| Urgency count tp | 49 |
+| Urgency count tp | 59 |
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
@@ -191,43 +182,34 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Report | Scenario | Text | Urgent probability | Review Triggers |
 | --- | --- | --- | --- | --- |
-| R-0010 | S-048 | Caller: At 09:30 during trans-shipping at Northvale Daventry depot, a forklift crushed two Halcyon Medical insulin cartons. Desk: Right, go on. Caller: Two Halc | 0.05 |  |
-| R-0100 | S-048 | Hello, passing on the driver's account below.  We can't get replacement insulin to the hospital pharmacy before today's four o'clock window. No one was hurt. Th | 0.05 |  |
-| R-0120 | S-015 | Hello, passing on the depot's account below.  NVT 5120, loaded with Sable Electronics laptops, is showing a move away from Northvale Thurrock yard towards the A | 0.05 |  |
-| R-0160 | S-048 | Driver's report, as received: The insulin pens inside are broken; nobody hurt. We can't get replacement insulin to the hospital pharmacy before today's four o'c | 0.05 | location_missing |
-| R-0168 | S-045 | NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate. Reefer fuel shows about two hours left | 0.05 |  |
-| R-0184 | S-045 | Hello, passing on the driver's account below.  The inspection area at Dover won't allow refuelling of chilled trailer NV20 TCH's reefer. Box reading four degree | 0.05 |  |
-| R-0188 | S-100 | Driver's report, as received: They're for a hospital laboratory in Carlisle by 18:00. Tacho shows driver has reached nine hours driving and must stop. A timing  | 0.05 |  |
 | R-0292 | S-045 | Caller: NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate. Desk: Right, go on. Caller: It | 0.05 |  |
-| R-0368 | S-048 | At 09:30 during trans-shipping at Northvale Daventry depot, a forklift crushed two Halcyon Medical insulin cartons. The insulin pens inside are broken; nobody h | 0.05 |  |
-| R-0370 | S-100 | Hello, passing on the driver's account below.  A timing update on NV70 HSE, Halcyon Medical reagents for blood testing at a Carlisle hospital lab, due six this  | 0.05 |  |
 
 ### Latency and cost
 
 | Measure | Value |
 | --- | --- |
-| Latency max | 7.1075 |
+| Latency max | 1.7525 |
 | Latency n | 200 |
-| Latency p50 | 1.2298 |
-| Latency p95 | 2.8846 |
-| Cost per_100 | 546.5 |
-| Cost total | 1093 |
+| Latency p50 | 1.03 |
+| Latency p95 | 1.2985 |
+| Cost per_100 | 68.5 |
+| Cost total | 137 |
 | API USD / 1,000 | 0.0 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
 | false_alarm | 0 | 0.0 |
-| missed_urgent | 1000 | 500.0 |
-| review | 26 | 13.0 |
-| wrong_category_same_destination | 2 | 1.0 |
-| wrong_destination | 65 | 32.5 |
+| missed_urgent | 100 | 50.0 |
+| review | 16 | 8.0 |
+| wrong_category_same_destination | 1 | 0.5 |
+| wrong_destination | 20 | 10.0 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
-| auto_routed_error_rate | [0.0621, 0.2295] |
-| cost_per_100 | [104.0, 1151.0] |
-| review_rate | [0.065, 0.205] |
-| urgent_recall | [0.625, 0.9737] |
+| auto_routed_error_rate | [0.0105, 0.0585] |
+| cost_per_100 | [10.5, 177.5] |
+| review_rate | [0.025, 0.155] |
+| urgent_recall | [0.9412, 1.0] |
 
 ## B / v1
 
@@ -429,49 +411,49 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 ### Category
 
-Macro-F1: 0.9105
+Macro-F1: 0.9499
 
 | Label | Precision | Recall | F1 |
 | --- | --- | --- | --- |
-| vehicle_breakdown | 0.9706 | 0.9167 | 0.9429 |
-| delivery_delay | 0.8182 | 0.8438 | 0.8308 |
+| vehicle_breakdown | 0.9722 | 0.9722 | 0.9722 |
+| delivery_delay | 0.8857 | 0.9688 | 0.9254 |
 | shipment_damage | 1.0 | 0.9062 | 0.9508 |
-| missing_shipment | 0.9394 | 0.9688 | 0.9538 |
-| documentation_issue | 0.9677 | 0.8333 | 0.8955 |
-| safety_incident | 0.8 | 1.0 | 0.8889 |
+| missing_shipment | 0.9412 | 1.0 | 0.9697 |
+| documentation_issue | 0.9688 | 0.8611 | 0.9118 |
+| safety_incident | 0.9412 | 1.0 | 0.9697 |
 
 Confusion matrix: rows are Labels; columns are Predictions.
 
 | Label / Prediction | vehicle_breakdown | delivery_delay | shipment_damage | missing_shipment | documentation_issue | safety_incident |
 | --- | --- | --- | --- | --- | --- | --- |
-| vehicle_breakdown | 33 | 0 | 0 | 1 | 0 | 2 |
-| delivery_delay | 0 | 27 | 0 | 0 | 1 | 4 |
+| vehicle_breakdown | 35 | 0 | 0 | 1 | 0 | 0 |
+| delivery_delay | 0 | 31 | 0 | 0 | 1 | 0 |
 | shipment_damage | 0 | 0 | 29 | 1 | 0 | 2 |
-| missing_shipment | 0 | 1 | 0 | 31 | 0 | 0 |
-| documentation_issue | 1 | 5 | 0 | 0 | 30 | 0 |
+| missing_shipment | 0 | 0 | 0 | 32 | 0 | 0 |
+| documentation_issue | 1 | 4 | 0 | 0 | 31 | 0 |
 | safety_incident | 0 | 0 | 0 | 0 | 0 | 32 |
 
 ### Destination
 
-Macro-F1: 0.9112
+Macro-F1: 0.9577
 
 | Label | Precision | Recall | F1 |
 | --- | --- | --- | --- |
-| fleet_support | 0.8788 | 0.9062 | 0.8923 |
-| customer_desk | 0.9737 | 0.8409 | 0.9024 |
+| fleet_support | 0.9394 | 0.9688 | 0.9538 |
+| customer_desk | 0.9773 | 0.9773 | 0.9773 |
 | claims | 1.0 | 0.8571 | 0.9231 |
-| security_investigations | 0.9091 | 0.9375 | 0.9231 |
-| compliance | 0.9375 | 0.9375 | 0.9375 |
-| safety_desk | 0.8 | 1.0 | 0.8889 |
+| security_investigations | 0.9412 | 1.0 | 0.9697 |
+| compliance | 0.9677 | 0.9375 | 0.9524 |
+| safety_desk | 0.9412 | 1.0 | 0.9697 |
 
 Confusion matrix: rows are Labels; columns are Predictions.
 
 | Label / Prediction | fleet_support | customer_desk | claims | security_investigations | compliance | safety_desk |
 | --- | --- | --- | --- | --- | --- | --- |
-| fleet_support | 29 | 0 | 0 | 0 | 1 | 2 |
-| customer_desk | 0 | 37 | 0 | 2 | 1 | 4 |
+| fleet_support | 31 | 0 | 0 | 0 | 1 | 0 |
+| customer_desk | 0 | 43 | 0 | 1 | 0 | 0 |
 | claims | 0 | 1 | 24 | 1 | 0 | 2 |
-| security_investigations | 2 | 0 | 0 | 30 | 0 | 0 |
+| security_investigations | 0 | 0 | 0 | 32 | 0 | 0 |
 | compliance | 2 | 0 | 0 | 0 | 30 | 0 |
 | safety_desk | 0 | 0 | 0 | 0 | 0 | 32 |
 
@@ -479,106 +461,98 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Urgency recall | 0.85 |
+| Urgency recall | 0.9833 |
 | Urgency precision | 1.0 |
-| Urgency count fn | 9 |
+| Urgency count fn | 1 |
 | Urgency count fp | 0 |
 | Urgency count tn | 140 |
-| Urgency count tp | 51 |
+| Urgency count tp | 59 |
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
-| Tokens mean_input | 777.535 |
-| Tokens mean_output | 115.205 |
+| Tokens mean_input | 681.93 |
+| Tokens mean_output | 101.03 |
 
 ### Missed Urgent
 
 | Report | Scenario | Text | Urgent probability | Review Triggers |
 | --- | --- | --- | --- | --- |
-| R-0010 | S-048 | Caller: At 09:30 during trans-shipping at Northvale Daventry depot, a forklift crushed two Halcyon Medical insulin cartons. Desk: Right, go on. Caller: Two Halc | 0.05 |  |
-| R-0100 | S-048 | Hello, passing on the driver's account below.  We can't get replacement insulin to the hospital pharmacy before today's four o'clock window. No one was hurt. Th | 0.05 |  |
-| R-0120 | S-015 | Hello, passing on the depot's account below.  NVT 5120, loaded with Sable Electronics laptops, is showing a move away from Northvale Thurrock yard towards the A | 0.05 |  |
-| R-0168 | S-045 | NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate. Reefer fuel shows about two hours left | 0.05 |  |
-| R-0184 | S-045 | Hello, passing on the driver's account below.  The inspection area at Dover won't allow refuelling of chilled trailer NV20 TCH's reefer. Box reading four degree | 0.05 |  |
-| R-0188 | S-100 | Driver's report, as received: They're for a hospital laboratory in Carlisle by 18:00. Tacho shows driver has reached nine hours driving and must stop. A timing  | 0.05 |  |
 | R-0292 | S-045 | Caller: NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate. Desk: Right, go on. Caller: It | 0.05 |  |
-| R-0368 | S-048 | At 09:30 during trans-shipping at Northvale Daventry depot, a forklift crushed two Halcyon Medical insulin cartons. The insulin pens inside are broken; nobody h | 0.05 |  |
-| R-0370 | S-100 | Hello, passing on the driver's account below.  A timing update on NV70 HSE, Halcyon Medical reagents for blood testing at a Carlisle hospital lab, due six this  | 0.05 |  |
 
 ### Latency and cost
 
 | Measure | Value |
 | --- | --- |
-| Latency max | 359.4547 |
+| Latency max | 359.4024 |
 | Latency n | 200 |
-| Latency p50 | 1.8086 |
-| Latency p95 | 254.4501 |
-| Cost per_100 | 142.0 |
-| Cost total | 284 |
-| API USD / 1,000 | 0.0327 |
+| Latency p50 | 1.1318 |
+| Latency p95 | 253.1374 |
+| Cost per_100 | 35.5 |
+| Cost total | 71 |
+| API USD / 1,000 | 0.0286 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
 | false_alarm | 0 | 0.0 |
-| missed_urgent | 180 | 90.0 |
-| review | 20 | 10.0 |
-| wrong_category_same_destination | 4 | 2.0 |
-| wrong_destination | 80 | 40.0 |
+| missed_urgent | 20 | 10.0 |
+| review | 18 | 9.0 |
+| wrong_category_same_destination | 3 | 1.5 |
+| wrong_destination | 30 | 15.0 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
-| auto_routed_error_rate | [0.0745, 0.2514] |
-| cost_per_100 | [60.5, 256.0] |
-| review_rate | [0.04, 0.18] |
-| urgent_recall | [0.7, 0.9737] |
+| auto_routed_error_rate | [0.0157, 0.1033] |
+| cost_per_100 | [12.5, 69.5] |
+| review_rate | [0.03, 0.17] |
+| urgent_recall | [0.9412, 1.0] |
 
 ## C / v2
 
 ### Category
 
-Macro-F1: 0.9105
+Macro-F1: 0.9499
 
 | Label | Precision | Recall | F1 |
 | --- | --- | --- | --- |
-| vehicle_breakdown | 0.9706 | 0.9167 | 0.9429 |
-| delivery_delay | 0.8182 | 0.8438 | 0.8308 |
+| vehicle_breakdown | 0.9722 | 0.9722 | 0.9722 |
+| delivery_delay | 0.8857 | 0.9688 | 0.9254 |
 | shipment_damage | 1.0 | 0.9062 | 0.9508 |
-| missing_shipment | 0.9394 | 0.9688 | 0.9538 |
-| documentation_issue | 0.9677 | 0.8333 | 0.8955 |
-| safety_incident | 0.8 | 1.0 | 0.8889 |
+| missing_shipment | 0.9412 | 1.0 | 0.9697 |
+| documentation_issue | 0.9688 | 0.8611 | 0.9118 |
+| safety_incident | 0.9412 | 1.0 | 0.9697 |
 
 Confusion matrix: rows are Labels; columns are Predictions.
 
 | Label / Prediction | vehicle_breakdown | delivery_delay | shipment_damage | missing_shipment | documentation_issue | safety_incident |
 | --- | --- | --- | --- | --- | --- | --- |
-| vehicle_breakdown | 33 | 0 | 0 | 1 | 0 | 2 |
-| delivery_delay | 0 | 27 | 0 | 0 | 1 | 4 |
+| vehicle_breakdown | 35 | 0 | 0 | 1 | 0 | 0 |
+| delivery_delay | 0 | 31 | 0 | 0 | 1 | 0 |
 | shipment_damage | 0 | 0 | 29 | 1 | 0 | 2 |
-| missing_shipment | 0 | 1 | 0 | 31 | 0 | 0 |
-| documentation_issue | 1 | 5 | 0 | 0 | 30 | 0 |
+| missing_shipment | 0 | 0 | 0 | 32 | 0 | 0 |
+| documentation_issue | 1 | 4 | 0 | 0 | 31 | 0 |
 | safety_incident | 0 | 0 | 0 | 0 | 0 | 32 |
 
 ### Destination
 
-Macro-F1: 0.9112
+Macro-F1: 0.9577
 
 | Label | Precision | Recall | F1 |
 | --- | --- | --- | --- |
-| fleet_support | 0.8788 | 0.9062 | 0.8923 |
-| customer_desk | 0.9737 | 0.8409 | 0.9024 |
+| fleet_support | 0.9394 | 0.9688 | 0.9538 |
+| customer_desk | 0.9773 | 0.9773 | 0.9773 |
 | claims | 1.0 | 0.8571 | 0.9231 |
-| security_investigations | 0.9091 | 0.9375 | 0.9231 |
-| compliance | 0.9375 | 0.9375 | 0.9375 |
-| safety_desk | 0.8 | 1.0 | 0.8889 |
+| security_investigations | 0.9412 | 1.0 | 0.9697 |
+| compliance | 0.9677 | 0.9375 | 0.9524 |
+| safety_desk | 0.9412 | 1.0 | 0.9697 |
 
 Confusion matrix: rows are Labels; columns are Predictions.
 
 | Label / Prediction | fleet_support | customer_desk | claims | security_investigations | compliance | safety_desk |
 | --- | --- | --- | --- | --- | --- | --- |
-| fleet_support | 29 | 0 | 0 | 0 | 1 | 2 |
-| customer_desk | 0 | 37 | 0 | 2 | 1 | 4 |
+| fleet_support | 31 | 0 | 0 | 0 | 1 | 0 |
+| customer_desk | 0 | 43 | 0 | 1 | 0 | 0 |
 | claims | 0 | 1 | 24 | 1 | 0 | 2 |
-| security_investigations | 2 | 0 | 0 | 30 | 0 | 0 |
+| security_investigations | 0 | 0 | 0 | 32 | 0 | 0 |
 | compliance | 2 | 0 | 0 | 0 | 30 | 0 |
 | safety_desk | 0 | 0 | 0 | 0 | 0 | 32 |
 
@@ -586,55 +560,47 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Urgency recall | 0.85 |
+| Urgency recall | 0.9833 |
 | Urgency precision | 1.0 |
-| Urgency count fn | 9 |
+| Urgency count fn | 1 |
 | Urgency count fp | 0 |
 | Urgency count tn | 140 |
-| Urgency count tp | 51 |
+| Urgency count tp | 59 |
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
-| Tokens mean_input | 777.535 |
-| Tokens mean_output | 115.205 |
+| Tokens mean_input | 681.93 |
+| Tokens mean_output | 101.03 |
 
 ### Missed Urgent
 
 | Report | Scenario | Text | Urgent probability | Review Triggers |
 | --- | --- | --- | --- | --- |
-| R-0010 | S-048 | Caller: At 09:30 during trans-shipping at Northvale Daventry depot, a forklift crushed two Halcyon Medical insulin cartons. Desk: Right, go on. Caller: Two Halc | 0.05 |  |
-| R-0100 | S-048 | Hello, passing on the driver's account below.  We can't get replacement insulin to the hospital pharmacy before today's four o'clock window. No one was hurt. Th | 0.05 |  |
-| R-0120 | S-015 | Hello, passing on the depot's account below.  NVT 5120, loaded with Sable Electronics laptops, is showing a move away from Northvale Thurrock yard towards the A | 0.05 |  |
-| R-0168 | S-045 | NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate. Reefer fuel shows about two hours left | 0.05 |  |
-| R-0184 | S-045 | Hello, passing on the driver's account below.  The inspection area at Dover won't allow refuelling of chilled trailer NV20 TCH's reefer. Box reading four degree | 0.05 |  |
-| R-0188 | S-100 | Driver's report, as received: They're for a hospital laboratory in Carlisle by 18:00. Tacho shows driver has reached nine hours driving and must stop. A timing  | 0.05 |  |
 | R-0292 | S-045 | Caller: NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate. Desk: Right, go on. Caller: It | 0.05 |  |
-| R-0368 | S-048 | At 09:30 during trans-shipping at Northvale Daventry depot, a forklift crushed two Halcyon Medical insulin cartons. The insulin pens inside are broken; nobody h | 0.05 |  |
-| R-0370 | S-100 | Hello, passing on the driver's account below.  A timing update on NV70 HSE, Halcyon Medical reagents for blood testing at a Carlisle hospital lab, due six this  | 0.05 |  |
 
 ### Latency and cost
 
 | Measure | Value |
 | --- | --- |
-| Latency max | 359.4547 |
+| Latency max | 359.4024 |
 | Latency n | 200 |
-| Latency p50 | 1.8086 |
-| Latency p95 | 254.4501 |
-| Cost per_100 | 502.0 |
-| Cost total | 1004 |
-| API USD / 1,000 | 0.0327 |
+| Latency p50 | 1.1318 |
+| Latency p95 | 253.1374 |
+| Cost per_100 | 75.5 |
+| Cost total | 151 |
+| API USD / 1,000 | 0.0286 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
 | false_alarm | 0 | 0.0 |
-| missed_urgent | 900 | 450.0 |
-| review | 20 | 10.0 |
-| wrong_category_same_destination | 4 | 2.0 |
-| wrong_destination | 80 | 40.0 |
+| missed_urgent | 100 | 50.0 |
+| review | 18 | 9.0 |
+| wrong_category_same_destination | 3 | 1.5 |
+| wrong_destination | 30 | 15.0 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
-| auto_routed_error_rate | [0.0745, 0.2514] |
-| cost_per_100 | [109.0, 1035.5] |
-| review_rate | [0.04, 0.18] |
-| urgent_recall | [0.7, 0.9737] |
+| auto_routed_error_rate | [0.0157, 0.1033] |
+| cost_per_100 | [12.5, 190.5] |
+| review_rate | [0.03, 0.17] |
+| urgent_recall | [0.9412, 1.0] |

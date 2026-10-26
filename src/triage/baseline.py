@@ -26,7 +26,7 @@ from triage.schema import (
     split_sentences,
 )
 
-RULES_VERSION = "a-v1"
+RULES_VERSION = "a-v2"
 
 C = Category
 D = Destination
@@ -68,13 +68,19 @@ def _rule(code, pattern, weight=1.0, negatable=True, unless=None, flags=re.IGNOR
 # the match cancels it. "(not ours)" just after a match cancels it too ("crash (not ours)").
 _NEG_BEFORE = _re(r"\b(no|not|nobody|no-one|no one|none|never|without|nothing|isn't|wasn't|"
                   r"aren't|weren't|hasn't|haven't)\b[\w\s,'-]{0,20}$")
-_NEG_AFTER = _re(r"^[^.]{0,6}\(?not (ours|us|our \w+|involving us|one of ours)\)?")
+_NEG_AFTER = _re(r"^[^.]{0,6}\(?(not (ours|us|our \w+|involving us|one of ours)"
+                 r"|(we|I) (weren['’]t|wasn['’]t|were not|was not) (involved|part)[^.]{0,10})\)?")
+# "somebody else's collision": an incident that happened to someone else is not ours.
+_NEG_BEFORE_OTHERS = _re(r"\b(some(body|one) else['’]?s|another (driver|vehicle|firm)['’]?s|other "
+                         r"people['’]?s|third[- ]party)\s*(\w+\s)?$")
 
 
 def _affirmed(sentence: str, m: re.Match, rule: Rule) -> bool:
     if not rule.negatable:
         return True
-    return not (_NEG_BEFORE.search(sentence[: m.start()]) or _NEG_AFTER.search(sentence[m.end():]))
+    return not (_NEG_BEFORE.search(sentence[: m.start()])
+                or _NEG_BEFORE_OTHERS.search(sentence[: m.start()])
+                or _NEG_AFTER.search(sentence[m.end():]))
 
 
 # --- Shared vocabulary -----------------------------------------------------------------------
@@ -89,7 +95,8 @@ _BREACH = (r"(\bseals?\b[^.]*\b(broken|missing|cut|tampered|(does ?n[o']t|doesn'
 _CRIMINAL_IMMOBILISATION = (r"(\bsiphon\w*|\bfuel (was )?(stolen|theft|drained)|\btank drained"
                             r"|\b(filler|fuel) cap (was )?forced|\b(air )?lines (were |had been )?"
                             r"cut|\bcables? (were |had been )?cut|\btyres? (were |had been )?"
-                            r"slashed|\bvandal\w*)")
+                            r"slashed|\bvandal\w*|\bcut\b[^.]{0,30}\b(air )?(lines|cables?|hoses?|wires?)\b"
+                            r"|\bslashed\b[^.]{0,20}\btyres?)")
 _DRIVER_HOURS = (r"(\bdriving limit|\b(\d+|nine|ten)-hour|\bhours limit|\bout of hours|\b(daily|"
                  r"weekly) rest|\btake (his|her|my|a) (rest|break)|\b(required|mandatory) break"
                  r"|\bno (relief )?driver|\brelief driver|\bdriver (is )?off sick)")
@@ -102,9 +109,9 @@ _DOC_WORD = (r"(\bPOD\b|proof of delivery|delivery note|\be-?POD\b|\bCMR\b|consi
 _DOC_PROBLEM = (r"(\bmissing|\bwrong|\bincorrect|\bnot (been )?(lodged|signed|stamped|filed)"
                 r"|\bunsigned|\bexpired|\binvalid|\brefused to sign|\bno \w+ signature|\blacks"
                 r"|\bleft without|\bwithout (a|the|any) (signature|delivery note|paperwork)"
-                r"|\binfringement|\bmismatch|\bdoes ?n[o']t match|\bdisputed?|\bnot (captured|"
+                r"|\binfringement|\bout of date|\bmismatch|\bdoes ?n[o']t match|\bdisputed?|\bnot (captured|"
                 r"uploaded))")
-_COMMERCIAL_PAPER = r"(\bPOD\b|proof of delivery|delivery note|\be-?POD\b|\bsignature|\bsign(ed)?\b)"
+_COMMERCIAL_PAPER = r"(\bPOD\b|proof of delivery|delivery (note|documents|paperwork)|\be-?POD\b|\bsignature|\bsign(ed)?\b)"
 _REGULATORY_PAPER = (r"(customs|declaration|\bCMR\b|consignment note|certificate|dangerous goods "
                      r"note|\bDGN\b|tachograph|\btacho\b|driver card|\bCPC\b|permit|licence"
                      r"|\bENS\b|\bT1\b|transit|export|import)")
@@ -135,7 +142,8 @@ CATEGORY_RULES: dict[Category, list[Rule]] = {
         _rule("C6 threat", r"\bthreat\w*|\bassault\w*|\babusive\b|\battack\w*|\bweapons?\b"
               r"|\bknife\b|\bpunch\w*|\b(trying|tried) to (open|get into|break into)", 3),
         _rule("C6 near miss", r"\bnear miss\b|\bnearly (hit|crashed|killed|ran)|\bcut (in|me up)"
-              r"\b|\bbrake[ds]? hard\b|\bhad to brake\b", 2.5),
+              r"\b|\bbrake[ds]? hard\b|\bhad to brake\b", 2.5, negatable=False),
+        _rule("C6 unsafe reversing", r"\bwithout a banksman\b|\bno banksman\b", 2, negatable=False),
         _rule("C6 hazard report", r"\bhazard\b|\bfloodlights?\b|\blighting\b|\bslippery\b"
               r"|\bracking\b|\bpedestrians?\b|\bbanksman\b", 1.5),
     ],
@@ -149,18 +157,19 @@ CATEGORY_RULES: dict[Category, list[Rule]] = {
               r"locked|overheat\w*|seized|packed up)", 2.5),
         _rule("C1 air leak", r"\bair leak\b", 1.5),
         _rule("C1 tyre", r"\bpunctur\w*|\bblow-?out\b|\bflat tyre|\btyres? (has |have )?(burst|"
-              r"blew|gone|blown|flat)", 2.5),
+              r"blew|gone|blown|flat)|\btyre service\b|\bspare (wheel )?(is )?missing", 2.5),
         _rule("C1 warning light", r"\bwarning light|\blimp mode\b|\bloss of power\b"
               r"|\blost power\b", 1.5),
-        _rule("C1 light cleared, no fault (C1 excludes)", r"\bno fault found\b|\blight "
-              r"(has )?cleared\b", -5, negatable=False),
+        _rule("C1 light cleared, no fault (C1 excludes)", r"\bno fault found\b|\bfound no fault|\b(light|warning|"
+              r"engine light) (has )?cleared\b|\bcleared (at|after) ", -5, negatable=False),
         _rule("C1 reefer failed", r"\b(reefer|fridge|refrigeration|chiller)( unit)?\b.*\b("
               r"stopped|fail\w*|not working|died|cut out|alarm\w*|packed up|broken|fault)", 2.5),
         _rule("C1 tail-lift failed", r"\btail-?lift\b.*\b(fail\w*|broke\w*|stuck|won'?t|"
               r"not working|jammed)", 2.5),
         _rule("C1 recovery", r"\brecovery\b|\bmechanic\b|\btow(ed|ing)?\b|\bfitter\b", 1),
         _rule("C1 own fuel leak", r"\b(diesel|fuel) tank\b.*\b(split|leak\w*|holed|punctured|"
-              r"crack\w*)|\bdiesel (is )?(pouring|leaking|everywhere)", 2.5),
+              r"crack\w*)|\b(split|holed|punctured|cracked)\b.*\b(diesel|fuel) tank\b"
+              r"|\bdiesel (is )?(pouring|leaking|everywhere)", 2.5),
         _rule("C1 criminal immobilisation (X5 cause)", _CRIMINAL_IMMOBILISATION, 2.5,
               negatable=False),
         _rule("C1 roadside prohibition for a defect", r"\bprohibition\b|\bdefects?\b", 1.5),
@@ -200,15 +209,18 @@ CATEGORY_RULES: dict[Category, list[Rule]] = {
               r"(received|delivered|on the (van|vehicle|trailer|lorry))|has ?n'?t (arrived|turned"
               r" up)|never (arrived|turned up)|isn'?t on the (van|vehicle|trailer|lorry))\b", 2.5,
               negatable=False),
-        _rule("C4 short", r"\b(\w+ )?pallets? short\b|\bshort (by|of) \w+|\bshortage\b", 2.5,
+        _rule("C4 short", r"\b(\w+ )?pallets? short\b|\bshort (by|of) \w+|\bshortage\b|\b(missing|lost) (pallets?|cartons?|cases|boxes|parcels?|items?|"
+              r"cages?)\b", 2.5,
               negatable=False),
         _rule("C4 wrong place (X1 explanation)", r"\bdelivered (\w+ ){0,4}to the wrong|\bwrong "
               r"(address|store|unit|site|depot|vehicle|trailer|lorry|van)\b|\bmeant for\b"
               r"|\b(old|previous) (address|premises)|\bby mistake\b|\bmis-?pick\w*|\bleft behind"
-              r"\b|\bnot loaded\b", 2.5, negatable=False),
+              r"\b|\bnot loaded\b|\b(delivered|gone|sent|taken) (\w+ ){0,6}to [^.]{0,40}"
+              r"\binstead of\b|\bmade an error reading", 2.5, negatable=False),
         _rule("C4 theft", r"\bstolen\b|(?<!fuel )\btheft\b|\bthieves\b", 2.5),
         _rule("C4 whereabouts unknown", r"\btracker\b[^.]*\b(moving|leaving|left|off|heading)"
-              r"|\bno (move|movement|driver) (is |was )?(scheduled|planned|booked)|\bunplanned "
+              r"|\bshowing a move\b|\bmove away\b"
+              r"|\bno [^.]{0,25}(move|movement) (is |was )?(scheduled|planned|booked)|\bunplanned "
               r"(move|movement)|\b(can'?t|cannot|unable to) (contact|reach|get hold of)( the| "
               r"our| their)? driver|\bno idea where\b|\bwhereabouts\b|\bnobody knows where", 2,
               negatable=False),
@@ -241,7 +253,8 @@ _WILL_MISS = (r"\b(will|going to|gonna|likely to|set to|bound to) miss|\bwon'?t 
               r"make|\bcan'?t make|\bcannot make|\bnot going to make|\bno way (to|of) (get|make)"
               r"|\bmiss(ed|ing)? (the|its|our|their|his|her) (slot|window|deadline|cut-?off|"
               r"sailing|ferry)|\b(cannot|can'?t) (reach|get there|get it there)[^.]*\bin time"
-              r"|\btoo late\b|\bwill be missed")
+              r"|\btoo late\b|\bwill be missed|\bwon['’]t be made\b|\b(can['’]?t|cannot|won['’]t) "
+              r"(get|reach)\b[^.]{0,60}\b(before|by)\b")
 _WILL_MAKE = r"\b(will |should )?still make\b|\bon time\b|\bin time\b(?<!not in time)"
 
 URGENCY_RULES: list[Rule] = [
@@ -281,11 +294,12 @@ URGENCY_RULES: list[Rule] = [
     _rule("U4 temperature rising", r"\btemp(erature)? (is |has been )?(rising|climbing|going up|"
           r"out of range)|\bout of range\b", unless=r"\breject\w*|\bdownload"),
     _rule("U4 refrigeration will stop", r"\b(reefer|fridge|unit)( unit)? fuel\b[^.]*\b(run "
-          r"out|running out|low|empty)|\bno refuel\w*|\bnot allowed to refuel"),
+          r"out|running out|low|empty|(hours?|minutes?) (left|remaining)|remaining)"
+          r"|\bno refuel\w*|\bnot allowed to refuel|\bwon['’]t allow refuell?ing|\brefuell?ing (isn['’]t|is not|not) allowed"),
     # U6 theft in progress, loaded vehicle missing with driver unreachable, load space breached.
     _rule("U6 load space breached", _BREACH, negatable=False),
-    _rule("U6 unplanned move", r"\btracker\b[^.]*\b(moving|leaving|heading)|\bno (move|movement"
-          r"|driver) (is |was )?(scheduled|planned|booked)|\bunplanned (move|movement)",
+    _rule("U6 unplanned move", r"\btracker\b[^.]*\b(moving|leaving|heading)|\bshowing a move\b"
+          r"|\bmove away\b|\bno [^.]{0,25}(move|movement) (is |was )?(scheduled|planned|booked)|\bunplanned (move|movement)",
           negatable=False),
     _rule("U6 driver unreachable", r"\b(can'?t|cannot|unable to) (contact|reach|get hold of)"
           r"( the| our| their)? driver|\bdriver (is )?not answering|\btracker (has been |is )?off",
@@ -312,7 +326,9 @@ _ETA_TIME = _re(r"\b(ETA|arrive|arriving|there about|there at|get there)\b[^.\d]
 _X1_EXPLANATION = _re(r"\bdelivered (\w+ ){0,4}to the wrong|\bwrong (address|store|unit|site|"
                       r"depot|vehicle|trailer|lorry|van)\b|\bmeant for\b|\b(old|previous) "
                       r"(address|premises)|\bby mistake\b|\bmis-?pick\w*|\bleft behind\b"
-                      r"|\bnot loaded\b|\bcross-?dock\w* (onto|on to) the wrong|\bmoved (with)?in "
+                      r"|\bnot loaded\b|\bmade an error reading|\bhand them back|\b(left|stayed) in "
+                      r"(the|a) (\w+ ){1,2}(store|room|bay|yard)\b"
+                      r"|\bcross-?dock\w* (onto|on to) the wrong|\bmoved (with)?in "
                       r"the yard")
 _X2_COMMERCIAL = _re(_COMMERCIAL_PAPER)
 _X2_REGULATORY = _re(_REGULATORY_PAPER)
@@ -441,7 +457,11 @@ def predict(report: Report) -> Prediction:
     no_match = all(v == 0 for v in scores.values())
     total = sum(scores.values()) + SMOOTHING * len(scores)
     probs = {c: (scores[c] + SMOOTHING) / total for c in C}
-    ranked = sorted(P4_ORDER, key=lambda c: -probs[c])  # stable: ties follow P4
+    # With no rule fired nothing was observed, so P4's safety-first tie-break must not decide;
+    # fall back to the most common routine Category (C2) and let the Review Triggers flag it.
+    order = ([C.DELIVERY_DELAY] + [c for c in P4_ORDER if c != C.DELIVERY_DELAY]
+             if no_match else P4_ORDER)
+    ranked = sorted(order, key=lambda c: -probs[c])  # stable: ties follow the order
     category = ranked[0]
 
     urgent_prob, urgency_sentences = _urgency(sentences, text)
