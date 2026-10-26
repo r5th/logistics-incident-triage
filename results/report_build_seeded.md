@@ -6,12 +6,12 @@ Each Incident Report has a Category, Urgency and Destination. A Policy chooses A
 
 | Approach | Policy | Category accuracy | Destination accuracy | Urgent recall | Review rate | Auto-route coverage | Auto-route error rate | Missed Urgent | Cost / 100 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| A | v1 | 0.96 | 0.96 | 0.9833 | 0.08 | 0.92 | 0.0326 | 1 | 28.5 |
-| A | v2 | 0.96 | 0.96 | 0.9833 | 0.08 | 0.92 | 0.0326 | 1 | 68.5 |
-| B | v1 | 0.9 | 0.905 | 0.9333 | 0.27 | 0.73 | 0.0959 | 0 | 56.0 |
-| B | v2 | 0.9 | 0.905 | 0.9333 | 0.27 | 0.73 | 0.0959 | 0 | 56.0 |
-| C | v1 | 0.95 | 0.96 | 0.9833 | 0.09 | 0.91 | 0.0549 | 1 | 35.5 |
-| C | v2 | 0.95 | 0.96 | 0.9833 | 0.09 | 0.91 | 0.0549 | 1 | 75.5 |
+| A | v1 | 0.96 | 0.96 | 1.0 | 1.0 | 0.0 | 0.0 | 0 | 100.0 |
+| A | v2 | 0.96 | 0.96 | 1.0 | 1.0 | 0.0 | 0.0 | 0 | 100.0 |
+| B | v1 | 0.9 | 0.905 | 1.0 | 0.465 | 0.535 | 0.2243 | 0 | 82.5 |
+| B | v2 | 0.9 | 0.905 | 1.0 | 0.465 | 0.535 | 0.2243 | 0 | 82.5 |
+| C | v1 | 0.95 | 0.96 | 1.0 | 0.95 | 0.05 | 0.2 | 0 | 98.0 |
+| C | v2 | 0.95 | 0.96 | 1.0 | 0.95 | 0.05 | 0.2 | 0 | 98.0 |
 
 ## A / v1
 
@@ -67,12 +67,12 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Urgency recall | 0.9833 |
-| Urgency precision | 0.8806 |
-| Urgency count fn | 1 |
-| Urgency count fp | 8 |
-| Urgency count tn | 132 |
-| Urgency count tp | 59 |
+| Urgency recall | 1.0 |
+| Urgency precision | 0.3 |
+| Urgency count fn | 0 |
+| Urgency count fp | 140 |
+| Urgency count tn | 0 |
+| Urgency count tp | 60 |
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
@@ -83,7 +83,6 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Report | Scenario | Text | Urgent probability | Review Triggers |
 | --- | --- | --- | --- | --- |
-| R-0292 | S-045 | Caller: NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate. Desk: Right, go on. Caller: It | 0.05 |  |
 
 ### Latency and cost
 
@@ -93,24 +92,24 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | Latency n | 200 |
 | Latency p50 | 1.03 |
 | Latency p95 | 1.2985 |
-| Cost per_100 | 28.5 |
-| Cost total | 57 |
+| Cost per_100 | 100.0 |
+| Cost total | 200 |
 | API USD / 1,000 | 0.0 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
 | false_alarm | 0 | 0.0 |
-| missed_urgent | 20 | 10.0 |
-| review | 16 | 8.0 |
-| wrong_category_same_destination | 1 | 0.5 |
-| wrong_destination | 20 | 10.0 |
+| missed_urgent | 0 | 0.0 |
+| review | 200 | 100.0 |
+| wrong_category_same_destination | 0 | 0.0 |
+| wrong_destination | 0 | 0.0 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
-| auto_routed_error_rate | [0.0105, 0.0585] |
-| cost_per_100 | [10.5, 56.5] |
-| review_rate | [0.025, 0.155] |
-| urgent_recall | [0.9412, 1.0] |
+| auto_routed_error_rate | [0.0, 0.0] |
+| cost_per_100 | [100.0, 100.0] |
+| review_rate | [1.0, 1.0] |
+| urgent_recall | [1.0, 1.0] |
 
 ## A / v2
 
@@ -166,12 +165,12 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Urgency recall | 0.9833 |
-| Urgency precision | 0.8806 |
-| Urgency count fn | 1 |
-| Urgency count fp | 8 |
-| Urgency count tn | 132 |
-| Urgency count tp | 59 |
+| Urgency recall | 1.0 |
+| Urgency precision | 0.3 |
+| Urgency count fn | 0 |
+| Urgency count fp | 140 |
+| Urgency count tn | 0 |
+| Urgency count tp | 60 |
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
@@ -182,7 +181,6 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Report | Scenario | Text | Urgent probability | Review Triggers |
 | --- | --- | --- | --- | --- |
-| R-0292 | S-045 | Caller: NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate. Desk: Right, go on. Caller: It | 0.05 |  |
 
 ### Latency and cost
 
@@ -192,24 +190,24 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | Latency n | 200 |
 | Latency p50 | 1.03 |
 | Latency p95 | 1.2985 |
-| Cost per_100 | 68.5 |
-| Cost total | 137 |
+| Cost per_100 | 100.0 |
+| Cost total | 200 |
 | API USD / 1,000 | 0.0 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
 | false_alarm | 0 | 0.0 |
-| missed_urgent | 100 | 50.0 |
-| review | 16 | 8.0 |
-| wrong_category_same_destination | 1 | 0.5 |
-| wrong_destination | 20 | 10.0 |
+| missed_urgent | 0 | 0.0 |
+| review | 200 | 100.0 |
+| wrong_category_same_destination | 0 | 0.0 |
+| wrong_destination | 0 | 0.0 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
-| auto_routed_error_rate | [0.0105, 0.0585] |
-| cost_per_100 | [10.5, 177.5] |
-| review_rate | [0.025, 0.155] |
-| urgent_recall | [0.9412, 1.0] |
+| auto_routed_error_rate | [0.0, 0.0] |
+| cost_per_100 | [100.0, 100.0] |
+| review_rate | [1.0, 1.0] |
+| urgent_recall | [1.0, 1.0] |
 
 ## B / v1
 
@@ -265,12 +263,12 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Urgency recall | 0.9333 |
-| Urgency precision | 0.9492 |
-| Urgency count fn | 4 |
-| Urgency count fp | 3 |
-| Urgency count tn | 137 |
-| Urgency count tp | 56 |
+| Urgency recall | 1.0 |
+| Urgency precision | 0.3774 |
+| Urgency count fn | 0 |
+| Urgency count fp | 99 |
+| Urgency count tn | 41 |
+| Urgency count tp | 60 |
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
@@ -290,24 +288,24 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | Latency n | 200 |
 | Latency p50 | 229.2962 |
 | Latency p95 | 291.1166 |
-| Cost per_100 | 56.0 |
-| Cost total | 112 |
+| Cost per_100 | 82.5 |
+| Cost total | 165 |
 | API USD / 1,000 | 0.0995 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
-| false_alarm | 0 | 0.0 |
+| false_alarm | 30 | 15.0 |
 | missed_urgent | 0 | 0.0 |
-| review | 54 | 27.0 |
-| wrong_category_same_destination | 3 | 1.5 |
-| wrong_destination | 55 | 27.5 |
+| review | 93 | 46.5 |
+| wrong_category_same_destination | 2 | 1.0 |
+| wrong_destination | 40 | 20.0 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
-| auto_routed_error_rate | [0.0263, 0.1871] |
-| cost_per_100 | [32.0, 87.5] |
-| review_rate | [0.17, 0.38] |
-| urgent_recall | [0.825, 1.0] |
+| auto_routed_error_rate | [0.1034, 0.3684] |
+| cost_per_100 | [60.5, 108.5] |
+| review_rate | [0.345, 0.59] |
+| urgent_recall | [1.0, 1.0] |
 
 ## B / v2
 
@@ -363,12 +361,12 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Urgency recall | 0.9333 |
-| Urgency precision | 0.9492 |
-| Urgency count fn | 4 |
-| Urgency count fp | 3 |
-| Urgency count tn | 137 |
-| Urgency count tp | 56 |
+| Urgency recall | 1.0 |
+| Urgency precision | 0.3774 |
+| Urgency count fn | 0 |
+| Urgency count fp | 99 |
+| Urgency count tn | 41 |
+| Urgency count tp | 60 |
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
@@ -388,24 +386,24 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | Latency n | 200 |
 | Latency p50 | 229.2962 |
 | Latency p95 | 291.1166 |
-| Cost per_100 | 56.0 |
-| Cost total | 112 |
+| Cost per_100 | 82.5 |
+| Cost total | 165 |
 | API USD / 1,000 | 0.0995 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
-| false_alarm | 0 | 0.0 |
+| false_alarm | 30 | 15.0 |
 | missed_urgent | 0 | 0.0 |
-| review | 54 | 27.0 |
-| wrong_category_same_destination | 3 | 1.5 |
-| wrong_destination | 55 | 27.5 |
+| review | 93 | 46.5 |
+| wrong_category_same_destination | 2 | 1.0 |
+| wrong_destination | 40 | 20.0 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
-| auto_routed_error_rate | [0.0263, 0.1871] |
-| cost_per_100 | [32.0, 87.5] |
-| review_rate | [0.17, 0.38] |
-| urgent_recall | [0.825, 1.0] |
+| auto_routed_error_rate | [0.1034, 0.3684] |
+| cost_per_100 | [60.5, 108.5] |
+| review_rate | [0.345, 0.59] |
+| urgent_recall | [1.0, 1.0] |
 
 ## C / v1
 
@@ -461,12 +459,12 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Urgency recall | 0.9833 |
-| Urgency precision | 1.0 |
-| Urgency count fn | 1 |
-| Urgency count fp | 0 |
-| Urgency count tn | 140 |
-| Urgency count tp | 59 |
+| Urgency recall | 1.0 |
+| Urgency precision | 0.3125 |
+| Urgency count fn | 0 |
+| Urgency count fp | 132 |
+| Urgency count tn | 8 |
+| Urgency count tp | 60 |
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
@@ -477,7 +475,6 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Report | Scenario | Text | Urgent probability | Review Triggers |
 | --- | --- | --- | --- | --- |
-| R-0292 | S-045 | Caller: NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate. Desk: Right, go on. Caller: It | 0.05 |  |
 
 ### Latency and cost
 
@@ -487,24 +484,24 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | Latency n | 200 |
 | Latency p50 | 1.1318 |
 | Latency p95 | 253.1374 |
-| Cost per_100 | 35.5 |
-| Cost total | 71 |
+| Cost per_100 | 98.0 |
+| Cost total | 196 |
 | API USD / 1,000 | 0.0286 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
 | false_alarm | 0 | 0.0 |
-| missed_urgent | 20 | 10.0 |
-| review | 18 | 9.0 |
-| wrong_category_same_destination | 3 | 1.5 |
-| wrong_destination | 30 | 15.0 |
+| missed_urgent | 0 | 0.0 |
+| review | 190 | 95.0 |
+| wrong_category_same_destination | 1 | 0.5 |
+| wrong_destination | 5 | 2.5 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
-| auto_routed_error_rate | [0.0157, 0.1033] |
-| cost_per_100 | [12.5, 69.5] |
-| review_rate | [0.03, 0.17] |
-| urgent_recall | [0.9412, 1.0] |
+| auto_routed_error_rate | [0.0, 0.5] |
+| cost_per_100 | [94.0, 102.5] |
+| review_rate | [0.9, 0.985] |
+| urgent_recall | [1.0, 1.0] |
 
 ## C / v2
 
@@ -560,12 +557,12 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Urgency recall | 0.9833 |
-| Urgency precision | 1.0 |
-| Urgency count fn | 1 |
-| Urgency count fp | 0 |
-| Urgency count tn | 140 |
-| Urgency count tp | 59 |
+| Urgency recall | 1.0 |
+| Urgency precision | 0.3125 |
+| Urgency count fn | 0 |
+| Urgency count fp | 132 |
+| Urgency count tn | 8 |
+| Urgency count tp | 60 |
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
@@ -576,7 +573,6 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Report | Scenario | Text | Urgent probability | Review Triggers |
 | --- | --- | --- | --- | --- |
-| R-0292 | S-045 | Caller: NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate. Desk: Right, go on. Caller: It | 0.05 |  |
 
 ### Latency and cost
 
@@ -586,21 +582,21 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | Latency n | 200 |
 | Latency p50 | 1.1318 |
 | Latency p95 | 253.1374 |
-| Cost per_100 | 75.5 |
-| Cost total | 151 |
+| Cost per_100 | 98.0 |
+| Cost total | 196 |
 | API USD / 1,000 | 0.0286 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
 | false_alarm | 0 | 0.0 |
-| missed_urgent | 100 | 50.0 |
-| review | 18 | 9.0 |
-| wrong_category_same_destination | 3 | 1.5 |
-| wrong_destination | 30 | 15.0 |
+| missed_urgent | 0 | 0.0 |
+| review | 190 | 95.0 |
+| wrong_category_same_destination | 1 | 0.5 |
+| wrong_destination | 5 | 2.5 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
-| auto_routed_error_rate | [0.0157, 0.1033] |
-| cost_per_100 | [12.5, 190.5] |
-| review_rate | [0.03, 0.17] |
-| urgent_recall | [0.9412, 1.0] |
+| auto_routed_error_rate | [0.0, 0.5] |
+| cost_per_100 | [94.0, 102.5] |
+| review_rate | [0.9, 0.985] |
+| urgent_recall | [1.0, 1.0] |

@@ -6,12 +6,12 @@ Each Incident Report has a Category, Urgency and Destination. A Policy chooses A
 
 | Approach | Policy | Category accuracy | Destination accuracy | Urgent recall | Review rate | Auto-route coverage | Auto-route error rate | Missed Urgent | Cost / 100 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| A | v1 | 0.6875 | 0.7125 | 0.6667 | 0.3125 | 0.6875 | 0.2909 | 7 | 268.75 |
-| A | v2 | 0.6875 | 0.7125 | 0.6667 | 0.3125 | 0.6875 | 0.2909 | 7 | 968.75 |
-| B | v1 | 0.95 | 0.9375 | 0.75 | 0.275 | 0.725 | 0.1724 | 2 | 115.0 |
-| B | v2 | 0.95 | 0.9375 | 0.75 | 0.275 | 0.725 | 0.1724 | 2 | 315.0 |
-| C | v1 | 0.925 | 0.9125 | 0.625 | 0.1625 | 0.8375 | 0.209 | 7 | 236.25 |
-| C | v2 | 0.925 | 0.9125 | 0.625 | 0.1625 | 0.8375 | 0.209 | 7 | 936.25 |
+| A | v1 | 0.6875 | 0.7125 | 1.0 | 1.0 | 0.0 | 0.0 | 0 | 100.0 |
+| A | v2 | 0.6875 | 0.7125 | 1.0 | 1.0 | 0.0 | 0.0 | 0 | 100.0 |
+| B | v1 | 0.95 | 0.9375 | 1.0 | 0.5375 | 0.4625 | 0.1351 | 0 | 66.25 |
+| B | v2 | 0.95 | 0.9375 | 1.0 | 0.5375 | 0.4625 | 0.1351 | 0 | 66.25 |
+| C | v1 | 0.925 | 0.9125 | 1.0 | 0.8 | 0.2 | 0.0 | 0 | 80.0 |
+| C | v2 | 0.925 | 0.9125 | 1.0 | 0.8 | 0.2 | 0.0 | 0 | 80.0 |
 
 ## A / v1
 
@@ -67,12 +67,12 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Urgency recall | 0.6667 |
-| Urgency precision | 1.0 |
-| Urgency count fn | 8 |
-| Urgency count fp | 0 |
-| Urgency count tn | 56 |
-| Urgency count tp | 16 |
+| Urgency recall | 1.0 |
+| Urgency precision | 0.3 |
+| Urgency count fn | 0 |
+| Urgency count fp | 56 |
+| Urgency count tn | 0 |
+| Urgency count tp | 24 |
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
@@ -83,13 +83,6 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Report | Scenario | Text | Urgent probability | Review Triggers |
 | --- | --- | --- | --- | --- |
-| R-0019 | S-061 | Driver's report, as received: It's UN1263 paint, class 3 flammable, in 25-litre steel drums. They're upright, no leak seen and no smell. Customer in Bradford ha | 0.05 |  |
-| R-0099 | S-061 | Hello, passing on the driver's account below.  Customer in Bradford has refused damaged Pennine Paints drums: three dented, with a lid cracked on one. All uprig | 0.05 |  |
-| R-0204 | S-061 | At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid. It's UN1263 paint, class 3 flammable, in 25-lit | 0.05 |  |
-| R-0234 | S-001 | NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the | 0.05 |  |
-| R-0286 | S-001 | Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p | 0.05 |  |
-| R-0297 | S-052 | Caller: NV20 RXC has rear-ended a car in slow traffic on the A34 near Oxford. Desk: Right, go on. Caller: The car driver says their neck hurts. Police are comin | 0.05 |  |
-| R-0315 | S-061 | Caller: At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid. Desk: Right, go on. Caller: The 25-litr | 0.05 |  |
 
 ### Latency and cost
 
@@ -99,24 +92,24 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | Latency n | 80 |
 | Latency p50 | 1.0257 |
 | Latency p95 | 1.3168 |
-| Cost per_100 | 268.75 |
-| Cost total | 215 |
+| Cost per_100 | 100.0 |
+| Cost total | 80 |
 | API USD / 1,000 | 0.0 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
 | false_alarm | 0 | 0.0 |
-| missed_urgent | 140 | 175.0 |
-| review | 25 | 31.25 |
+| missed_urgent | 0 | 0.0 |
+| review | 80 | 100.0 |
 | wrong_category_same_destination | 0 | 0.0 |
-| wrong_destination | 50 | 62.5 |
+| wrong_destination | 0 | 0.0 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
-| auto_routed_error_rate | [0.1026, 0.5] |
-| cost_per_100 | [81.25, 515.0] |
-| review_rate | [0.125, 0.5] |
-| urgent_recall | [0.35, 0.9167] |
+| auto_routed_error_rate | [0.0, 0.0] |
+| cost_per_100 | [100.0, 100.0] |
+| review_rate | [1.0, 1.0] |
+| urgent_recall | [1.0, 1.0] |
 
 ## A / v2
 
@@ -172,12 +165,12 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Urgency recall | 0.6667 |
-| Urgency precision | 1.0 |
-| Urgency count fn | 8 |
-| Urgency count fp | 0 |
-| Urgency count tn | 56 |
-| Urgency count tp | 16 |
+| Urgency recall | 1.0 |
+| Urgency precision | 0.3 |
+| Urgency count fn | 0 |
+| Urgency count fp | 56 |
+| Urgency count tn | 0 |
+| Urgency count tp | 24 |
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
@@ -188,13 +181,6 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Report | Scenario | Text | Urgent probability | Review Triggers |
 | --- | --- | --- | --- | --- |
-| R-0019 | S-061 | Driver's report, as received: It's UN1263 paint, class 3 flammable, in 25-litre steel drums. They're upright, no leak seen and no smell. Customer in Bradford ha | 0.05 |  |
-| R-0099 | S-061 | Hello, passing on the driver's account below.  Customer in Bradford has refused damaged Pennine Paints drums: three dented, with a lid cracked on one. All uprig | 0.05 |  |
-| R-0204 | S-061 | At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid. It's UN1263 paint, class 3 flammable, in 25-lit | 0.05 |  |
-| R-0234 | S-001 | NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the | 0.05 |  |
-| R-0286 | S-001 | Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p | 0.05 |  |
-| R-0297 | S-052 | Caller: NV20 RXC has rear-ended a car in slow traffic on the A34 near Oxford. Desk: Right, go on. Caller: The car driver says their neck hurts. Police are comin | 0.05 |  |
-| R-0315 | S-061 | Caller: At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid. Desk: Right, go on. Caller: The 25-litr | 0.05 |  |
 
 ### Latency and cost
 
@@ -204,24 +190,24 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | Latency n | 80 |
 | Latency p50 | 1.0257 |
 | Latency p95 | 1.3168 |
-| Cost per_100 | 968.75 |
-| Cost total | 775 |
+| Cost per_100 | 100.0 |
+| Cost total | 80 |
 | API USD / 1,000 | 0.0 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
 | false_alarm | 0 | 0.0 |
-| missed_urgent | 700 | 875.0 |
-| review | 25 | 31.25 |
+| missed_urgent | 0 | 0.0 |
+| review | 80 | 100.0 |
 | wrong_category_same_destination | 0 | 0.0 |
-| wrong_destination | 50 | 62.5 |
+| wrong_destination | 0 | 0.0 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
-| auto_routed_error_rate | [0.1026, 0.5] |
-| cost_per_100 | [83.75, 2200.0] |
-| review_rate | [0.125, 0.5] |
-| urgent_recall | [0.35, 0.9167] |
+| auto_routed_error_rate | [0.0, 0.0] |
+| cost_per_100 | [100.0, 100.0] |
+| review_rate | [1.0, 1.0] |
+| urgent_recall | [1.0, 1.0] |
 
 ## B / v1
 
@@ -277,12 +263,12 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Urgency recall | 0.75 |
-| Urgency precision | 0.8571 |
-| Urgency count fn | 6 |
-| Urgency count fp | 3 |
-| Urgency count tn | 53 |
-| Urgency count tp | 18 |
+| Urgency recall | 1.0 |
+| Urgency precision | 0.3529 |
+| Urgency count fn | 0 |
+| Urgency count fp | 44 |
+| Urgency count tn | 12 |
+| Urgency count tp | 24 |
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
@@ -293,8 +279,6 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Report | Scenario | Text | Urgent probability | Review Triggers |
 | --- | --- | --- | --- | --- |
-| R-0234 | S-001 | NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the | 0.1 | cargo_missing, multiple_issues |
-| R-0286 | S-001 | Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p | 0.08 | cargo_missing, multiple_issues |
 
 ### Latency and cost
 
@@ -304,24 +288,24 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | Latency n | 80 |
 | Latency p50 | 222.4682 |
 | Latency p95 | 277.0583 |
-| Cost per_100 | 115.0 |
-| Cost total | 92 |
+| Cost per_100 | 66.25 |
+| Cost total | 53 |
 | API USD / 1,000 | 0.0996 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
-| false_alarm | 4 | 5.0 |
-| missed_urgent | 40 | 50.0 |
-| review | 22 | 27.5 |
-| wrong_category_same_destination | 1 | 1.25 |
-| wrong_destination | 25 | 31.25 |
+| false_alarm | 10 | 12.5 |
+| missed_urgent | 0 | 0.0 |
+| review | 43 | 53.75 |
+| wrong_category_same_destination | 0 | 0.0 |
+| wrong_destination | 0 | 0.0 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
-| auto_routed_error_rate | [0.0357, 0.3333] |
-| cost_per_100 | [40.0, 225.0] |
-| review_rate | [0.1125, 0.4625] |
-| urgent_recall | [0.5, 1.0] |
+| auto_routed_error_rate | [0.0, 0.3333] |
+| cost_per_100 | [45.0, 90.0] |
+| review_rate | [0.375, 0.7] |
+| urgent_recall | [1.0, 1.0] |
 
 ## B / v2
 
@@ -377,12 +361,12 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Urgency recall | 0.75 |
-| Urgency precision | 0.8571 |
-| Urgency count fn | 6 |
-| Urgency count fp | 3 |
-| Urgency count tn | 53 |
-| Urgency count tp | 18 |
+| Urgency recall | 1.0 |
+| Urgency precision | 0.3529 |
+| Urgency count fn | 0 |
+| Urgency count fp | 44 |
+| Urgency count tn | 12 |
+| Urgency count tp | 24 |
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
@@ -393,8 +377,6 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Report | Scenario | Text | Urgent probability | Review Triggers |
 | --- | --- | --- | --- | --- |
-| R-0234 | S-001 | NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the | 0.1 | cargo_missing, multiple_issues |
-| R-0286 | S-001 | Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p | 0.08 | cargo_missing, multiple_issues |
 
 ### Latency and cost
 
@@ -404,24 +386,24 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | Latency n | 80 |
 | Latency p50 | 222.4682 |
 | Latency p95 | 277.0583 |
-| Cost per_100 | 315.0 |
-| Cost total | 252 |
+| Cost per_100 | 66.25 |
+| Cost total | 53 |
 | API USD / 1,000 | 0.0996 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
-| false_alarm | 4 | 5.0 |
-| missed_urgent | 200 | 250.0 |
-| review | 22 | 27.5 |
-| wrong_category_same_destination | 1 | 1.25 |
-| wrong_destination | 25 | 31.25 |
+| false_alarm | 10 | 12.5 |
+| missed_urgent | 0 | 0.0 |
+| review | 43 | 53.75 |
+| wrong_category_same_destination | 0 | 0.0 |
+| wrong_destination | 0 | 0.0 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
-| auto_routed_error_rate | [0.0357, 0.3333] |
-| cost_per_100 | [40.0, 826.25] |
-| review_rate | [0.1125, 0.4625] |
-| urgent_recall | [0.5, 1.0] |
+| auto_routed_error_rate | [0.0, 0.3333] |
+| cost_per_100 | [45.0, 90.0] |
+| review_rate | [0.375, 0.7] |
+| urgent_recall | [1.0, 1.0] |
 
 ## C / v1
 
@@ -477,12 +459,12 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Urgency recall | 0.625 |
-| Urgency precision | 1.0 |
-| Urgency count fn | 9 |
-| Urgency count fp | 0 |
-| Urgency count tn | 56 |
-| Urgency count tp | 15 |
+| Urgency recall | 1.0 |
+| Urgency precision | 0.3478 |
+| Urgency count fn | 0 |
+| Urgency count fp | 45 |
+| Urgency count tn | 11 |
+| Urgency count tp | 24 |
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
@@ -493,13 +475,6 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Report | Scenario | Text | Urgent probability | Review Triggers |
 | --- | --- | --- | --- | --- |
-| R-0019 | S-061 | Driver's report, as received: It's UN1263 paint, class 3 flammable, in 25-litre steel drums. They're upright, no leak seen and no smell. Customer in Bradford ha | 0.05 |  |
-| R-0099 | S-061 | Hello, passing on the driver's account below.  Customer in Bradford has refused damaged Pennine Paints drums: three dented, with a lid cracked on one. All uprig | 0.05 |  |
-| R-0204 | S-061 | At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid. It's UN1263 paint, class 3 flammable, in 25-lit | 0.05 |  |
-| R-0234 | S-001 | NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the | 0.05 |  |
-| R-0286 | S-001 | Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p | 0.05 |  |
-| R-0297 | S-052 | Caller: NV20 RXC has rear-ended a car in slow traffic on the A34 near Oxford. Desk: Right, go on. Caller: The car driver says their neck hurts. Police are comin | 0.05 |  |
-| R-0315 | S-061 | Caller: At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid. Desk: Right, go on. Caller: The 25-litr | 0.05 |  |
 
 ### Latency and cost
 
@@ -509,24 +484,24 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | Latency n | 80 |
 | Latency p50 | 214.7498 |
 | Latency p95 | 248.5584 |
-| Cost per_100 | 236.25 |
-| Cost total | 189 |
+| Cost per_100 | 80.0 |
+| Cost total | 64 |
 | API USD / 1,000 | 0.0558 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
 | false_alarm | 0 | 0.0 |
-| missed_urgent | 140 | 175.0 |
-| review | 13 | 16.25 |
-| wrong_category_same_destination | 1 | 1.25 |
-| wrong_destination | 35 | 43.75 |
+| missed_urgent | 0 | 0.0 |
+| review | 64 | 80.0 |
+| wrong_category_same_destination | 0 | 0.0 |
+| wrong_destination | 0 | 0.0 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
-| auto_routed_error_rate | [0.0571, 0.4] |
-| cost_per_100 | [46.25, 495.0] |
-| review_rate | [0.0375, 0.325] |
-| urgent_recall | [0.3125, 0.9167] |
+| auto_routed_error_rate | [0.0, 0.0] |
+| cost_per_100 | [63.75, 93.75] |
+| review_rate | [0.6375, 0.9375] |
+| urgent_recall | [1.0, 1.0] |
 
 ## C / v2
 
@@ -582,12 +557,12 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Measure | Value |
 | --- | --- |
-| Urgency recall | 0.625 |
-| Urgency precision | 1.0 |
-| Urgency count fn | 9 |
-| Urgency count fp | 0 |
-| Urgency count tn | 56 |
-| Urgency count tp | 15 |
+| Urgency recall | 1.0 |
+| Urgency precision | 0.3478 |
+| Urgency count fn | 0 |
+| Urgency count fp | 45 |
+| Urgency count tn | 11 |
+| Urgency count tp | 24 |
 | Reliability error_count | 0 |
 | Reliability invalid_output_count | 0 |
 | Reliability mean_attempts | 1.0 |
@@ -598,13 +573,6 @@ Confusion matrix: rows are Labels; columns are Predictions.
 
 | Report | Scenario | Text | Urgent probability | Review Triggers |
 | --- | --- | --- | --- | --- |
-| R-0019 | S-061 | Driver's report, as received: It's UN1263 paint, class 3 flammable, in 25-litre steel drums. They're upright, no leak seen and no smell. Customer in Bradford ha | 0.05 |  |
-| R-0099 | S-061 | Hello, passing on the driver's account below.  Customer in Bradford has refused damaged Pennine Paints drums: three dented, with a lid cracked on one. All uprig | 0.05 |  |
-| R-0204 | S-061 | At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid. It's UN1263 paint, class 3 flammable, in 25-lit | 0.05 |  |
-| R-0234 | S-001 | NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the | 0.05 |  |
-| R-0286 | S-001 | Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p | 0.05 |  |
-| R-0297 | S-052 | Caller: NV20 RXC has rear-ended a car in slow traffic on the A34 near Oxford. Desk: Right, go on. Caller: The car driver says their neck hurts. Police are comin | 0.05 |  |
-| R-0315 | S-061 | Caller: At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid. Desk: Right, go on. Caller: The 25-litr | 0.05 |  |
 
 ### Latency and cost
 
@@ -614,21 +582,21 @@ Confusion matrix: rows are Labels; columns are Predictions.
 | Latency n | 80 |
 | Latency p50 | 214.7498 |
 | Latency p95 | 248.5584 |
-| Cost per_100 | 936.25 |
-| Cost total | 749 |
+| Cost per_100 | 80.0 |
+| Cost total | 64 |
 | API USD / 1,000 | 0.0558 |
 
 | Cost term | Total | Per 100 |
 | --- | --- | --- |
 | false_alarm | 0 | 0.0 |
-| missed_urgent | 700 | 875.0 |
-| review | 13 | 16.25 |
-| wrong_category_same_destination | 1 | 1.25 |
-| wrong_destination | 35 | 43.75 |
+| missed_urgent | 0 | 0.0 |
+| review | 64 | 80.0 |
+| wrong_category_same_destination | 0 | 0.0 |
+| wrong_destination | 0 | 0.0 |
 
 | Bootstrap measure | 95% interval |
 | --- | --- |
-| auto_routed_error_rate | [0.0571, 0.4] |
-| cost_per_100 | [46.25, 2176.25] |
-| review_rate | [0.0375, 0.325] |
-| urgent_recall | [0.3125, 0.9167] |
+| auto_routed_error_rate | [0.0, 0.0] |
+| cost_per_100 | [63.75, 93.75] |
+| review_rate | [0.6375, 0.9375] |
+| urgent_recall | [1.0, 1.0] |

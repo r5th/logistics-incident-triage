@@ -2,3 +2,4 @@
 results/** text eol=lf
 data/** text eol=lf
 web/static/data/** text eol=lf
+policies/** text eol=lf

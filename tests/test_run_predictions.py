@@ -24,6 +24,12 @@ def workspace(tmp_path):
     shutil.copy(FIXTURES / "reports.jsonl", tmp_path / "data" / "reports.jsonl")
     shutil.copy(FIXTURES / "scenarios.jsonl", tmp_path / "data" / "scenarios.jsonl")
     shutil.copytree("policies", tmp_path / "policies")
+    for v in ("v1", "v2"):  # the repo's Policies may be frozen; tests start unfrozen
+        path = tmp_path / "policies" / f"{v}.json"
+        raw = json.loads(path.read_text(encoding="utf-8"))
+        raw["frozen"] = False
+        raw.pop("frozen_on", None)
+        path.write_text(json.dumps(raw), encoding="utf-8")
     return tmp_path
 
 

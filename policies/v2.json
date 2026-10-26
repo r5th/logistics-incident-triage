@@ -1,46 +1,54 @@
 {
-  "version": "v2",
-  "frozen": false,
-  "note": "Placeholder thresholds. Choose on validation to minimise this Policy's total cost, then set frozen to true.",
   "costs": {
-    "missed_urgent": 100,
-    "wrong_destination": 5,
     "false_alarm": 2,
+    "missed_urgent": 100,
+    "review": 1,
     "wrong_category_same_destination": 1,
-    "review": 1
-  },
-  "thresholds": {
-    "A": {
-      "urgent_threshold": 0.5,
-      "review_band": [
-        0.2,
-        0.8
-      ],
-      "min_category_prob": 0.5,
-      "min_destination_prob": 0.5
-    },
-    "B": {
-      "urgent_threshold": 0.5,
-      "review_band": [
-        0.2,
-        0.8
-      ],
-      "min_category_prob": 0.5,
-      "min_destination_prob": 0.5
-    },
-    "C": {
-      "urgent_threshold": 0.5,
-      "review_band": [
-        0.2,
-        0.8
-      ],
-      "min_category_prob": 0.5,
-      "min_destination_prob": 0.5
-    }
+    "wrong_destination": 5
   },
   "forcing_triggers": [
     "invalid_output",
     "no_rule_matched",
     "conflicting_statements"
-  ]
+  ],
+  "frozen": true,
+  "frozen_on": {
+    "predictions_sha256": {
+      "results/predictions/A_validation.jsonl": "8d55285621017d65603bf4f08fb01e1747bc62054d199770afa66979d81f6049",
+      "results/predictions/B_validation.jsonl": "e3409048af387ab0b8b6fb8e881e7a7c7fb4703c0b4b79613c4d35b88b20cbd8",
+      "results/predictions/C_validation.jsonl": "1c2c5dc5843e2dd6215132ed84c51006ed78cc047ba89e13a5d761eb8e0ffb61"
+    },
+    "split": "validation"
+  },
+  "note": "Placeholder thresholds. Choose on validation to minimise this Policy's total cost, then set frozen to true.",
+  "thresholds": {
+    "A": {
+      "min_category_prob": 0,
+      "min_destination_prob": 0,
+      "review_band": [
+        0.05,
+        0.95
+      ],
+      "urgent_threshold": 0.05
+    },
+    "B": {
+      "min_category_prob": 0,
+      "min_destination_prob": 0,
+      "review_band": [
+        0.05,
+        0.3
+      ],
+      "urgent_threshold": 0.05
+    },
+    "C": {
+      "min_category_prob": 0,
+      "min_destination_prob": 0,
+      "review_band": [
+        0.05,
+        0.95
+      ],
+      "urgent_threshold": 0.05
+    }
+  },
+  "version": "v2"
 }

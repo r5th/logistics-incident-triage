@@ -4,20 +4,20 @@
       "api_cost_per_1000_usd": 0.0,
       "bootstrap_95_ci": {
         "auto_routed_error_rate": [
-          0.1026,
-          0.5
+          0.0,
+          0.0
         ],
         "cost_per_100": [
-          81.25,
-          515.0
+          100.0,
+          100.0
         ],
         "review_rate": [
-          0.125,
-          0.5
+          1.0,
+          1.0
         ],
         "urgent_recall": [
-          0.35,
-          0.9167
+          1.0,
+          1.0
         ]
       },
       "category": {
@@ -107,30 +107,30 @@
         }
       },
       "cost": {
-        "per_100": 268.75,
+        "per_100": 100.0,
         "terms": {
           "false_alarm": {
             "per_100": 0.0,
             "total": 0
           },
           "missed_urgent": {
-            "per_100": 175.0,
-            "total": 140
+            "per_100": 0.0,
+            "total": 0
           },
           "review": {
-            "per_100": 31.25,
-            "total": 25
+            "per_100": 100.0,
+            "total": 80
           },
           "wrong_category_same_destination": {
             "per_100": 0.0,
             "total": 0
           },
           "wrong_destination": {
-            "per_100": 62.5,
-            "total": 50
+            "per_100": 0.0,
+            "total": 0
           }
         },
-        "total": 215
+        "total": 80
       },
       "destination": {
         "accuracy": 0.7125,
@@ -231,61 +231,11 @@
         "mean_attempts": 1.0
       },
       "routing": {
-        "auto_route_coverage": 0.6875,
-        "auto_routed_error_rate": 0.2909,
-        "missed_urgent": [
-          {
-            "report_id": "R-0019",
-            "scenario_id": "S-061",
-            "text": "Driver's report, as received: It's UN1263 paint, class 3 flammable, in 25-litre steel drums. They're upright, no leak seen and no smell. Customer in Bradford ha",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0099",
-            "scenario_id": "S-061",
-            "text": "Hello, passing on the driver's account below.\n\nCustomer in Bradford has refused damaged Pennine Paints drums: three dented, with a lid cracked on one. All uprig",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0204",
-            "scenario_id": "S-061",
-            "text": "At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid. It's UN1263 paint, class 3 flammable, in 25-lit",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0234",
-            "scenario_id": "S-001",
-            "text": "NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0286",
-            "scenario_id": "S-001",
-            "text": "Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0297",
-            "scenario_id": "S-052",
-            "text": "Caller: NV20 RXC has rear-ended a car in slow traffic on the A34 near Oxford.\nDesk: Right, go on.\nCaller: The car driver says their neck hurts. Police are comin",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0315",
-            "scenario_id": "S-061",
-            "text": "Caller: At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid.\nDesk: Right, go on.\nCaller: The 25-litr",
-            "triggers": [],
-            "urgent_prob": 0.05
-          }
-        ],
-        "missed_urgent_count": 7,
-        "review_rate": 0.3125
+        "auto_route_coverage": 0.0,
+        "auto_routed_error_rate": 0.0,
+        "missed_urgent": [],
+        "missed_urgent_count": 0,
+        "review_rate": 1.0
       },
       "tokens": {
         "mean_input": 0.0,
@@ -293,33 +243,33 @@
       },
       "urgency": {
         "counts": {
-          "fn": 8,
-          "fp": 0,
-          "tn": 56,
-          "tp": 16
+          "fn": 0,
+          "fp": 56,
+          "tn": 0,
+          "tp": 24
         },
-        "precision": 1.0,
-        "recall": 0.6667
+        "precision": 0.3,
+        "recall": 1.0
       }
     },
     "v2": {
       "api_cost_per_1000_usd": 0.0,
       "bootstrap_95_ci": {
         "auto_routed_error_rate": [
-          0.1026,
-          0.5
+          0.0,
+          0.0
         ],
         "cost_per_100": [
-          83.75,
-          2200.0
+          100.0,
+          100.0
         ],
         "review_rate": [
-          0.125,
-          0.5
+          1.0,
+          1.0
         ],
         "urgent_recall": [
-          0.35,
-          0.9167
+          1.0,
+          1.0
         ]
       },
       "category": {
@@ -409,30 +359,30 @@
         }
       },
       "cost": {
-        "per_100": 968.75,
+        "per_100": 100.0,
         "terms": {
           "false_alarm": {
             "per_100": 0.0,
             "total": 0
           },
           "missed_urgent": {
-            "per_100": 875.0,
-            "total": 700
+            "per_100": 0.0,
+            "total": 0
           },
           "review": {
-            "per_100": 31.25,
-            "total": 25
+            "per_100": 100.0,
+            "total": 80
           },
           "wrong_category_same_destination": {
             "per_100": 0.0,
             "total": 0
           },
           "wrong_destination": {
-            "per_100": 62.5,
-            "total": 50
+            "per_100": 0.0,
+            "total": 0
           }
         },
-        "total": 775
+        "total": 80
       },
       "destination": {
         "accuracy": 0.7125,
@@ -533,61 +483,11 @@
         "mean_attempts": 1.0
       },
       "routing": {
-        "auto_route_coverage": 0.6875,
-        "auto_routed_error_rate": 0.2909,
-        "missed_urgent": [
-          {
-            "report_id": "R-0019",
-            "scenario_id": "S-061",
-            "text": "Driver's report, as received: It's UN1263 paint, class 3 flammable, in 25-litre steel drums. They're upright, no leak seen and no smell. Customer in Bradford ha",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0099",
-            "scenario_id": "S-061",
-            "text": "Hello, passing on the driver's account below.\n\nCustomer in Bradford has refused damaged Pennine Paints drums: three dented, with a lid cracked on one. All uprig",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0204",
-            "scenario_id": "S-061",
-            "text": "At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid. It's UN1263 paint, class 3 flammable, in 25-lit",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0234",
-            "scenario_id": "S-001",
-            "text": "NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0286",
-            "scenario_id": "S-001",
-            "text": "Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0297",
-            "scenario_id": "S-052",
-            "text": "Caller: NV20 RXC has rear-ended a car in slow traffic on the A34 near Oxford.\nDesk: Right, go on.\nCaller: The car driver says their neck hurts. Police are comin",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0315",
-            "scenario_id": "S-061",
-            "text": "Caller: At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid.\nDesk: Right, go on.\nCaller: The 25-litr",
-            "triggers": [],
-            "urgent_prob": 0.05
-          }
-        ],
-        "missed_urgent_count": 7,
-        "review_rate": 0.3125
+        "auto_route_coverage": 0.0,
+        "auto_routed_error_rate": 0.0,
+        "missed_urgent": [],
+        "missed_urgent_count": 0,
+        "review_rate": 1.0
       },
       "tokens": {
         "mean_input": 0.0,
@@ -595,13 +495,13 @@
       },
       "urgency": {
         "counts": {
-          "fn": 8,
-          "fp": 0,
-          "tn": 56,
-          "tp": 16
+          "fn": 0,
+          "fp": 56,
+          "tn": 0,
+          "tp": 24
         },
-        "precision": 1.0,
-        "recall": 0.6667
+        "precision": 0.3,
+        "recall": 1.0
       }
     }
   },
@@ -610,19 +510,19 @@
       "api_cost_per_1000_usd": 0.0996,
       "bootstrap_95_ci": {
         "auto_routed_error_rate": [
-          0.0357,
+          0.0,
           0.3333
         ],
         "cost_per_100": [
-          40.0,
-          225.0
+          45.0,
+          90.0
         ],
         "review_rate": [
-          0.1125,
-          0.4625
+          0.375,
+          0.7
         ],
         "urgent_recall": [
-          0.5,
+          1.0,
           1.0
         ]
       },
@@ -713,30 +613,30 @@
         }
       },
       "cost": {
-        "per_100": 115.0,
+        "per_100": 66.25,
         "terms": {
           "false_alarm": {
-            "per_100": 5.0,
-            "total": 4
+            "per_100": 12.5,
+            "total": 10
           },
           "missed_urgent": {
-            "per_100": 50.0,
-            "total": 40
+            "per_100": 0.0,
+            "total": 0
           },
           "review": {
-            "per_100": 27.5,
-            "total": 22
+            "per_100": 53.75,
+            "total": 43
           },
           "wrong_category_same_destination": {
-            "per_100": 1.25,
-            "total": 1
+            "per_100": 0.0,
+            "total": 0
           },
           "wrong_destination": {
-            "per_100": 31.25,
-            "total": 25
+            "per_100": 0.0,
+            "total": 0
           }
         },
-        "total": 92
+        "total": 53
       },
       "destination": {
         "accuracy": 0.9375,
@@ -837,32 +737,11 @@
         "mean_attempts": 1.0
       },
       "routing": {
-        "auto_route_coverage": 0.725,
-        "auto_routed_error_rate": 0.1724,
-        "missed_urgent": [
-          {
-            "report_id": "R-0234",
-            "scenario_id": "S-001",
-            "text": "NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the",
-            "triggers": [
-              "cargo_missing",
-              "multiple_issues"
-            ],
-            "urgent_prob": 0.1
-          },
-          {
-            "report_id": "R-0286",
-            "scenario_id": "S-001",
-            "text": "Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p",
-            "triggers": [
-              "cargo_missing",
-              "multiple_issues"
-            ],
-            "urgent_prob": 0.08
-          }
-        ],
-        "missed_urgent_count": 2,
-        "review_rate": 0.275
+        "auto_route_coverage": 0.4625,
+        "auto_routed_error_rate": 0.1351,
+        "missed_urgent": [],
+        "missed_urgent_count": 0,
+        "review_rate": 0.5375
       },
       "tokens": {
         "mean_input": 2370.4125,
@@ -870,32 +749,32 @@
       },
       "urgency": {
         "counts": {
-          "fn": 6,
-          "fp": 3,
-          "tn": 53,
-          "tp": 18
+          "fn": 0,
+          "fp": 44,
+          "tn": 12,
+          "tp": 24
         },
-        "precision": 0.8571,
-        "recall": 0.75
+        "precision": 0.3529,
+        "recall": 1.0
       }
     },
     "v2": {
       "api_cost_per_1000_usd": 0.0996,
       "bootstrap_95_ci": {
         "auto_routed_error_rate": [
-          0.0357,
+          0.0,
           0.3333
         ],
         "cost_per_100": [
-          40.0,
-          826.25
+          45.0,
+          90.0
         ],
         "review_rate": [
-          0.1125,
-          0.4625
+          0.375,
+          0.7
         ],
         "urgent_recall": [
-          0.5,
+          1.0,
           1.0
         ]
       },
@@ -986,30 +865,30 @@
         }
       },
       "cost": {
-        "per_100": 315.0,
+        "per_100": 66.25,
         "terms": {
           "false_alarm": {
-            "per_100": 5.0,
-            "total": 4
+            "per_100": 12.5,
+            "total": 10
           },
           "missed_urgent": {
-            "per_100": 250.0,
-            "total": 200
+            "per_100": 0.0,
+            "total": 0
           },
           "review": {
-            "per_100": 27.5,
-            "total": 22
+            "per_100": 53.75,
+            "total": 43
           },
           "wrong_category_same_destination": {
-            "per_100": 1.25,
-            "total": 1
+            "per_100": 0.0,
+            "total": 0
           },
           "wrong_destination": {
-            "per_100": 31.25,
-            "total": 25
+            "per_100": 0.0,
+            "total": 0
           }
         },
-        "total": 252
+        "total": 53
       },
       "destination": {
         "accuracy": 0.9375,
@@ -1110,32 +989,11 @@
         "mean_attempts": 1.0
       },
       "routing": {
-        "auto_route_coverage": 0.725,
-        "auto_routed_error_rate": 0.1724,
-        "missed_urgent": [
-          {
-            "report_id": "R-0234",
-            "scenario_id": "S-001",
-            "text": "NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the",
-            "triggers": [
-              "cargo_missing",
-              "multiple_issues"
-            ],
-            "urgent_prob": 0.1
-          },
-          {
-            "report_id": "R-0286",
-            "scenario_id": "S-001",
-            "text": "Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p",
-            "triggers": [
-              "cargo_missing",
-              "multiple_issues"
-            ],
-            "urgent_prob": 0.08
-          }
-        ],
-        "missed_urgent_count": 2,
-        "review_rate": 0.275
+        "auto_route_coverage": 0.4625,
+        "auto_routed_error_rate": 0.1351,
+        "missed_urgent": [],
+        "missed_urgent_count": 0,
+        "review_rate": 0.5375
       },
       "tokens": {
         "mean_input": 2370.4125,
@@ -1143,13 +1001,13 @@
       },
       "urgency": {
         "counts": {
-          "fn": 6,
-          "fp": 3,
-          "tn": 53,
-          "tp": 18
+          "fn": 0,
+          "fp": 44,
+          "tn": 12,
+          "tp": 24
         },
-        "precision": 0.8571,
-        "recall": 0.75
+        "precision": 0.3529,
+        "recall": 1.0
       }
     }
   },
@@ -1158,20 +1016,20 @@
       "api_cost_per_1000_usd": 0.0558,
       "bootstrap_95_ci": {
         "auto_routed_error_rate": [
-          0.0571,
-          0.4
+          0.0,
+          0.0
         ],
         "cost_per_100": [
-          46.25,
-          495.0
+          63.75,
+          93.75
         ],
         "review_rate": [
-          0.0375,
-          0.325
+          0.6375,
+          0.9375
         ],
         "urgent_recall": [
-          0.3125,
-          0.9167
+          1.0,
+          1.0
         ]
       },
       "category": {
@@ -1261,30 +1119,30 @@
         }
       },
       "cost": {
-        "per_100": 236.25,
+        "per_100": 80.0,
         "terms": {
           "false_alarm": {
             "per_100": 0.0,
             "total": 0
           },
           "missed_urgent": {
-            "per_100": 175.0,
-            "total": 140
+            "per_100": 0.0,
+            "total": 0
           },
           "review": {
-            "per_100": 16.25,
-            "total": 13
+            "per_100": 80.0,
+            "total": 64
           },
           "wrong_category_same_destination": {
-            "per_100": 1.25,
-            "total": 1
+            "per_100": 0.0,
+            "total": 0
           },
           "wrong_destination": {
-            "per_100": 43.75,
-            "total": 35
+            "per_100": 0.0,
+            "total": 0
           }
         },
-        "total": 189
+        "total": 64
       },
       "destination": {
         "accuracy": 0.9125,
@@ -1385,61 +1243,11 @@
         "mean_attempts": 1.0
       },
       "routing": {
-        "auto_route_coverage": 0.8375,
-        "auto_routed_error_rate": 0.209,
-        "missed_urgent": [
-          {
-            "report_id": "R-0019",
-            "scenario_id": "S-061",
-            "text": "Driver's report, as received: It's UN1263 paint, class 3 flammable, in 25-litre steel drums. They're upright, no leak seen and no smell. Customer in Bradford ha",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0099",
-            "scenario_id": "S-061",
-            "text": "Hello, passing on the driver's account below.\n\nCustomer in Bradford has refused damaged Pennine Paints drums: three dented, with a lid cracked on one. All uprig",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0204",
-            "scenario_id": "S-061",
-            "text": "At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid. It's UN1263 paint, class 3 flammable, in 25-lit",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0234",
-            "scenario_id": "S-001",
-            "text": "NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0286",
-            "scenario_id": "S-001",
-            "text": "Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0297",
-            "scenario_id": "S-052",
-            "text": "Caller: NV20 RXC has rear-ended a car in slow traffic on the A34 near Oxford.\nDesk: Right, go on.\nCaller: The car driver says their neck hurts. Police are comin",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0315",
-            "scenario_id": "S-061",
-            "text": "Caller: At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid.\nDesk: Right, go on.\nCaller: The 25-litr",
-            "triggers": [],
-            "urgent_prob": 0.05
-          }
-        ],
-        "missed_urgent_count": 7,
-        "review_rate": 0.1625
+        "auto_route_coverage": 0.2,
+        "auto_routed_error_rate": 0.0,
+        "missed_urgent": [],
+        "missed_urgent_count": 0,
+        "review_rate": 0.8
       },
       "tokens": {
         "mean_input": 1327.6,
@@ -1447,33 +1255,33 @@
       },
       "urgency": {
         "counts": {
-          "fn": 9,
-          "fp": 0,
-          "tn": 56,
-          "tp": 15
+          "fn": 0,
+          "fp": 45,
+          "tn": 11,
+          "tp": 24
         },
-        "precision": 1.0,
-        "recall": 0.625
+        "precision": 0.3478,
+        "recall": 1.0
       }
     },
     "v2": {
       "api_cost_per_1000_usd": 0.0558,
       "bootstrap_95_ci": {
         "auto_routed_error_rate": [
-          0.0571,
-          0.4
+          0.0,
+          0.0
         ],
         "cost_per_100": [
-          46.25,
-          2176.25
+          63.75,
+          93.75
         ],
         "review_rate": [
-          0.0375,
-          0.325
+          0.6375,
+          0.9375
         ],
         "urgent_recall": [
-          0.3125,
-          0.9167
+          1.0,
+          1.0
         ]
       },
       "category": {
@@ -1563,30 +1371,30 @@
         }
       },
       "cost": {
-        "per_100": 936.25,
+        "per_100": 80.0,
         "terms": {
           "false_alarm": {
             "per_100": 0.0,
             "total": 0
           },
           "missed_urgent": {
-            "per_100": 875.0,
-            "total": 700
+            "per_100": 0.0,
+            "total": 0
           },
           "review": {
-            "per_100": 16.25,
-            "total": 13
+            "per_100": 80.0,
+            "total": 64
           },
           "wrong_category_same_destination": {
-            "per_100": 1.25,
-            "total": 1
+            "per_100": 0.0,
+            "total": 0
           },
           "wrong_destination": {
-            "per_100": 43.75,
-            "total": 35
+            "per_100": 0.0,
+            "total": 0
           }
         },
-        "total": 749
+        "total": 64
       },
       "destination": {
         "accuracy": 0.9125,
@@ -1687,61 +1495,11 @@
         "mean_attempts": 1.0
       },
       "routing": {
-        "auto_route_coverage": 0.8375,
-        "auto_routed_error_rate": 0.209,
-        "missed_urgent": [
-          {
-            "report_id": "R-0019",
-            "scenario_id": "S-061",
-            "text": "Driver's report, as received: It's UN1263 paint, class 3 flammable, in 25-litre steel drums. They're upright, no leak seen and no smell. Customer in Bradford ha",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0099",
-            "scenario_id": "S-061",
-            "text": "Hello, passing on the driver's account below.\n\nCustomer in Bradford has refused damaged Pennine Paints drums: three dented, with a lid cracked on one. All uprig",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0204",
-            "scenario_id": "S-061",
-            "text": "At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid. It's UN1263 paint, class 3 flammable, in 25-lit",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0234",
-            "scenario_id": "S-001",
-            "text": "NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0286",
-            "scenario_id": "S-001",
-            "text": "Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0297",
-            "scenario_id": "S-052",
-            "text": "Caller: NV20 RXC has rear-ended a car in slow traffic on the A34 near Oxford.\nDesk: Right, go on.\nCaller: The car driver says their neck hurts. Police are comin",
-            "triggers": [],
-            "urgent_prob": 0.05
-          },
-          {
-            "report_id": "R-0315",
-            "scenario_id": "S-061",
-            "text": "Caller: At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid.\nDesk: Right, go on.\nCaller: The 25-litr",
-            "triggers": [],
-            "urgent_prob": 0.05
-          }
-        ],
-        "missed_urgent_count": 7,
-        "review_rate": 0.1625
+        "auto_route_coverage": 0.2,
+        "auto_routed_error_rate": 0.0,
+        "missed_urgent": [],
+        "missed_urgent_count": 0,
+        "review_rate": 0.8
       },
       "tokens": {
         "mean_input": 1327.6,
@@ -1749,13 +1507,13 @@
       },
       "urgency": {
         "counts": {
-          "fn": 9,
-          "fp": 0,
-          "tn": 56,
-          "tp": 15
+          "fn": 0,
+          "fp": 45,
+          "tn": 11,
+          "tp": 24
         },
-        "precision": 1.0,
-        "recall": 0.625
+        "precision": 0.3478,
+        "recall": 1.0
       }
     }
   }

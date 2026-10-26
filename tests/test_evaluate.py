@@ -27,6 +27,8 @@ def workspace(tmp_path):
         raw = json.loads(path.read_text(encoding='utf-8'))
         raw['thresholds'] = {a: {'urgent_threshold': .5, 'review_band': [0, 0],
                                 'min_category_prob': 0, 'min_destination_prob': 0} for a in 'ABC'}
+        raw['frozen'] = False  # the repo's Policies may be frozen; tests start unfrozen
+        raw.pop('frozen_on', None)
         evaluate.write_json(path, raw)
     return tmp_path
 

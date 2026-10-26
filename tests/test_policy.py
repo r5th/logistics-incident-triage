@@ -49,7 +49,9 @@ def test_load_policy_reads_frozen_flag(tmp_path):
     path = tmp_path / "p.json"
     path.write_text(json.dumps(raw), encoding="utf-8")
     assert load_policy(path).frozen is True
-    assert load_policy("policies/v1.json").frozen is False
+    raw["frozen"] = False
+    path.write_text(json.dumps(raw), encoding="utf-8")
+    assert load_policy(path).frozen is False
 
 
 @pytest.mark.parametrize("p, expected", [(0.49, "routine"), (0.5, "urgent"), (0.95, "urgent")])
