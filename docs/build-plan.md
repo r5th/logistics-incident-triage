@@ -146,3 +146,35 @@ Next, in order:
 8. ~20:00 user think-aloud on the demo; log findings; fix ≤2. ~22:00 go public on the user's
    word; rehearsal.
 9. Before handing back: decision-log audit + independent review + Attention section.
+
+## Status at handoff 2 (2026-10-27 ~02:55 SGT)
+
+Done this run (rows from `2026-10-26T17:21:12Z` in `decisions.tsv`):
+- Step 1: A retuned on build errors only, a-v2 (`08f6c44`). Build A recall 0.98, but validation
+  barely moved (cat 0.69, recall 0.67): the rules fit build phrasing. Report it, don't hide it.
+- Step 2: v1/v2 frozen at the cost-minimising validation thresholds (`39f5f17`). They review
+  heavily (A 100%, B 54%, C 80% on validation) and set urgent threshold 0.05, so nearly
+  everything is predicted urgent (A 80/80, B 68/80). Costs and the minimise-cost rule were not
+  changed (plan decision). Urgent precision, predicted-urgent rate and false alarms are now
+  reported beside recall (`dcb2cac`). The 25% review target is missed on validation.
+- Step 3: Sol review (task `sol-eval-review-handoff2-v1`); fixed freeze-provenance check, no
+  test overwrite for any approach, resumable B test run (`B_test.partial.jsonl`), pass-2
+  protocol reporting in `agreement.py` (`a288cca`). Metrics/costs/bands reported clean.
+- Step 4: real data exported; labelling tool served as a detached `vite preview` of `web/build`
+  on 0.0.0.0:5173: http://desktop-fq424mh.tailb7dc99.ts.net:5173/label (or localhost).
+  Restart if the PC reboots: in `web/`, `npx vite preview --host 0.0.0.0 --port 5173 --strictPort`.
+  Rebuilding `web/build` changes the live labelling app: only do it if `/label` stays working,
+  and never change `labelling.json` (deterministic from its seed) or the label route's storage key.
+- Step 6 (pre-test parts): impeccable audit + polish (`2ee22cb`), DESIGN.md (`8e54a5f`), CI
+  drift workflow + README skeleton + attribution (`7f2cdfe`; Node job untested locally).
+
+Next, in order:
+1. Wait for the user's `data/labels/blind_test.json` (pass 1; pass 2 >= 4 h later; may arrive in
+   one file at the end). Validate it with `agreement.py` before the test run.
+2. Step 5 of handoff 1, unchanged: the one test run for A, then B (live, ~120 calls, ~US$0.01),
+   then C; evaluate final + seeded; agreement; adjudication by the user; `tune.py --curve test`.
+3. Steps 6-9 of handoff 1 not yet done: export test data to web and rebuild; fill README
+   RESULTS placeholder; `docs/business-summary.md` (one page; lead with the heavy-review and
+   all-urgent finding and what a 25% review budget would cost, from the curve); walkthrough
+   script; ask the user before 22:00 about going public for GitHub Pages; think-aloud ~20:00;
+   final decision-log audit + independent review + Attention section.
