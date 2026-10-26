@@ -16,8 +16,12 @@ _Avoid_: Template, seed (as a data unit)
 The reference answer for an Incident Report: its Category, Urgency and Destination.
 _Avoid_: Ground truth, tag
 
+**Seeded Label**:
+The Label a Scenario was written to have, fixed before any report text was generated.
+_Avoid_: Intended label, generator label
+
 **Blind Label**:
-A Label given by a human who could see neither the seeded Label nor any prediction.
+A Label given by a human who could see neither the Seeded Label nor any prediction; on the test set it is the Label.
 _Avoid_: Review, relabel
 
 ## Triage decisions
