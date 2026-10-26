@@ -17,3 +17,8 @@ packages = ["src/triage"]
 
 [tool.ruff]
 line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["live: calls the real TypeSafe API (skipped by default; run with -m live)"]
+addopts = "-m 'not live'"

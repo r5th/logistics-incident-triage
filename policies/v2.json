@@ -1,0 +1,19 @@
+{
+  "version": "v2",
+  "frozen": false,
+  "note": "Placeholder thresholds. Choose on validation to minimise this Policy's total cost, then set frozen to true.",
+  "costs": {
+    "missed_urgent": 100,
+    "wrong_destination": 5,
+    "false_alarm": 2,
+    "wrong_category_same_destination": 1,
+    "review": 1
+  },
+  "thresholds": {
+    "urgent_threshold": 0.5,
+    "review_band": [0.2, 0.8],
+    "min_category_prob": 0.5,
+    "min_destination_prob": 0.5
+  },
+  "forcing_triggers": ["invalid_output", "no_rule_matched", "conflicting_statements"]
+}

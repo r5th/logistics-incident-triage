@@ -15,6 +15,7 @@ import json
 import re
 import sys
 from collections import Counter
+from itertools import pairwise
 from pathlib import Path
 
 CATEGORIES = ["vehicle_breakdown", "delivery_delay", "shipment_damage",
@@ -183,7 +184,7 @@ def check_reports(rows, scenarios, c):
         c.check(per_scenario[sid] == 4, f"{sid}: {per_scenario[sid]} reports, want 4")
         c.check(len(roles.get(sid, ())) >= 2, f"{sid}: all reports share one author_role")
     in_order = [r.get("scenario_id") for _, r in sorted(rows, key=lambda x: x[1].get("report_id", ""))]
-    runs = sum(a == b for a, b in zip(in_order, in_order[1:]))
+    runs = sum(a == b for a, b in pairwise(in_order))
     c.check(runs < 40, f"report_ids look unshuffled ({runs} adjacent same-scenario pairs)")
     print()
     print(f"Reports: {len(rows)} lines, {len(per_scenario)} scenarios, "
