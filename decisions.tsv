@@ -13,3 +13,8 @@ ts	phase	decision	why	evidence	result
 2026-10-26T16:45:38Z	engine	C charges A+B latency and B tokens when it hands over	B would only run after A in a real cascade	src/triage/cascade.py	done
 2026-10-26T16:45:38Z	engine	placeholder Policy thresholds: urgent 0.5, band [0.2,0.8], min probs 0.5, forcing invalid_output/no_rule_matched/conflicting_statements; frozen false	to be chosen on validation	policies/v1.json	open
 2026-10-26T16:45:38Z	engine	B live smoke on 3 fixture reports	confirm end-to-end before build/validation runs	results/spend.json	3/3 right on all decisions; 221-305 ms; ~2.2k in / ~325 out tokens per call; ~US$0.09 per 1,000 reports
+2026-10-26T16:48:34Z	data	cut the PHMSA real-report stress set	phmsa.dot.gov returns 403 to agents; cut-order item 2	Sonnet research agent a25c61b9e028af949	cut
+2026-10-26T16:48:35Z	cost	TypeSafe price $0.042 per M input tokens, output free	needed for cost per 1,000 reports	https://docs.typesafe.ai/models.md	B ~$0.09 per 1,000 reports at ~2,230 input tokens
+2026-10-26T16:48:36Z	design	picked Route sign direction	Destination and Review read at a glance in a screen-share; user delegated the pick	design/comps/compare-01.html, a7599e8	accepted; user may veto
+2026-10-26T16:48:36Z	design	yellow Review plate gets a dark outline in all modes	1.68:1 fails WCAG 1.4.11 3:1 for component boundaries	design/direction.md	open (build)
+2026-10-26T16:48:37Z	eval	per-approach thresholds in each Policy	A's urgent_prob takes only 0.05/0.5/0.95 so one threshold set can't fit A and B	docs/briefs/j2-eval-harness.md step 1	open (J2)
