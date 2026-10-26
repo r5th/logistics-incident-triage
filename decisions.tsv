@@ -18,3 +18,6 @@ ts	phase	decision	why	evidence	result
 2026-10-26T16:48:36Z	design	picked Route sign direction	Destination and Review read at a glance in a screen-share; user delegated the pick	design/comps/compare-01.html, a7599e8	accepted; user may veto
 2026-10-26T16:48:36Z	design	yellow Review plate gets a dark outline in all modes	1.68:1 fails WCAG 1.4.11 3:1 for component boundaries	design/direction.md	open (build)
 2026-10-26T16:48:37Z	eval	per-approach thresholds in each Policy	A's urgent_prob takes only 0.05/0.5/0.95 so one threshold set can't fit A and B	docs/briefs/j2-eval-harness.md step 1	open (J2)
+2026-10-26T17:16:55Z	engine	accepted engine: A rules, B TypeSafe one call per report, C cascade, Policy routing and cost	137 tests green, live B smoke right on 3 of 3	35bca64	tests green
+2026-10-26T17:16:56Z	web	accepted SvelteKit demo on sample data incl. blind labelling route	check/build clean; screenshots reviewed (detail light, label dark)	1e4f07c, design/build-shots/	accepted; real data pending export
+2026-10-26T17:16:57Z	web	evidence is one shared list per Prediction, not per decision	B asks two evidence Choices but the schema stores one list; per-decision highlight dropped	1e4f07c report	accepted limitation
