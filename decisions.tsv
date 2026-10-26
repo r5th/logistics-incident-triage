@@ -24,3 +24,5 @@ ts	phase	decision	why	evidence	result
 2026-10-26T17:18:03Z	data	accepted J1 reports despite low variety (2x3 passages per scenario, 37-73 words)	redo costs ~1h; scenario splits prevent leakage; limitation documented	b1bc5bd, docs/provenance-generation.md	accepted with limitation
 2026-10-26T17:18:04Z	data	clarified label guide: forklift striking only goods is C3 not a collision	J1 flagged S-070 ambiguity (build split)	docs/label-guide.md:124	done
 2026-10-26T17:18:04Z	eval	merged J2 eval harness after scope check (16 files, all in scope)	Codex offload test; tests 157 green after merge	f96f18e, a6be246	tests green
+2026-10-26T17:19:55Z	run	ran A/B/C on build and validation; evaluated with seeded labels	first real numbers before tuning	results/report_build_seeded.md, results/spend.json	B 0 Missed Urgent on build; $0.028 spent
+2026-10-26T17:19:56Z	handoff	handed off to a fresh thread at ~150k context	user cap on main-thread context	docs/build-plan.md Status at handoff 1	open

@@ -1,0 +1,1794 @@
+{
+  "A": {
+    "v1": {
+      "api_cost_per_1000_usd": 0.0,
+      "bootstrap_95_ci": {
+        "auto_routed_error_rate": [
+          0.0621,
+          0.2295
+        ],
+        "cost_per_100": [
+          56.5,
+          273.5
+        ],
+        "review_rate": [
+          0.065,
+          0.205
+        ],
+        "urgent_recall": [
+          0.625,
+          0.9737
+        ]
+      },
+      "category": {
+        "accuracy": 0.885,
+        "confusion_matrix": {
+          "delivery_delay": {
+            "delivery_delay": 25,
+            "documentation_issue": 1,
+            "missing_shipment": 0,
+            "safety_incident": 6,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "documentation_issue": {
+            "delivery_delay": 3,
+            "documentation_issue": 32,
+            "missing_shipment": 0,
+            "safety_incident": 1,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "missing_shipment": {
+            "delivery_delay": 1,
+            "documentation_issue": 0,
+            "missing_shipment": 28,
+            "safety_incident": 3,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "safety_incident": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 32,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "shipment_damage": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 1,
+            "safety_incident": 1,
+            "shipment_damage": 30,
+            "vehicle_breakdown": 0
+          },
+          "vehicle_breakdown": {
+            "delivery_delay": 1,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 5,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 30
+          }
+        },
+        "macro_f1": 0.8881,
+        "per_class": {
+          "delivery_delay": {
+            "f1": 0.8065,
+            "precision": 0.8333,
+            "recall": 0.7812
+          },
+          "documentation_issue": {
+            "f1": 0.9275,
+            "precision": 0.9697,
+            "recall": 0.8889
+          },
+          "missing_shipment": {
+            "f1": 0.918,
+            "precision": 0.9655,
+            "recall": 0.875
+          },
+          "safety_incident": {
+            "f1": 0.8,
+            "precision": 0.6667,
+            "recall": 1.0
+          },
+          "shipment_damage": {
+            "f1": 0.9677,
+            "precision": 1.0,
+            "recall": 0.9375
+          },
+          "vehicle_breakdown": {
+            "f1": 0.9091,
+            "precision": 1.0,
+            "recall": 0.8333
+          }
+        }
+      },
+      "cost": {
+        "per_100": 146.5,
+        "terms": {
+          "false_alarm": {
+            "per_100": 0.0,
+            "total": 0
+          },
+          "missed_urgent": {
+            "per_100": 100.0,
+            "total": 200
+          },
+          "review": {
+            "per_100": 13.0,
+            "total": 26
+          },
+          "wrong_category_same_destination": {
+            "per_100": 1.0,
+            "total": 2
+          },
+          "wrong_destination": {
+            "per_100": 32.5,
+            "total": 65
+          }
+        },
+        "total": 293
+      },
+      "destination": {
+        "accuracy": 0.875,
+        "confusion_matrix": {
+          "claims": {
+            "claims": 26,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 1,
+            "security_investigations": 1
+          },
+          "compliance": {
+            "claims": 0,
+            "compliance": 29,
+            "customer_desk": 1,
+            "fleet_support": 0,
+            "safety_desk": 2,
+            "security_investigations": 0
+          },
+          "customer_desk": {
+            "claims": 0,
+            "compliance": 1,
+            "customer_desk": 34,
+            "fleet_support": 0,
+            "safety_desk": 7,
+            "security_investigations": 2
+          },
+          "fleet_support": {
+            "claims": 0,
+            "compliance": 1,
+            "customer_desk": 1,
+            "fleet_support": 26,
+            "safety_desk": 4,
+            "security_investigations": 0
+          },
+          "safety_desk": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 32,
+            "security_investigations": 0
+          },
+          "security_investigations": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 2,
+            "safety_desk": 2,
+            "security_investigations": 28
+          }
+        },
+        "macro_f1": 0.8815,
+        "per_class": {
+          "claims": {
+            "f1": 0.963,
+            "precision": 1.0,
+            "recall": 0.9286
+          },
+          "compliance": {
+            "f1": 0.9206,
+            "precision": 0.9355,
+            "recall": 0.9062
+          },
+          "customer_desk": {
+            "f1": 0.85,
+            "precision": 0.9444,
+            "recall": 0.7727
+          },
+          "fleet_support": {
+            "f1": 0.8667,
+            "precision": 0.9286,
+            "recall": 0.8125
+          },
+          "safety_desk": {
+            "f1": 0.8,
+            "precision": 0.6667,
+            "recall": 1.0
+          },
+          "security_investigations": {
+            "f1": 0.8889,
+            "precision": 0.9032,
+            "recall": 0.875
+          }
+        }
+      },
+      "latency": {
+        "max": 7.1075,
+        "n": 200,
+        "p50": 1.2298,
+        "p95": 2.8846
+      },
+      "n": 200,
+      "reliability": {
+        "error_count": 0,
+        "invalid_output_count": 0,
+        "mean_attempts": 1.0
+      },
+      "routing": {
+        "auto_route_coverage": 0.87,
+        "auto_routed_error_rate": 0.1379,
+        "missed_urgent": [
+          {
+            "report_id": "R-0010",
+            "scenario_id": "S-048",
+            "text": "Caller: At 09:30 during trans-shipping at Northvale Daventry depot, a forklift crushed two Halcyon Medical insulin cartons.\nDesk: Right, go on.\nCaller: Two Halc",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0100",
+            "scenario_id": "S-048",
+            "text": "Hello, passing on the driver's account below.\n\nWe can't get replacement insulin to the hospital pharmacy before today's four o'clock window. No one was hurt. Th",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0120",
+            "scenario_id": "S-015",
+            "text": "Hello, passing on the depot's account below.\n\nNVT 5120, loaded with Sable Electronics laptops, is showing a move away from Northvale Thurrock yard towards the A",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0160",
+            "scenario_id": "S-048",
+            "text": "Driver's report, as received: The insulin pens inside are broken; nobody hurt. We can't get replacement insulin to the hospital pharmacy before today's four o'c",
+            "triggers": [
+              "location_missing"
+            ],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0168",
+            "scenario_id": "S-045",
+            "text": "NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate. Reefer fuel shows about two hours left",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0184",
+            "scenario_id": "S-045",
+            "text": "Hello, passing on the driver's account below.\n\nThe inspection area at Dover won't allow refuelling of chilled trailer NV20 TCH's reefer. Box reading four degree",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0188",
+            "scenario_id": "S-100",
+            "text": "Driver's report, as received: They're for a hospital laboratory in Carlisle by 18:00. Tacho shows driver has reached nine hours driving and must stop. A timing ",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0292",
+            "scenario_id": "S-045",
+            "text": "Caller: NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate.\nDesk: Right, go on.\nCaller: It",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0368",
+            "scenario_id": "S-048",
+            "text": "At 09:30 during trans-shipping at Northvale Daventry depot, a forklift crushed two Halcyon Medical insulin cartons. The insulin pens inside are broken; nobody h",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0370",
+            "scenario_id": "S-100",
+            "text": "Hello, passing on the driver's account below.\n\nA timing update on NV70 HSE, Halcyon Medical reagents for blood testing at a Carlisle hospital lab, due six this ",
+            "triggers": [],
+            "urgent_prob": 0.05
+          }
+        ],
+        "missed_urgent_count": 10,
+        "review_rate": 0.13
+      },
+      "tokens": {
+        "mean_input": 0.0,
+        "mean_output": 0.0
+      },
+      "urgency": {
+        "counts": {
+          "fn": 11,
+          "fp": 8,
+          "tn": 132,
+          "tp": 49
+        },
+        "precision": 0.8596,
+        "recall": 0.8167
+      }
+    },
+    "v2": {
+      "api_cost_per_1000_usd": 0.0,
+      "bootstrap_95_ci": {
+        "auto_routed_error_rate": [
+          0.0621,
+          0.2295
+        ],
+        "cost_per_100": [
+          104.0,
+          1151.0
+        ],
+        "review_rate": [
+          0.065,
+          0.205
+        ],
+        "urgent_recall": [
+          0.625,
+          0.9737
+        ]
+      },
+      "category": {
+        "accuracy": 0.885,
+        "confusion_matrix": {
+          "delivery_delay": {
+            "delivery_delay": 25,
+            "documentation_issue": 1,
+            "missing_shipment": 0,
+            "safety_incident": 6,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "documentation_issue": {
+            "delivery_delay": 3,
+            "documentation_issue": 32,
+            "missing_shipment": 0,
+            "safety_incident": 1,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "missing_shipment": {
+            "delivery_delay": 1,
+            "documentation_issue": 0,
+            "missing_shipment": 28,
+            "safety_incident": 3,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "safety_incident": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 32,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "shipment_damage": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 1,
+            "safety_incident": 1,
+            "shipment_damage": 30,
+            "vehicle_breakdown": 0
+          },
+          "vehicle_breakdown": {
+            "delivery_delay": 1,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 5,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 30
+          }
+        },
+        "macro_f1": 0.8881,
+        "per_class": {
+          "delivery_delay": {
+            "f1": 0.8065,
+            "precision": 0.8333,
+            "recall": 0.7812
+          },
+          "documentation_issue": {
+            "f1": 0.9275,
+            "precision": 0.9697,
+            "recall": 0.8889
+          },
+          "missing_shipment": {
+            "f1": 0.918,
+            "precision": 0.9655,
+            "recall": 0.875
+          },
+          "safety_incident": {
+            "f1": 0.8,
+            "precision": 0.6667,
+            "recall": 1.0
+          },
+          "shipment_damage": {
+            "f1": 0.9677,
+            "precision": 1.0,
+            "recall": 0.9375
+          },
+          "vehicle_breakdown": {
+            "f1": 0.9091,
+            "precision": 1.0,
+            "recall": 0.8333
+          }
+        }
+      },
+      "cost": {
+        "per_100": 546.5,
+        "terms": {
+          "false_alarm": {
+            "per_100": 0.0,
+            "total": 0
+          },
+          "missed_urgent": {
+            "per_100": 500.0,
+            "total": 1000
+          },
+          "review": {
+            "per_100": 13.0,
+            "total": 26
+          },
+          "wrong_category_same_destination": {
+            "per_100": 1.0,
+            "total": 2
+          },
+          "wrong_destination": {
+            "per_100": 32.5,
+            "total": 65
+          }
+        },
+        "total": 1093
+      },
+      "destination": {
+        "accuracy": 0.875,
+        "confusion_matrix": {
+          "claims": {
+            "claims": 26,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 1,
+            "security_investigations": 1
+          },
+          "compliance": {
+            "claims": 0,
+            "compliance": 29,
+            "customer_desk": 1,
+            "fleet_support": 0,
+            "safety_desk": 2,
+            "security_investigations": 0
+          },
+          "customer_desk": {
+            "claims": 0,
+            "compliance": 1,
+            "customer_desk": 34,
+            "fleet_support": 0,
+            "safety_desk": 7,
+            "security_investigations": 2
+          },
+          "fleet_support": {
+            "claims": 0,
+            "compliance": 1,
+            "customer_desk": 1,
+            "fleet_support": 26,
+            "safety_desk": 4,
+            "security_investigations": 0
+          },
+          "safety_desk": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 32,
+            "security_investigations": 0
+          },
+          "security_investigations": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 2,
+            "safety_desk": 2,
+            "security_investigations": 28
+          }
+        },
+        "macro_f1": 0.8815,
+        "per_class": {
+          "claims": {
+            "f1": 0.963,
+            "precision": 1.0,
+            "recall": 0.9286
+          },
+          "compliance": {
+            "f1": 0.9206,
+            "precision": 0.9355,
+            "recall": 0.9062
+          },
+          "customer_desk": {
+            "f1": 0.85,
+            "precision": 0.9444,
+            "recall": 0.7727
+          },
+          "fleet_support": {
+            "f1": 0.8667,
+            "precision": 0.9286,
+            "recall": 0.8125
+          },
+          "safety_desk": {
+            "f1": 0.8,
+            "precision": 0.6667,
+            "recall": 1.0
+          },
+          "security_investigations": {
+            "f1": 0.8889,
+            "precision": 0.9032,
+            "recall": 0.875
+          }
+        }
+      },
+      "latency": {
+        "max": 7.1075,
+        "n": 200,
+        "p50": 1.2298,
+        "p95": 2.8846
+      },
+      "n": 200,
+      "reliability": {
+        "error_count": 0,
+        "invalid_output_count": 0,
+        "mean_attempts": 1.0
+      },
+      "routing": {
+        "auto_route_coverage": 0.87,
+        "auto_routed_error_rate": 0.1379,
+        "missed_urgent": [
+          {
+            "report_id": "R-0010",
+            "scenario_id": "S-048",
+            "text": "Caller: At 09:30 during trans-shipping at Northvale Daventry depot, a forklift crushed two Halcyon Medical insulin cartons.\nDesk: Right, go on.\nCaller: Two Halc",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0100",
+            "scenario_id": "S-048",
+            "text": "Hello, passing on the driver's account below.\n\nWe can't get replacement insulin to the hospital pharmacy before today's four o'clock window. No one was hurt. Th",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0120",
+            "scenario_id": "S-015",
+            "text": "Hello, passing on the depot's account below.\n\nNVT 5120, loaded with Sable Electronics laptops, is showing a move away from Northvale Thurrock yard towards the A",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0160",
+            "scenario_id": "S-048",
+            "text": "Driver's report, as received: The insulin pens inside are broken; nobody hurt. We can't get replacement insulin to the hospital pharmacy before today's four o'c",
+            "triggers": [
+              "location_missing"
+            ],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0168",
+            "scenario_id": "S-045",
+            "text": "NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate. Reefer fuel shows about two hours left",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0184",
+            "scenario_id": "S-045",
+            "text": "Hello, passing on the driver's account below.\n\nThe inspection area at Dover won't allow refuelling of chilled trailer NV20 TCH's reefer. Box reading four degree",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0188",
+            "scenario_id": "S-100",
+            "text": "Driver's report, as received: They're for a hospital laboratory in Carlisle by 18:00. Tacho shows driver has reached nine hours driving and must stop. A timing ",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0292",
+            "scenario_id": "S-045",
+            "text": "Caller: NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate.\nDesk: Right, go on.\nCaller: It",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0368",
+            "scenario_id": "S-048",
+            "text": "At 09:30 during trans-shipping at Northvale Daventry depot, a forklift crushed two Halcyon Medical insulin cartons. The insulin pens inside are broken; nobody h",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0370",
+            "scenario_id": "S-100",
+            "text": "Hello, passing on the driver's account below.\n\nA timing update on NV70 HSE, Halcyon Medical reagents for blood testing at a Carlisle hospital lab, due six this ",
+            "triggers": [],
+            "urgent_prob": 0.05
+          }
+        ],
+        "missed_urgent_count": 10,
+        "review_rate": 0.13
+      },
+      "tokens": {
+        "mean_input": 0.0,
+        "mean_output": 0.0
+      },
+      "urgency": {
+        "counts": {
+          "fn": 11,
+          "fp": 8,
+          "tn": 132,
+          "tp": 49
+        },
+        "precision": 0.8596,
+        "recall": 0.8167
+      }
+    }
+  },
+  "B": {
+    "v1": {
+      "api_cost_per_1000_usd": 0.0995,
+      "bootstrap_95_ci": {
+        "auto_routed_error_rate": [
+          0.0263,
+          0.1871
+        ],
+        "cost_per_100": [
+          32.0,
+          87.5
+        ],
+        "review_rate": [
+          0.17,
+          0.38
+        ],
+        "urgent_recall": [
+          0.825,
+          1.0
+        ]
+      },
+      "category": {
+        "accuracy": 0.9,
+        "confusion_matrix": {
+          "delivery_delay": {
+            "delivery_delay": 31,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 1,
+            "vehicle_breakdown": 0
+          },
+          "documentation_issue": {
+            "delivery_delay": 3,
+            "documentation_issue": 32,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 1
+          },
+          "missing_shipment": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 32,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "safety_incident": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 32,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "shipment_damage": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 1,
+            "safety_incident": 6,
+            "shipment_damage": 25,
+            "vehicle_breakdown": 0
+          },
+          "vehicle_breakdown": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 1,
+            "safety_incident": 7,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 28
+          }
+        },
+        "macro_f1": 0.9008,
+        "per_class": {
+          "delivery_delay": {
+            "f1": 0.9394,
+            "precision": 0.9118,
+            "recall": 0.9688
+          },
+          "documentation_issue": {
+            "f1": 0.9412,
+            "precision": 1.0,
+            "recall": 0.8889
+          },
+          "missing_shipment": {
+            "f1": 0.9697,
+            "precision": 0.9412,
+            "recall": 1.0
+          },
+          "safety_incident": {
+            "f1": 0.8312,
+            "precision": 0.7111,
+            "recall": 1.0
+          },
+          "shipment_damage": {
+            "f1": 0.8621,
+            "precision": 0.9615,
+            "recall": 0.7812
+          },
+          "vehicle_breakdown": {
+            "f1": 0.8615,
+            "precision": 0.9655,
+            "recall": 0.7778
+          }
+        }
+      },
+      "cost": {
+        "per_100": 56.0,
+        "terms": {
+          "false_alarm": {
+            "per_100": 0.0,
+            "total": 0
+          },
+          "missed_urgent": {
+            "per_100": 0.0,
+            "total": 0
+          },
+          "review": {
+            "per_100": 27.0,
+            "total": 54
+          },
+          "wrong_category_same_destination": {
+            "per_100": 1.5,
+            "total": 3
+          },
+          "wrong_destination": {
+            "per_100": 27.5,
+            "total": 55
+          }
+        },
+        "total": 112
+      },
+      "destination": {
+        "accuracy": 0.905,
+        "confusion_matrix": {
+          "claims": {
+            "claims": 19,
+            "compliance": 0,
+            "customer_desk": 1,
+            "fleet_support": 3,
+            "safety_desk": 3,
+            "security_investigations": 2
+          },
+          "compliance": {
+            "claims": 0,
+            "compliance": 30,
+            "customer_desk": 0,
+            "fleet_support": 2,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "customer_desk": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 42,
+            "fleet_support": 1,
+            "safety_desk": 0,
+            "security_investigations": 1
+          },
+          "fleet_support": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 26,
+            "safety_desk": 6,
+            "security_investigations": 0
+          },
+          "safety_desk": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 32,
+            "security_investigations": 0
+          },
+          "security_investigations": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 32
+          }
+        },
+        "macro_f1": 0.8977,
+        "per_class": {
+          "claims": {
+            "f1": 0.8085,
+            "precision": 1.0,
+            "recall": 0.6786
+          },
+          "compliance": {
+            "f1": 0.9677,
+            "precision": 1.0,
+            "recall": 0.9375
+          },
+          "customer_desk": {
+            "f1": 0.9655,
+            "precision": 0.9767,
+            "recall": 0.9545
+          },
+          "fleet_support": {
+            "f1": 0.8125,
+            "precision": 0.8125,
+            "recall": 0.8125
+          },
+          "safety_desk": {
+            "f1": 0.8767,
+            "precision": 0.7805,
+            "recall": 1.0
+          },
+          "security_investigations": {
+            "f1": 0.9552,
+            "precision": 0.9143,
+            "recall": 1.0
+          }
+        }
+      },
+      "latency": {
+        "max": 1457.3707,
+        "n": 200,
+        "p50": 229.2962,
+        "p95": 291.1166
+      },
+      "n": 200,
+      "reliability": {
+        "error_count": 0,
+        "invalid_output_count": 0,
+        "mean_attempts": 1.0
+      },
+      "routing": {
+        "auto_route_coverage": 0.73,
+        "auto_routed_error_rate": 0.0959,
+        "missed_urgent": [],
+        "missed_urgent_count": 0,
+        "review_rate": 0.27
+      },
+      "tokens": {
+        "mean_input": 2368.01,
+        "mean_output": 349.5
+      },
+      "urgency": {
+        "counts": {
+          "fn": 4,
+          "fp": 3,
+          "tn": 137,
+          "tp": 56
+        },
+        "precision": 0.9492,
+        "recall": 0.9333
+      }
+    },
+    "v2": {
+      "api_cost_per_1000_usd": 0.0995,
+      "bootstrap_95_ci": {
+        "auto_routed_error_rate": [
+          0.0263,
+          0.1871
+        ],
+        "cost_per_100": [
+          32.0,
+          87.5
+        ],
+        "review_rate": [
+          0.17,
+          0.38
+        ],
+        "urgent_recall": [
+          0.825,
+          1.0
+        ]
+      },
+      "category": {
+        "accuracy": 0.9,
+        "confusion_matrix": {
+          "delivery_delay": {
+            "delivery_delay": 31,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 1,
+            "vehicle_breakdown": 0
+          },
+          "documentation_issue": {
+            "delivery_delay": 3,
+            "documentation_issue": 32,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 1
+          },
+          "missing_shipment": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 32,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "safety_incident": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 32,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "shipment_damage": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 1,
+            "safety_incident": 6,
+            "shipment_damage": 25,
+            "vehicle_breakdown": 0
+          },
+          "vehicle_breakdown": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 1,
+            "safety_incident": 7,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 28
+          }
+        },
+        "macro_f1": 0.9008,
+        "per_class": {
+          "delivery_delay": {
+            "f1": 0.9394,
+            "precision": 0.9118,
+            "recall": 0.9688
+          },
+          "documentation_issue": {
+            "f1": 0.9412,
+            "precision": 1.0,
+            "recall": 0.8889
+          },
+          "missing_shipment": {
+            "f1": 0.9697,
+            "precision": 0.9412,
+            "recall": 1.0
+          },
+          "safety_incident": {
+            "f1": 0.8312,
+            "precision": 0.7111,
+            "recall": 1.0
+          },
+          "shipment_damage": {
+            "f1": 0.8621,
+            "precision": 0.9615,
+            "recall": 0.7812
+          },
+          "vehicle_breakdown": {
+            "f1": 0.8615,
+            "precision": 0.9655,
+            "recall": 0.7778
+          }
+        }
+      },
+      "cost": {
+        "per_100": 56.0,
+        "terms": {
+          "false_alarm": {
+            "per_100": 0.0,
+            "total": 0
+          },
+          "missed_urgent": {
+            "per_100": 0.0,
+            "total": 0
+          },
+          "review": {
+            "per_100": 27.0,
+            "total": 54
+          },
+          "wrong_category_same_destination": {
+            "per_100": 1.5,
+            "total": 3
+          },
+          "wrong_destination": {
+            "per_100": 27.5,
+            "total": 55
+          }
+        },
+        "total": 112
+      },
+      "destination": {
+        "accuracy": 0.905,
+        "confusion_matrix": {
+          "claims": {
+            "claims": 19,
+            "compliance": 0,
+            "customer_desk": 1,
+            "fleet_support": 3,
+            "safety_desk": 3,
+            "security_investigations": 2
+          },
+          "compliance": {
+            "claims": 0,
+            "compliance": 30,
+            "customer_desk": 0,
+            "fleet_support": 2,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "customer_desk": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 42,
+            "fleet_support": 1,
+            "safety_desk": 0,
+            "security_investigations": 1
+          },
+          "fleet_support": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 26,
+            "safety_desk": 6,
+            "security_investigations": 0
+          },
+          "safety_desk": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 32,
+            "security_investigations": 0
+          },
+          "security_investigations": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 32
+          }
+        },
+        "macro_f1": 0.8977,
+        "per_class": {
+          "claims": {
+            "f1": 0.8085,
+            "precision": 1.0,
+            "recall": 0.6786
+          },
+          "compliance": {
+            "f1": 0.9677,
+            "precision": 1.0,
+            "recall": 0.9375
+          },
+          "customer_desk": {
+            "f1": 0.9655,
+            "precision": 0.9767,
+            "recall": 0.9545
+          },
+          "fleet_support": {
+            "f1": 0.8125,
+            "precision": 0.8125,
+            "recall": 0.8125
+          },
+          "safety_desk": {
+            "f1": 0.8767,
+            "precision": 0.7805,
+            "recall": 1.0
+          },
+          "security_investigations": {
+            "f1": 0.9552,
+            "precision": 0.9143,
+            "recall": 1.0
+          }
+        }
+      },
+      "latency": {
+        "max": 1457.3707,
+        "n": 200,
+        "p50": 229.2962,
+        "p95": 291.1166
+      },
+      "n": 200,
+      "reliability": {
+        "error_count": 0,
+        "invalid_output_count": 0,
+        "mean_attempts": 1.0
+      },
+      "routing": {
+        "auto_route_coverage": 0.73,
+        "auto_routed_error_rate": 0.0959,
+        "missed_urgent": [],
+        "missed_urgent_count": 0,
+        "review_rate": 0.27
+      },
+      "tokens": {
+        "mean_input": 2368.01,
+        "mean_output": 349.5
+      },
+      "urgency": {
+        "counts": {
+          "fn": 4,
+          "fp": 3,
+          "tn": 137,
+          "tp": 56
+        },
+        "precision": 0.9492,
+        "recall": 0.9333
+      }
+    }
+  },
+  "C": {
+    "v1": {
+      "api_cost_per_1000_usd": 0.0327,
+      "bootstrap_95_ci": {
+        "auto_routed_error_rate": [
+          0.0745,
+          0.2514
+        ],
+        "cost_per_100": [
+          60.5,
+          256.0
+        ],
+        "review_rate": [
+          0.04,
+          0.18
+        ],
+        "urgent_recall": [
+          0.7,
+          0.9737
+        ]
+      },
+      "category": {
+        "accuracy": 0.91,
+        "confusion_matrix": {
+          "delivery_delay": {
+            "delivery_delay": 27,
+            "documentation_issue": 1,
+            "missing_shipment": 0,
+            "safety_incident": 4,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "documentation_issue": {
+            "delivery_delay": 5,
+            "documentation_issue": 30,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 1
+          },
+          "missing_shipment": {
+            "delivery_delay": 1,
+            "documentation_issue": 0,
+            "missing_shipment": 31,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "safety_incident": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 32,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "shipment_damage": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 1,
+            "safety_incident": 2,
+            "shipment_damage": 29,
+            "vehicle_breakdown": 0
+          },
+          "vehicle_breakdown": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 1,
+            "safety_incident": 2,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 33
+          }
+        },
+        "macro_f1": 0.9105,
+        "per_class": {
+          "delivery_delay": {
+            "f1": 0.8308,
+            "precision": 0.8182,
+            "recall": 0.8438
+          },
+          "documentation_issue": {
+            "f1": 0.8955,
+            "precision": 0.9677,
+            "recall": 0.8333
+          },
+          "missing_shipment": {
+            "f1": 0.9538,
+            "precision": 0.9394,
+            "recall": 0.9688
+          },
+          "safety_incident": {
+            "f1": 0.8889,
+            "precision": 0.8,
+            "recall": 1.0
+          },
+          "shipment_damage": {
+            "f1": 0.9508,
+            "precision": 1.0,
+            "recall": 0.9062
+          },
+          "vehicle_breakdown": {
+            "f1": 0.9429,
+            "precision": 0.9706,
+            "recall": 0.9167
+          }
+        }
+      },
+      "cost": {
+        "per_100": 142.0,
+        "terms": {
+          "false_alarm": {
+            "per_100": 0.0,
+            "total": 0
+          },
+          "missed_urgent": {
+            "per_100": 90.0,
+            "total": 180
+          },
+          "review": {
+            "per_100": 10.0,
+            "total": 20
+          },
+          "wrong_category_same_destination": {
+            "per_100": 2.0,
+            "total": 4
+          },
+          "wrong_destination": {
+            "per_100": 40.0,
+            "total": 80
+          }
+        },
+        "total": 284
+      },
+      "destination": {
+        "accuracy": 0.91,
+        "confusion_matrix": {
+          "claims": {
+            "claims": 24,
+            "compliance": 0,
+            "customer_desk": 1,
+            "fleet_support": 0,
+            "safety_desk": 2,
+            "security_investigations": 1
+          },
+          "compliance": {
+            "claims": 0,
+            "compliance": 30,
+            "customer_desk": 0,
+            "fleet_support": 2,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "customer_desk": {
+            "claims": 0,
+            "compliance": 1,
+            "customer_desk": 37,
+            "fleet_support": 0,
+            "safety_desk": 4,
+            "security_investigations": 2
+          },
+          "fleet_support": {
+            "claims": 0,
+            "compliance": 1,
+            "customer_desk": 0,
+            "fleet_support": 29,
+            "safety_desk": 2,
+            "security_investigations": 0
+          },
+          "safety_desk": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 32,
+            "security_investigations": 0
+          },
+          "security_investigations": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 2,
+            "safety_desk": 0,
+            "security_investigations": 30
+          }
+        },
+        "macro_f1": 0.9112,
+        "per_class": {
+          "claims": {
+            "f1": 0.9231,
+            "precision": 1.0,
+            "recall": 0.8571
+          },
+          "compliance": {
+            "f1": 0.9375,
+            "precision": 0.9375,
+            "recall": 0.9375
+          },
+          "customer_desk": {
+            "f1": 0.9024,
+            "precision": 0.9737,
+            "recall": 0.8409
+          },
+          "fleet_support": {
+            "f1": 0.8923,
+            "precision": 0.8788,
+            "recall": 0.9062
+          },
+          "safety_desk": {
+            "f1": 0.8889,
+            "precision": 0.8,
+            "recall": 1.0
+          },
+          "security_investigations": {
+            "f1": 0.9231,
+            "precision": 0.9091,
+            "recall": 0.9375
+          }
+        }
+      },
+      "latency": {
+        "max": 359.4547,
+        "n": 200,
+        "p50": 1.8086,
+        "p95": 254.4501
+      },
+      "n": 200,
+      "reliability": {
+        "error_count": 0,
+        "invalid_output_count": 0,
+        "mean_attempts": 1.0
+      },
+      "routing": {
+        "auto_route_coverage": 0.9,
+        "auto_routed_error_rate": 0.1556,
+        "missed_urgent": [
+          {
+            "report_id": "R-0010",
+            "scenario_id": "S-048",
+            "text": "Caller: At 09:30 during trans-shipping at Northvale Daventry depot, a forklift crushed two Halcyon Medical insulin cartons.\nDesk: Right, go on.\nCaller: Two Halc",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0100",
+            "scenario_id": "S-048",
+            "text": "Hello, passing on the driver's account below.\n\nWe can't get replacement insulin to the hospital pharmacy before today's four o'clock window. No one was hurt. Th",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0120",
+            "scenario_id": "S-015",
+            "text": "Hello, passing on the depot's account below.\n\nNVT 5120, loaded with Sable Electronics laptops, is showing a move away from Northvale Thurrock yard towards the A",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0168",
+            "scenario_id": "S-045",
+            "text": "NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate. Reefer fuel shows about two hours left",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0184",
+            "scenario_id": "S-045",
+            "text": "Hello, passing on the driver's account below.\n\nThe inspection area at Dover won't allow refuelling of chilled trailer NV20 TCH's reefer. Box reading four degree",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0188",
+            "scenario_id": "S-100",
+            "text": "Driver's report, as received: They're for a hospital laboratory in Carlisle by 18:00. Tacho shows driver has reached nine hours driving and must stop. A timing ",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0292",
+            "scenario_id": "S-045",
+            "text": "Caller: NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate.\nDesk: Right, go on.\nCaller: It",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0368",
+            "scenario_id": "S-048",
+            "text": "At 09:30 during trans-shipping at Northvale Daventry depot, a forklift crushed two Halcyon Medical insulin cartons. The insulin pens inside are broken; nobody h",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0370",
+            "scenario_id": "S-100",
+            "text": "Hello, passing on the driver's account below.\n\nA timing update on NV70 HSE, Halcyon Medical reagents for blood testing at a Carlisle hospital lab, due six this ",
+            "triggers": [],
+            "urgent_prob": 0.05
+          }
+        ],
+        "missed_urgent_count": 9,
+        "review_rate": 0.1
+      },
+      "tokens": {
+        "mean_input": 777.535,
+        "mean_output": 115.205
+      },
+      "urgency": {
+        "counts": {
+          "fn": 9,
+          "fp": 0,
+          "tn": 140,
+          "tp": 51
+        },
+        "precision": 1.0,
+        "recall": 0.85
+      }
+    },
+    "v2": {
+      "api_cost_per_1000_usd": 0.0327,
+      "bootstrap_95_ci": {
+        "auto_routed_error_rate": [
+          0.0745,
+          0.2514
+        ],
+        "cost_per_100": [
+          109.0,
+          1035.5
+        ],
+        "review_rate": [
+          0.04,
+          0.18
+        ],
+        "urgent_recall": [
+          0.7,
+          0.9737
+        ]
+      },
+      "category": {
+        "accuracy": 0.91,
+        "confusion_matrix": {
+          "delivery_delay": {
+            "delivery_delay": 27,
+            "documentation_issue": 1,
+            "missing_shipment": 0,
+            "safety_incident": 4,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "documentation_issue": {
+            "delivery_delay": 5,
+            "documentation_issue": 30,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 1
+          },
+          "missing_shipment": {
+            "delivery_delay": 1,
+            "documentation_issue": 0,
+            "missing_shipment": 31,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "safety_incident": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 32,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "shipment_damage": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 1,
+            "safety_incident": 2,
+            "shipment_damage": 29,
+            "vehicle_breakdown": 0
+          },
+          "vehicle_breakdown": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 1,
+            "safety_incident": 2,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 33
+          }
+        },
+        "macro_f1": 0.9105,
+        "per_class": {
+          "delivery_delay": {
+            "f1": 0.8308,
+            "precision": 0.8182,
+            "recall": 0.8438
+          },
+          "documentation_issue": {
+            "f1": 0.8955,
+            "precision": 0.9677,
+            "recall": 0.8333
+          },
+          "missing_shipment": {
+            "f1": 0.9538,
+            "precision": 0.9394,
+            "recall": 0.9688
+          },
+          "safety_incident": {
+            "f1": 0.8889,
+            "precision": 0.8,
+            "recall": 1.0
+          },
+          "shipment_damage": {
+            "f1": 0.9508,
+            "precision": 1.0,
+            "recall": 0.9062
+          },
+          "vehicle_breakdown": {
+            "f1": 0.9429,
+            "precision": 0.9706,
+            "recall": 0.9167
+          }
+        }
+      },
+      "cost": {
+        "per_100": 502.0,
+        "terms": {
+          "false_alarm": {
+            "per_100": 0.0,
+            "total": 0
+          },
+          "missed_urgent": {
+            "per_100": 450.0,
+            "total": 900
+          },
+          "review": {
+            "per_100": 10.0,
+            "total": 20
+          },
+          "wrong_category_same_destination": {
+            "per_100": 2.0,
+            "total": 4
+          },
+          "wrong_destination": {
+            "per_100": 40.0,
+            "total": 80
+          }
+        },
+        "total": 1004
+      },
+      "destination": {
+        "accuracy": 0.91,
+        "confusion_matrix": {
+          "claims": {
+            "claims": 24,
+            "compliance": 0,
+            "customer_desk": 1,
+            "fleet_support": 0,
+            "safety_desk": 2,
+            "security_investigations": 1
+          },
+          "compliance": {
+            "claims": 0,
+            "compliance": 30,
+            "customer_desk": 0,
+            "fleet_support": 2,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "customer_desk": {
+            "claims": 0,
+            "compliance": 1,
+            "customer_desk": 37,
+            "fleet_support": 0,
+            "safety_desk": 4,
+            "security_investigations": 2
+          },
+          "fleet_support": {
+            "claims": 0,
+            "compliance": 1,
+            "customer_desk": 0,
+            "fleet_support": 29,
+            "safety_desk": 2,
+            "security_investigations": 0
+          },
+          "safety_desk": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 32,
+            "security_investigations": 0
+          },
+          "security_investigations": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 2,
+            "safety_desk": 0,
+            "security_investigations": 30
+          }
+        },
+        "macro_f1": 0.9112,
+        "per_class": {
+          "claims": {
+            "f1": 0.9231,
+            "precision": 1.0,
+            "recall": 0.8571
+          },
+          "compliance": {
+            "f1": 0.9375,
+            "precision": 0.9375,
+            "recall": 0.9375
+          },
+          "customer_desk": {
+            "f1": 0.9024,
+            "precision": 0.9737,
+            "recall": 0.8409
+          },
+          "fleet_support": {
+            "f1": 0.8923,
+            "precision": 0.8788,
+            "recall": 0.9062
+          },
+          "safety_desk": {
+            "f1": 0.8889,
+            "precision": 0.8,
+            "recall": 1.0
+          },
+          "security_investigations": {
+            "f1": 0.9231,
+            "precision": 0.9091,
+            "recall": 0.9375
+          }
+        }
+      },
+      "latency": {
+        "max": 359.4547,
+        "n": 200,
+        "p50": 1.8086,
+        "p95": 254.4501
+      },
+      "n": 200,
+      "reliability": {
+        "error_count": 0,
+        "invalid_output_count": 0,
+        "mean_attempts": 1.0
+      },
+      "routing": {
+        "auto_route_coverage": 0.9,
+        "auto_routed_error_rate": 0.1556,
+        "missed_urgent": [
+          {
+            "report_id": "R-0010",
+            "scenario_id": "S-048",
+            "text": "Caller: At 09:30 during trans-shipping at Northvale Daventry depot, a forklift crushed two Halcyon Medical insulin cartons.\nDesk: Right, go on.\nCaller: Two Halc",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0100",
+            "scenario_id": "S-048",
+            "text": "Hello, passing on the driver's account below.\n\nWe can't get replacement insulin to the hospital pharmacy before today's four o'clock window. No one was hurt. Th",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0120",
+            "scenario_id": "S-015",
+            "text": "Hello, passing on the depot's account below.\n\nNVT 5120, loaded with Sable Electronics laptops, is showing a move away from Northvale Thurrock yard towards the A",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0168",
+            "scenario_id": "S-045",
+            "text": "NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate. Reefer fuel shows about two hours left",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0184",
+            "scenario_id": "S-045",
+            "text": "Hello, passing on the driver's account below.\n\nThe inspection area at Dover won't allow refuelling of chilled trailer NV20 TCH's reefer. Box reading four degree",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0188",
+            "scenario_id": "S-100",
+            "text": "Driver's report, as received: They're for a hospital laboratory in Carlisle by 18:00. Tacho shows driver has reached nine hours driving and must stop. A timing ",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0292",
+            "scenario_id": "S-045",
+            "text": "Caller: NV20 TCH inbound Dover with chilled French cheese for Brackenridge Foods is held for a missing export health certificate.\nDesk: Right, go on.\nCaller: It",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0368",
+            "scenario_id": "S-048",
+            "text": "At 09:30 during trans-shipping at Northvale Daventry depot, a forklift crushed two Halcyon Medical insulin cartons. The insulin pens inside are broken; nobody h",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0370",
+            "scenario_id": "S-100",
+            "text": "Hello, passing on the driver's account below.\n\nA timing update on NV70 HSE, Halcyon Medical reagents for blood testing at a Carlisle hospital lab, due six this ",
+            "triggers": [],
+            "urgent_prob": 0.05
+          }
+        ],
+        "missed_urgent_count": 9,
+        "review_rate": 0.1
+      },
+      "tokens": {
+        "mean_input": 777.535,
+        "mean_output": 115.205
+      },
+      "urgency": {
+        "counts": {
+          "fn": 9,
+          "fp": 0,
+          "tn": 140,
+          "tp": 51
+        },
+        "precision": 1.0,
+        "recall": 0.85
+      }
+    }
+  }
+}

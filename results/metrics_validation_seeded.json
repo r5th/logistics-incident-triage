@@ -1,0 +1,1762 @@
+{
+  "A": {
+    "v1": {
+      "api_cost_per_1000_usd": 0.0,
+      "bootstrap_95_ci": {
+        "auto_routed_error_rate": [
+          0.1026,
+          0.5
+        ],
+        "cost_per_100": [
+          81.25,
+          515.0
+        ],
+        "review_rate": [
+          0.125,
+          0.5
+        ],
+        "urgent_recall": [
+          0.35,
+          0.9167
+        ]
+      },
+      "category": {
+        "accuracy": 0.7,
+        "confusion_matrix": {
+          "delivery_delay": {
+            "delivery_delay": 10,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 6,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "documentation_issue": {
+            "delivery_delay": 0,
+            "documentation_issue": 6,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 2,
+            "vehicle_breakdown": 0
+          },
+          "missing_shipment": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 12,
+            "safety_incident": 4,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "safety_incident": {
+            "delivery_delay": 4,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 8,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "shipment_damage": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 4,
+            "shipment_damage": 12,
+            "vehicle_breakdown": 0
+          },
+          "vehicle_breakdown": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 4,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 8
+          }
+        },
+        "macro_f1": 0.7337,
+        "per_class": {
+          "delivery_delay": {
+            "f1": 0.6667,
+            "precision": 0.7143,
+            "recall": 0.625
+          },
+          "documentation_issue": {
+            "f1": 0.8571,
+            "precision": 1.0,
+            "recall": 0.75
+          },
+          "missing_shipment": {
+            "f1": 0.8571,
+            "precision": 1.0,
+            "recall": 0.75
+          },
+          "safety_incident": {
+            "f1": 0.4211,
+            "precision": 0.3077,
+            "recall": 0.6667
+          },
+          "shipment_damage": {
+            "f1": 0.8,
+            "precision": 0.8571,
+            "recall": 0.75
+          },
+          "vehicle_breakdown": {
+            "f1": 0.8,
+            "precision": 1.0,
+            "recall": 0.6667
+          }
+        }
+      },
+      "cost": {
+        "per_100": 268.75,
+        "terms": {
+          "false_alarm": {
+            "per_100": 0.0,
+            "total": 0
+          },
+          "missed_urgent": {
+            "per_100": 175.0,
+            "total": 140
+          },
+          "review": {
+            "per_100": 31.25,
+            "total": 25
+          },
+          "wrong_category_same_destination": {
+            "per_100": 0.0,
+            "total": 0
+          },
+          "wrong_destination": {
+            "per_100": 62.5,
+            "total": 50
+          }
+        },
+        "total": 215
+      },
+      "destination": {
+        "accuracy": 0.675,
+        "confusion_matrix": {
+          "claims": {
+            "claims": 12,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 4,
+            "security_investigations": 0
+          },
+          "compliance": {
+            "claims": 2,
+            "compliance": 10,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "customer_desk": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 8,
+            "fleet_support": 0,
+            "safety_desk": 10,
+            "security_investigations": 2
+          },
+          "fleet_support": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 8,
+            "safety_desk": 4,
+            "security_investigations": 0
+          },
+          "safety_desk": {
+            "claims": 0,
+            "compliance": 4,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 8,
+            "security_investigations": 0
+          },
+          "security_investigations": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 8
+          }
+        },
+        "macro_f1": 0.7084,
+        "per_class": {
+          "claims": {
+            "f1": 0.8,
+            "precision": 0.8571,
+            "recall": 0.75
+          },
+          "compliance": {
+            "f1": 0.7692,
+            "precision": 0.7143,
+            "recall": 0.8333
+          },
+          "customer_desk": {
+            "f1": 0.5714,
+            "precision": 1.0,
+            "recall": 0.4
+          },
+          "fleet_support": {
+            "f1": 0.8,
+            "precision": 1.0,
+            "recall": 0.6667
+          },
+          "safety_desk": {
+            "f1": 0.4211,
+            "precision": 0.3077,
+            "recall": 0.6667
+          },
+          "security_investigations": {
+            "f1": 0.8889,
+            "precision": 0.8,
+            "recall": 1.0
+          }
+        }
+      },
+      "latency": {
+        "max": 1.5871,
+        "n": 80,
+        "p50": 1.0019,
+        "p95": 1.2848
+      },
+      "n": 80,
+      "reliability": {
+        "error_count": 0,
+        "invalid_output_count": 0,
+        "mean_attempts": 1.0
+      },
+      "routing": {
+        "auto_route_coverage": 0.6875,
+        "auto_routed_error_rate": 0.2909,
+        "missed_urgent": [
+          {
+            "report_id": "R-0019",
+            "scenario_id": "S-061",
+            "text": "Driver's report, as received: It's UN1263 paint, class 3 flammable, in 25-litre steel drums. They're upright, no leak seen and no smell. Customer in Bradford ha",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0099",
+            "scenario_id": "S-061",
+            "text": "Hello, passing on the driver's account below.\n\nCustomer in Bradford has refused damaged Pennine Paints drums: three dented, with a lid cracked on one. All uprig",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0204",
+            "scenario_id": "S-061",
+            "text": "At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid. It's UN1263 paint, class 3 flammable, in 25-lit",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0234",
+            "scenario_id": "S-001",
+            "text": "NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0286",
+            "scenario_id": "S-001",
+            "text": "Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0297",
+            "scenario_id": "S-052",
+            "text": "Caller: NV20 RXC has rear-ended a car in slow traffic on the A34 near Oxford.\nDesk: Right, go on.\nCaller: The car driver says their neck hurts. Police are comin",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0315",
+            "scenario_id": "S-061",
+            "text": "Caller: At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid.\nDesk: Right, go on.\nCaller: The 25-litr",
+            "triggers": [],
+            "urgent_prob": 0.05
+          }
+        ],
+        "missed_urgent_count": 7,
+        "review_rate": 0.3125
+      },
+      "tokens": {
+        "mean_input": 0.0,
+        "mean_output": 0.0
+      },
+      "urgency": {
+        "counts": {
+          "fn": 8,
+          "fp": 0,
+          "tn": 56,
+          "tp": 16
+        },
+        "precision": 1.0,
+        "recall": 0.6667
+      }
+    },
+    "v2": {
+      "api_cost_per_1000_usd": 0.0,
+      "bootstrap_95_ci": {
+        "auto_routed_error_rate": [
+          0.1026,
+          0.5
+        ],
+        "cost_per_100": [
+          83.75,
+          2200.0
+        ],
+        "review_rate": [
+          0.125,
+          0.5
+        ],
+        "urgent_recall": [
+          0.35,
+          0.9167
+        ]
+      },
+      "category": {
+        "accuracy": 0.7,
+        "confusion_matrix": {
+          "delivery_delay": {
+            "delivery_delay": 10,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 6,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "documentation_issue": {
+            "delivery_delay": 0,
+            "documentation_issue": 6,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 2,
+            "vehicle_breakdown": 0
+          },
+          "missing_shipment": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 12,
+            "safety_incident": 4,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "safety_incident": {
+            "delivery_delay": 4,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 8,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "shipment_damage": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 4,
+            "shipment_damage": 12,
+            "vehicle_breakdown": 0
+          },
+          "vehicle_breakdown": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 4,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 8
+          }
+        },
+        "macro_f1": 0.7337,
+        "per_class": {
+          "delivery_delay": {
+            "f1": 0.6667,
+            "precision": 0.7143,
+            "recall": 0.625
+          },
+          "documentation_issue": {
+            "f1": 0.8571,
+            "precision": 1.0,
+            "recall": 0.75
+          },
+          "missing_shipment": {
+            "f1": 0.8571,
+            "precision": 1.0,
+            "recall": 0.75
+          },
+          "safety_incident": {
+            "f1": 0.4211,
+            "precision": 0.3077,
+            "recall": 0.6667
+          },
+          "shipment_damage": {
+            "f1": 0.8,
+            "precision": 0.8571,
+            "recall": 0.75
+          },
+          "vehicle_breakdown": {
+            "f1": 0.8,
+            "precision": 1.0,
+            "recall": 0.6667
+          }
+        }
+      },
+      "cost": {
+        "per_100": 968.75,
+        "terms": {
+          "false_alarm": {
+            "per_100": 0.0,
+            "total": 0
+          },
+          "missed_urgent": {
+            "per_100": 875.0,
+            "total": 700
+          },
+          "review": {
+            "per_100": 31.25,
+            "total": 25
+          },
+          "wrong_category_same_destination": {
+            "per_100": 0.0,
+            "total": 0
+          },
+          "wrong_destination": {
+            "per_100": 62.5,
+            "total": 50
+          }
+        },
+        "total": 775
+      },
+      "destination": {
+        "accuracy": 0.675,
+        "confusion_matrix": {
+          "claims": {
+            "claims": 12,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 4,
+            "security_investigations": 0
+          },
+          "compliance": {
+            "claims": 2,
+            "compliance": 10,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "customer_desk": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 8,
+            "fleet_support": 0,
+            "safety_desk": 10,
+            "security_investigations": 2
+          },
+          "fleet_support": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 8,
+            "safety_desk": 4,
+            "security_investigations": 0
+          },
+          "safety_desk": {
+            "claims": 0,
+            "compliance": 4,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 8,
+            "security_investigations": 0
+          },
+          "security_investigations": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 8
+          }
+        },
+        "macro_f1": 0.7084,
+        "per_class": {
+          "claims": {
+            "f1": 0.8,
+            "precision": 0.8571,
+            "recall": 0.75
+          },
+          "compliance": {
+            "f1": 0.7692,
+            "precision": 0.7143,
+            "recall": 0.8333
+          },
+          "customer_desk": {
+            "f1": 0.5714,
+            "precision": 1.0,
+            "recall": 0.4
+          },
+          "fleet_support": {
+            "f1": 0.8,
+            "precision": 1.0,
+            "recall": 0.6667
+          },
+          "safety_desk": {
+            "f1": 0.4211,
+            "precision": 0.3077,
+            "recall": 0.6667
+          },
+          "security_investigations": {
+            "f1": 0.8889,
+            "precision": 0.8,
+            "recall": 1.0
+          }
+        }
+      },
+      "latency": {
+        "max": 1.5871,
+        "n": 80,
+        "p50": 1.0019,
+        "p95": 1.2848
+      },
+      "n": 80,
+      "reliability": {
+        "error_count": 0,
+        "invalid_output_count": 0,
+        "mean_attempts": 1.0
+      },
+      "routing": {
+        "auto_route_coverage": 0.6875,
+        "auto_routed_error_rate": 0.2909,
+        "missed_urgent": [
+          {
+            "report_id": "R-0019",
+            "scenario_id": "S-061",
+            "text": "Driver's report, as received: It's UN1263 paint, class 3 flammable, in 25-litre steel drums. They're upright, no leak seen and no smell. Customer in Bradford ha",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0099",
+            "scenario_id": "S-061",
+            "text": "Hello, passing on the driver's account below.\n\nCustomer in Bradford has refused damaged Pennine Paints drums: three dented, with a lid cracked on one. All uprig",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0204",
+            "scenario_id": "S-061",
+            "text": "At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid. It's UN1263 paint, class 3 flammable, in 25-lit",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0234",
+            "scenario_id": "S-001",
+            "text": "NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0286",
+            "scenario_id": "S-001",
+            "text": "Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0297",
+            "scenario_id": "S-052",
+            "text": "Caller: NV20 RXC has rear-ended a car in slow traffic on the A34 near Oxford.\nDesk: Right, go on.\nCaller: The car driver says their neck hurts. Police are comin",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0315",
+            "scenario_id": "S-061",
+            "text": "Caller: At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid.\nDesk: Right, go on.\nCaller: The 25-litr",
+            "triggers": [],
+            "urgent_prob": 0.05
+          }
+        ],
+        "missed_urgent_count": 7,
+        "review_rate": 0.3125
+      },
+      "tokens": {
+        "mean_input": 0.0,
+        "mean_output": 0.0
+      },
+      "urgency": {
+        "counts": {
+          "fn": 8,
+          "fp": 0,
+          "tn": 56,
+          "tp": 16
+        },
+        "precision": 1.0,
+        "recall": 0.6667
+      }
+    }
+  },
+  "B": {
+    "v1": {
+      "api_cost_per_1000_usd": 0.0996,
+      "bootstrap_95_ci": {
+        "auto_routed_error_rate": [
+          0.0357,
+          0.3333
+        ],
+        "cost_per_100": [
+          40.0,
+          225.0
+        ],
+        "review_rate": [
+          0.1125,
+          0.4625
+        ],
+        "urgent_recall": [
+          0.5,
+          1.0
+        ]
+      },
+      "category": {
+        "accuracy": 0.95,
+        "confusion_matrix": {
+          "delivery_delay": {
+            "delivery_delay": 16,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "documentation_issue": {
+            "delivery_delay": 0,
+            "documentation_issue": 8,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "missing_shipment": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 16,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "safety_incident": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 12,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "shipment_damage": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 16,
+            "vehicle_breakdown": 0
+          },
+          "vehicle_breakdown": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 4,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 8
+          }
+        },
+        "macro_f1": 0.9429,
+        "per_class": {
+          "delivery_delay": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "documentation_issue": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "missing_shipment": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "safety_incident": {
+            "f1": 0.8571,
+            "precision": 0.75,
+            "recall": 1.0
+          },
+          "shipment_damage": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "vehicle_breakdown": {
+            "f1": 0.8,
+            "precision": 1.0,
+            "recall": 0.6667
+          }
+        }
+      },
+      "cost": {
+        "per_100": 115.0,
+        "terms": {
+          "false_alarm": {
+            "per_100": 5.0,
+            "total": 4
+          },
+          "missed_urgent": {
+            "per_100": 50.0,
+            "total": 40
+          },
+          "review": {
+            "per_100": 27.5,
+            "total": 22
+          },
+          "wrong_category_same_destination": {
+            "per_100": 1.25,
+            "total": 1
+          },
+          "wrong_destination": {
+            "per_100": 31.25,
+            "total": 25
+          }
+        },
+        "total": 92
+      },
+      "destination": {
+        "accuracy": 0.9375,
+        "confusion_matrix": {
+          "claims": {
+            "claims": 16,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "compliance": {
+            "claims": 0,
+            "compliance": 10,
+            "customer_desk": 2,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "customer_desk": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 20,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "fleet_support": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 9,
+            "safety_desk": 3,
+            "security_investigations": 0
+          },
+          "safety_desk": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 12,
+            "security_investigations": 0
+          },
+          "security_investigations": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 8
+          }
+        },
+        "macro_f1": 0.9346,
+        "per_class": {
+          "claims": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "compliance": {
+            "f1": 0.9091,
+            "precision": 1.0,
+            "recall": 0.8333
+          },
+          "customer_desk": {
+            "f1": 0.9524,
+            "precision": 0.9091,
+            "recall": 1.0
+          },
+          "fleet_support": {
+            "f1": 0.8571,
+            "precision": 1.0,
+            "recall": 0.75
+          },
+          "safety_desk": {
+            "f1": 0.8889,
+            "precision": 0.8,
+            "recall": 1.0
+          },
+          "security_investigations": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          }
+        }
+      },
+      "latency": {
+        "max": 355.9587,
+        "n": 80,
+        "p50": 222.4682,
+        "p95": 277.0583
+      },
+      "n": 80,
+      "reliability": {
+        "error_count": 0,
+        "invalid_output_count": 0,
+        "mean_attempts": 1.0
+      },
+      "routing": {
+        "auto_route_coverage": 0.725,
+        "auto_routed_error_rate": 0.1724,
+        "missed_urgent": [
+          {
+            "report_id": "R-0234",
+            "scenario_id": "S-001",
+            "text": "NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the",
+            "triggers": [
+              "cargo_missing",
+              "multiple_issues"
+            ],
+            "urgent_prob": 0.1
+          },
+          {
+            "report_id": "R-0286",
+            "scenario_id": "S-001",
+            "text": "Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p",
+            "triggers": [
+              "cargo_missing",
+              "multiple_issues"
+            ],
+            "urgent_prob": 0.08
+          }
+        ],
+        "missed_urgent_count": 2,
+        "review_rate": 0.275
+      },
+      "tokens": {
+        "mean_input": 2370.4125,
+        "mean_output": 347.5625
+      },
+      "urgency": {
+        "counts": {
+          "fn": 6,
+          "fp": 3,
+          "tn": 53,
+          "tp": 18
+        },
+        "precision": 0.8571,
+        "recall": 0.75
+      }
+    },
+    "v2": {
+      "api_cost_per_1000_usd": 0.0996,
+      "bootstrap_95_ci": {
+        "auto_routed_error_rate": [
+          0.0357,
+          0.3333
+        ],
+        "cost_per_100": [
+          40.0,
+          826.25
+        ],
+        "review_rate": [
+          0.1125,
+          0.4625
+        ],
+        "urgent_recall": [
+          0.5,
+          1.0
+        ]
+      },
+      "category": {
+        "accuracy": 0.95,
+        "confusion_matrix": {
+          "delivery_delay": {
+            "delivery_delay": 16,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "documentation_issue": {
+            "delivery_delay": 0,
+            "documentation_issue": 8,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "missing_shipment": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 16,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "safety_incident": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 12,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "shipment_damage": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 16,
+            "vehicle_breakdown": 0
+          },
+          "vehicle_breakdown": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 4,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 8
+          }
+        },
+        "macro_f1": 0.9429,
+        "per_class": {
+          "delivery_delay": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "documentation_issue": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "missing_shipment": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "safety_incident": {
+            "f1": 0.8571,
+            "precision": 0.75,
+            "recall": 1.0
+          },
+          "shipment_damage": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "vehicle_breakdown": {
+            "f1": 0.8,
+            "precision": 1.0,
+            "recall": 0.6667
+          }
+        }
+      },
+      "cost": {
+        "per_100": 315.0,
+        "terms": {
+          "false_alarm": {
+            "per_100": 5.0,
+            "total": 4
+          },
+          "missed_urgent": {
+            "per_100": 250.0,
+            "total": 200
+          },
+          "review": {
+            "per_100": 27.5,
+            "total": 22
+          },
+          "wrong_category_same_destination": {
+            "per_100": 1.25,
+            "total": 1
+          },
+          "wrong_destination": {
+            "per_100": 31.25,
+            "total": 25
+          }
+        },
+        "total": 252
+      },
+      "destination": {
+        "accuracy": 0.9375,
+        "confusion_matrix": {
+          "claims": {
+            "claims": 16,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "compliance": {
+            "claims": 0,
+            "compliance": 10,
+            "customer_desk": 2,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "customer_desk": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 20,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "fleet_support": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 9,
+            "safety_desk": 3,
+            "security_investigations": 0
+          },
+          "safety_desk": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 12,
+            "security_investigations": 0
+          },
+          "security_investigations": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 8
+          }
+        },
+        "macro_f1": 0.9346,
+        "per_class": {
+          "claims": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "compliance": {
+            "f1": 0.9091,
+            "precision": 1.0,
+            "recall": 0.8333
+          },
+          "customer_desk": {
+            "f1": 0.9524,
+            "precision": 0.9091,
+            "recall": 1.0
+          },
+          "fleet_support": {
+            "f1": 0.8571,
+            "precision": 1.0,
+            "recall": 0.75
+          },
+          "safety_desk": {
+            "f1": 0.8889,
+            "precision": 0.8,
+            "recall": 1.0
+          },
+          "security_investigations": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          }
+        }
+      },
+      "latency": {
+        "max": 355.9587,
+        "n": 80,
+        "p50": 222.4682,
+        "p95": 277.0583
+      },
+      "n": 80,
+      "reliability": {
+        "error_count": 0,
+        "invalid_output_count": 0,
+        "mean_attempts": 1.0
+      },
+      "routing": {
+        "auto_route_coverage": 0.725,
+        "auto_routed_error_rate": 0.1724,
+        "missed_urgent": [
+          {
+            "report_id": "R-0234",
+            "scenario_id": "S-001",
+            "text": "NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the",
+            "triggers": [
+              "cargo_missing",
+              "multiple_issues"
+            ],
+            "urgent_prob": 0.1
+          },
+          {
+            "report_id": "R-0286",
+            "scenario_id": "S-001",
+            "text": "Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p",
+            "triggers": [
+              "cargo_missing",
+              "multiple_issues"
+            ],
+            "urgent_prob": 0.08
+          }
+        ],
+        "missed_urgent_count": 2,
+        "review_rate": 0.275
+      },
+      "tokens": {
+        "mean_input": 2370.4125,
+        "mean_output": 347.5625
+      },
+      "urgency": {
+        "counts": {
+          "fn": 6,
+          "fp": 3,
+          "tn": 53,
+          "tp": 18
+        },
+        "precision": 0.8571,
+        "recall": 0.75
+      }
+    }
+  },
+  "C": {
+    "v1": {
+      "api_cost_per_1000_usd": 0.0545,
+      "bootstrap_95_ci": {
+        "auto_routed_error_rate": [
+          0.0571,
+          0.4
+        ],
+        "cost_per_100": [
+          51.25,
+          500.0
+        ],
+        "review_rate": [
+          0.0375,
+          0.325
+        ],
+        "urgent_recall": [
+          0.3125,
+          0.9167
+        ]
+      },
+      "category": {
+        "accuracy": 0.925,
+        "confusion_matrix": {
+          "delivery_delay": {
+            "delivery_delay": 16,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "documentation_issue": {
+            "delivery_delay": 0,
+            "documentation_issue": 8,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "missing_shipment": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 16,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "safety_incident": {
+            "delivery_delay": 4,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 8,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "shipment_damage": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 16,
+            "vehicle_breakdown": 0
+          },
+          "vehicle_breakdown": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 2,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 10
+          }
+        },
+        "macro_f1": 0.9209,
+        "per_class": {
+          "delivery_delay": {
+            "f1": 0.8889,
+            "precision": 0.8,
+            "recall": 1.0
+          },
+          "documentation_issue": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "missing_shipment": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "safety_incident": {
+            "f1": 0.7273,
+            "precision": 0.8,
+            "recall": 0.6667
+          },
+          "shipment_damage": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "vehicle_breakdown": {
+            "f1": 0.9091,
+            "precision": 1.0,
+            "recall": 0.8333
+          }
+        }
+      },
+      "cost": {
+        "per_100": 241.25,
+        "terms": {
+          "false_alarm": {
+            "per_100": 0.0,
+            "total": 0
+          },
+          "missed_urgent": {
+            "per_100": 175.0,
+            "total": 140
+          },
+          "review": {
+            "per_100": 16.25,
+            "total": 13
+          },
+          "wrong_category_same_destination": {
+            "per_100": 0.0,
+            "total": 0
+          },
+          "wrong_destination": {
+            "per_100": 50.0,
+            "total": 40
+          }
+        },
+        "total": 193
+      },
+      "destination": {
+        "accuracy": 0.9,
+        "confusion_matrix": {
+          "claims": {
+            "claims": 16,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "compliance": {
+            "claims": 0,
+            "compliance": 10,
+            "customer_desk": 2,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "customer_desk": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 20,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "fleet_support": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 10,
+            "safety_desk": 2,
+            "security_investigations": 0
+          },
+          "safety_desk": {
+            "claims": 0,
+            "compliance": 4,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 8,
+            "security_investigations": 0
+          },
+          "security_investigations": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 8
+          }
+        },
+        "macro_f1": 0.893,
+        "per_class": {
+          "claims": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "compliance": {
+            "f1": 0.7692,
+            "precision": 0.7143,
+            "recall": 0.8333
+          },
+          "customer_desk": {
+            "f1": 0.9524,
+            "precision": 0.9091,
+            "recall": 1.0
+          },
+          "fleet_support": {
+            "f1": 0.9091,
+            "precision": 1.0,
+            "recall": 0.8333
+          },
+          "safety_desk": {
+            "f1": 0.7273,
+            "precision": 0.8,
+            "recall": 0.6667
+          },
+          "security_investigations": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          }
+        }
+      },
+      "latency": {
+        "max": 296.22,
+        "n": 80,
+        "p50": 214.7112,
+        "p95": 248.5422
+      },
+      "n": 80,
+      "reliability": {
+        "error_count": 0,
+        "invalid_output_count": 0,
+        "mean_attempts": 1.0
+      },
+      "routing": {
+        "auto_route_coverage": 0.8375,
+        "auto_routed_error_rate": 0.209,
+        "missed_urgent": [
+          {
+            "report_id": "R-0019",
+            "scenario_id": "S-061",
+            "text": "Driver's report, as received: It's UN1263 paint, class 3 flammable, in 25-litre steel drums. They're upright, no leak seen and no smell. Customer in Bradford ha",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0099",
+            "scenario_id": "S-061",
+            "text": "Hello, passing on the driver's account below.\n\nCustomer in Bradford has refused damaged Pennine Paints drums: three dented, with a lid cracked on one. All uprig",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0204",
+            "scenario_id": "S-061",
+            "text": "At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid. It's UN1263 paint, class 3 flammable, in 25-lit",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0234",
+            "scenario_id": "S-001",
+            "text": "NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0286",
+            "scenario_id": "S-001",
+            "text": "Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0297",
+            "scenario_id": "S-052",
+            "text": "Caller: NV20 RXC has rear-ended a car in slow traffic on the A34 near Oxford.\nDesk: Right, go on.\nCaller: The car driver says their neck hurts. Police are comin",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0315",
+            "scenario_id": "S-061",
+            "text": "Caller: At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid.\nDesk: Right, go on.\nCaller: The 25-litr",
+            "triggers": [],
+            "urgent_prob": 0.05
+          }
+        ],
+        "missed_urgent_count": 7,
+        "review_rate": 0.1625
+      },
+      "tokens": {
+        "mean_input": 1298.1875,
+        "mean_output": 188.425
+      },
+      "urgency": {
+        "counts": {
+          "fn": 9,
+          "fp": 0,
+          "tn": 56,
+          "tp": 15
+        },
+        "precision": 1.0,
+        "recall": 0.625
+      }
+    },
+    "v2": {
+      "api_cost_per_1000_usd": 0.0545,
+      "bootstrap_95_ci": {
+        "auto_routed_error_rate": [
+          0.0571,
+          0.4
+        ],
+        "cost_per_100": [
+          52.5,
+          2181.25
+        ],
+        "review_rate": [
+          0.0375,
+          0.325
+        ],
+        "urgent_recall": [
+          0.3125,
+          0.9167
+        ]
+      },
+      "category": {
+        "accuracy": 0.925,
+        "confusion_matrix": {
+          "delivery_delay": {
+            "delivery_delay": 16,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "documentation_issue": {
+            "delivery_delay": 0,
+            "documentation_issue": 8,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "missing_shipment": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 16,
+            "safety_incident": 0,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "safety_incident": {
+            "delivery_delay": 4,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 8,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 0
+          },
+          "shipment_damage": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 0,
+            "shipment_damage": 16,
+            "vehicle_breakdown": 0
+          },
+          "vehicle_breakdown": {
+            "delivery_delay": 0,
+            "documentation_issue": 0,
+            "missing_shipment": 0,
+            "safety_incident": 2,
+            "shipment_damage": 0,
+            "vehicle_breakdown": 10
+          }
+        },
+        "macro_f1": 0.9209,
+        "per_class": {
+          "delivery_delay": {
+            "f1": 0.8889,
+            "precision": 0.8,
+            "recall": 1.0
+          },
+          "documentation_issue": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "missing_shipment": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "safety_incident": {
+            "f1": 0.7273,
+            "precision": 0.8,
+            "recall": 0.6667
+          },
+          "shipment_damage": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "vehicle_breakdown": {
+            "f1": 0.9091,
+            "precision": 1.0,
+            "recall": 0.8333
+          }
+        }
+      },
+      "cost": {
+        "per_100": 941.25,
+        "terms": {
+          "false_alarm": {
+            "per_100": 0.0,
+            "total": 0
+          },
+          "missed_urgent": {
+            "per_100": 875.0,
+            "total": 700
+          },
+          "review": {
+            "per_100": 16.25,
+            "total": 13
+          },
+          "wrong_category_same_destination": {
+            "per_100": 0.0,
+            "total": 0
+          },
+          "wrong_destination": {
+            "per_100": 50.0,
+            "total": 40
+          }
+        },
+        "total": 753
+      },
+      "destination": {
+        "accuracy": 0.9,
+        "confusion_matrix": {
+          "claims": {
+            "claims": 16,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "compliance": {
+            "claims": 0,
+            "compliance": 10,
+            "customer_desk": 2,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "customer_desk": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 20,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 0
+          },
+          "fleet_support": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 10,
+            "safety_desk": 2,
+            "security_investigations": 0
+          },
+          "safety_desk": {
+            "claims": 0,
+            "compliance": 4,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 8,
+            "security_investigations": 0
+          },
+          "security_investigations": {
+            "claims": 0,
+            "compliance": 0,
+            "customer_desk": 0,
+            "fleet_support": 0,
+            "safety_desk": 0,
+            "security_investigations": 8
+          }
+        },
+        "macro_f1": 0.893,
+        "per_class": {
+          "claims": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "compliance": {
+            "f1": 0.7692,
+            "precision": 0.7143,
+            "recall": 0.8333
+          },
+          "customer_desk": {
+            "f1": 0.9524,
+            "precision": 0.9091,
+            "recall": 1.0
+          },
+          "fleet_support": {
+            "f1": 0.9091,
+            "precision": 1.0,
+            "recall": 0.8333
+          },
+          "safety_desk": {
+            "f1": 0.7273,
+            "precision": 0.8,
+            "recall": 0.6667
+          },
+          "security_investigations": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          }
+        }
+      },
+      "latency": {
+        "max": 296.22,
+        "n": 80,
+        "p50": 214.7112,
+        "p95": 248.5422
+      },
+      "n": 80,
+      "reliability": {
+        "error_count": 0,
+        "invalid_output_count": 0,
+        "mean_attempts": 1.0
+      },
+      "routing": {
+        "auto_route_coverage": 0.8375,
+        "auto_routed_error_rate": 0.209,
+        "missed_urgent": [
+          {
+            "report_id": "R-0019",
+            "scenario_id": "S-061",
+            "text": "Driver's report, as received: It's UN1263 paint, class 3 flammable, in 25-litre steel drums. They're upright, no leak seen and no smell. Customer in Bradford ha",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0099",
+            "scenario_id": "S-061",
+            "text": "Hello, passing on the driver's account below.\n\nCustomer in Bradford has refused damaged Pennine Paints drums: three dented, with a lid cracked on one. All uprig",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0204",
+            "scenario_id": "S-061",
+            "text": "At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid. It's UN1263 paint, class 3 flammable, in 25-lit",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0234",
+            "scenario_id": "S-001",
+            "text": "NV22 HPL has tipped at Brackenridge RDC Doncaster, three pallets short. Driver says the seal was intact when he opened the artic. Goods-in say the number on the",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0286",
+            "scenario_id": "S-001",
+            "text": "Driver's report, as received: Driver says the seal was intact when he opened the artic. Goods-in say the number on the doors doesn't match the manifest. Three p",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0297",
+            "scenario_id": "S-052",
+            "text": "Caller: NV20 RXC has rear-ended a car in slow traffic on the A34 near Oxford.\nDesk: Right, go on.\nCaller: The car driver says their neck hurts. Police are comin",
+            "triggers": [],
+            "urgent_prob": 0.05
+          },
+          {
+            "report_id": "R-0315",
+            "scenario_id": "S-061",
+            "text": "Caller: At the Pennine Paints customer in Bradford, opening the trailer revealed three dented drums and one cracked lid.\nDesk: Right, go on.\nCaller: The 25-litr",
+            "triggers": [],
+            "urgent_prob": 0.05
+          }
+        ],
+        "missed_urgent_count": 7,
+        "review_rate": 0.1625
+      },
+      "tokens": {
+        "mean_input": 1298.1875,
+        "mean_output": 188.425
+      },
+      "urgency": {
+        "counts": {
+          "fn": 9,
+          "fp": 0,
+          "tn": 56,
+          "tp": 15
+        },
+        "precision": 1.0,
+        "recall": 0.625
+      }
+    }
+  }
+}

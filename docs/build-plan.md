@@ -113,3 +113,36 @@ docs/label-guide.md, docs/provenance.md, docs/business-summary.md, docs/attribut
 
 Codex jobs (`~/.claude/routing/codex-offload.md`): **J1** paraphrases from Scenarios + label
 guide; **J2** eval harness + tests to a Claude-written spec. Claude reviews both diffs.
+
+## Status at handoff 1 (2026-10-27 ~02:00 SGT)
+
+Done: label guide + 100 Scenarios (`ada53b8`), 400 reports from Codex J1 (`b1bc5bd`, variety
+limitation in `docs/provenance-generation.md`), engine A/B/C + Policy (`35bca64`), eval harness
+from Codex J2 (`f96f18e`), design direction Route sign (`design/direction.md`), SvelteKit demo on
+sample data (`1e4f07c`). Predictions cached for A/B/C on build + validation; TypeSafe spend so
+far US$0.028 (`results/spend.json`). Build-split, untuned thresholds: B urgent recall 0.93 with 0
+Missed Urgent at 27% review; A 0.82 recall, 10 Missed Urgent (`results/report_build_seeded.md`).
+
+Next, in order:
+1. Optional, ≤45 min: tune A's rules against **build-split** errors only (never validation or
+   test text), re-run A and C on build + validation (no API cost). Log it.
+2. `eval/tune.py --policy v1` and `--policy v2` on validation; sanity-check; `--freeze`;
+   `eval/tune.py --curve validation`.
+3. Sol review (`~/.claude/routing/sol.md`) of `eval/` + `src/triage/policy.py` before any test
+   run: leakage, metric definitions, cost and Missed Urgent logic.
+4. `eval/export_web.py` with real data; `labelling.json` = 120 test reports, no labels. Serve
+   `web` dev server so the user can blind-label at http://localhost:5173/label by **10:00 SGT**
+   (if they are remote, use the `tailscale-remote-preview` skill). Tell the user.
+5. User downloads labels → `data/labels/blind_test.json` (pass 1; pass 2 ≥4 h later). Then the one
+   test run: `run_predictions.py --split test --i-know-this-is-the-one-test-run` for A, B, C;
+   `evaluate.py --split test --labels final` and `--labels seeded`; `agreement.py`; user
+   adjudicates disagreements → `data/labels/adjudicated_test.json`; `tune.py --curve test`.
+6. Export real data to web; `/impeccable audit` + `polish` (bounded); `/impeccable document` →
+   `DESIGN.md`; CI workflow that re-runs evaluate from cached predictions and fails on
+   `git diff --exit-code results/`; README (run steps, live link), `docs/business-summary.md`
+   (one page), `docs/attribution.md` (Claude Opus 5.5 / Sonnet 5.5, GPT-6.1 Sol via Codex J1/J2,
+   TypeSafe Jev; user = labeller and decision owner), walkthrough script.
+7. GitHub Pages needs the repo public (or a paid plan): ask the user before 22:00.
+8. ~20:00 user think-aloud on the demo; log findings; fix ≤2. ~22:00 go public on the user's
+   word; rehearsal.
+9. Before handing back: decision-log audit + independent review + Attention section.
