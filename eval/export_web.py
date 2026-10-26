@@ -260,8 +260,12 @@ def build_curve(root: Path, fixture: bool) -> dict:
             entry = raw.get(a)
             if entry is None:
                 continue
-            points = entry.get("points", entry if isinstance(entry, list) else [])
-            chosen = entry.get("chosen", entry) if isinstance(entry, dict) else {}
+            if isinstance(entry, list):  # tune.py writes a flat list; frozen points have chosen=True
+                points = [p for p in entry if not p.get("chosen")]
+                chosen = {p["sweep_policy"]: p for p in entry if p.get("chosen")}
+            else:
+                points = entry.get("points", [])
+                chosen = entry.get("chosen", entry)
             approaches[a] = {"points": points, "v1": chosen.get("v1"), "v2": chosen.get("v2")}
         return {"fixture": fixture, "split": split, "approaches": approaches}
     return {"fixture": fixture, "split": None, "approaches": {}}

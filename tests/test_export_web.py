@@ -70,3 +70,14 @@ def test_export_tolerates_an_empty_repo_and_is_deterministic(tmp_path):
     assert incidents["reports"] == [] and incidents["split"] == "test"
     for name in ("incidents.json", "results.json", "curve.json", "labelling.json"):
         assert (tmp_path / "a" / name).read_bytes() == (tmp_path / "b" / name).read_bytes()
+
+
+def test_build_curve_reads_tune_flat_list(tmp_path):
+    (tmp_path / "results").mkdir()
+    pts = [{"review_rate": 0.1, "missed_urgent": 2, "sweep_policy": "v1", "chosen": False},
+           {"review_rate": 0.5, "missed_urgent": 0, "sweep_policy": "v1", "chosen": True},
+           {"review_rate": 0.6, "missed_urgent": 0, "sweep_policy": "v2", "chosen": True}]
+    (tmp_path / "results" / "curve_validation.json").write_text(json.dumps({"A": pts}))
+    got = export_web.build_curve(tmp_path, fixture=False)
+    assert got["split"] == "validation"
+    assert got["approaches"]["A"] == {"points": pts[:1], "v1": pts[1], "v2": pts[2]}
