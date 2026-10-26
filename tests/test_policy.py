@@ -20,7 +20,7 @@ def _policy(**threshold_overrides):
         version="t",
         costs={"missed_urgent": 20, "wrong_destination": 5, "false_alarm": 2,
                    "wrong_category_same_destination": 1, "review": 1},
-        thresholds=thresholds,
+        thresholds={a: dict(thresholds) for a in "ABC"},
         forcing_triggers=["conflicting_statements"],
     )
 

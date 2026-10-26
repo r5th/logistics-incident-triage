@@ -1,0 +1,4 @@
+{"scenario_id": "validation-urgent", "split": "validation", "category": "shipment_damage", "urgency": "urgent", "destination": "claims", "destination_is_exception": false}
+{"scenario_id": "validation-routine", "split": "validation", "category": "shipment_damage", "urgency": "routine", "destination": "claims", "destination_is_exception": false}
+{"scenario_id": "test-urgent", "split": "test", "category": "shipment_damage", "urgency": "urgent", "destination": "claims", "destination_is_exception": false}
+{"scenario_id": "test-routine", "split": "test", "category": "shipment_damage", "urgency": "routine", "destination": "claims", "destination_is_exception": false}
