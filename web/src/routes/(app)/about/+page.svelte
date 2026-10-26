@@ -97,11 +97,16 @@
 	<p>
 		{stored ? `${stored} reports have Reviewer Actions saved in this browser.` : 'No Reviewer Actions are saved in this browser.'}
 	</p>
-	<button class="btn" type="button" disabled={!stored} onclick={() => { actions.clear(); cleared = true; }}><Icon name="undo" />Clear Reviewer Actions</button>
+	<button class="btn clear" type="button" disabled={!stored} onclick={() => { actions.clear(); cleared = true; }}><Icon name="undo" />Clear Reviewer Actions</button>
 	<p class="muted small" aria-live="polite">{cleared && !stored ? 'Cleared. The Queue shows every Review item as awaiting again.' : ''}</p>
 </article>
 
 <style>
+	@media (max-width: 599px) {
+		.clear {
+			min-height: 44px;
+		}
+	}
 	.about {
 		max-width: 72ch;
 	}

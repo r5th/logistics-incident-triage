@@ -264,7 +264,7 @@
 							<td class="col-report">
 								<a class="rid" href={href(r)} data-rid={r.report.id} onclick={(e) => { e.preventDefault(); e.stopPropagation(); open(r); }} onfocus={() => (selected = r.report.id)}>{r.report.id}</a>
 								<span class="excerpt">{r.report.text}</span>
-								<span class="time-inline num muted">{r.report.received}{#if r.status === 'awaiting'} · waiting {waited(r.report.waiting_min)}{/if}</span>
+								<span class="time-inline num muted">{r.report.received}{#if r.status === 'awaiting'}{' · '}waiting {waited(r.report.waiting_min)}{/if}</span>
 							</td>
 							<td class="col-cat">{CATEGORY_NAME[r.category]}</td>
 							<td><DestinationPlate destination={r.destination} /></td>
@@ -291,7 +291,7 @@
 							<span class="li-top">
 								<UrgencyMark urgency={r.urgency} />
 								<span class="rid">{r.report.id}</span>
-								<span class="li-time num">{r.report.received}{#if r.status === 'awaiting'} · {waited(r.report.waiting_min)}{/if}</span>
+								<span class="li-time num">{r.report.received}{#if r.status === 'awaiting'}{' · '}{waited(r.report.waiting_min)}{/if}</span>
 							</span>
 							<span class="li-text">{r.report.text}</span>
 							<span class="li-plates">

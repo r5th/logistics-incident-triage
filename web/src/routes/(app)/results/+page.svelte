@@ -64,12 +64,21 @@
 	const current = $derived(m?.[view.approach]?.[view.policy] ?? null);
 	const headline = $derived.by(() => {
 		if (!current) return '';
-		const checks = ROWS.filter((r) => r.met).map((r) => r.met!(current));
-		const met = checks.filter((c) => c === true).length;
-		return `Approach ${view.approach} (${APPROACH_NAME[view.approach]}) under Policy ${view.policy}: urgent recall ${p2(current.urgency.recall)}, review rate ${pct(current.routing.review_rate)}, ${current.routing.missed_urgent_count} Missed Urgent. It meets ${met} of ${checks.length} targets.`;
+		const checks = ROWS.filter((r) => r.met).map((r) => ({ r, ok: r.met!(current) }));
+		const met = checks.filter((c) => c.ok === true).length;
+		const missedNames = checks.filter((c) => c.ok === false).map((c) => `${c.r.label.toLowerCase()} (target ${c.r.target})`);
+		const misses = missedNames.length ? ` and misses ${missedNames.join(' and ')}` : '';
+		return `Approach ${view.approach} (${APPROACH_NAME[view.approach]}) under Policy ${view.policy}: urgent recall ${p2(current.urgency.recall)}, review rate ${pct(current.routing.review_rate)}, ${current.routing.missed_urgent_count} Missed Urgent. It meets ${met} of ${checks.length} targets${misses}.`;
 	});
 	const missed = $derived(
 		APPROACHES.flatMap((a) => (m?.[a]?.[view.policy]?.routing.missed_urgent ?? []).map((c) => ({ a, c })))
+	);
+	// Approaches whose v1 and v2 froze the same thresholds, so their two columns are identical.
+	const sameOp = $derived(
+		APPROACHES.filter((a) => {
+			const c = curve?.approaches[a];
+			return c?.v1 && c?.v2 && c.v1.urgent_threshold === c.v2.urgent_threshold && JSON.stringify(c.v1.band) === JSON.stringify(c.v2.band);
+		})
 	);
 	const labelsWord = $derived(results?.labels === 'final' ? 'final (Blind) Labels' : 'Seeded Labels');
 </script>
@@ -130,6 +139,11 @@
 				</tbody>
 			</table>
 		</div>
+		{#if sameOp.length}
+			<p class="muted small">
+				{sameOp.length === APPROACHES.length ? 'For every approach' : `For ${sameOp.join(' and ')}`}, Policies v1 and v2 froze the same thresholds on validation, so their columns match.
+			</p>
+		{/if}
 		<p class="muted small">Cost is in reviewer-minutes under each Policy's error costs. Ranges are 95% intervals from resampling whole Scenarios. The highlighted column is the approach and Policy picked in the menu.</p>
 	</section>
 

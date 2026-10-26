@@ -683,7 +683,6 @@
 	}
 	@media (max-width: 599px) {
 		.crumb,
-		.detail-head h1,
 		.head-actions {
 			display: none;
 		}

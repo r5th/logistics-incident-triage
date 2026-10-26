@@ -27,29 +27,36 @@
 				const points = Object.values(seen).sort(
 					(x, y) => x.review_rate - y.review_rate || y.missed_urgent - x.missed_urgent
 				);
-				return { a, points, v1: c.v1, v2: c.v2 };
+				// The sweep varies two thresholds, so many settings share a review rate. The line is
+				// the frontier: the fewest Missed Urgent reachable at or below each review rate.
+				const front: CurvePoint[] = [];
+				for (const p of points) if (!front.length || p.missed_urgent < front.at(-1)!.missed_urgent) front.push(p);
+				const xEnd = points.length ? points.at(-1)!.review_rate : 0;
+				return { a, points, front, xEnd, v1: c.v1, v2: c.v2 };
 			})
 	);
 	const all = $derived(series.flatMap((s) => [...s.points, ...(s.v1 ? [s.v1] : []), ...(s.v2 ? [s.v2] : [])]));
 	const xMax = $derived(Math.min(1, Math.max(0.3, Math.ceil(Math.max(0, ...all.map((p) => p.review_rate)) * 10) / 10)));
-	const yMax = $derived(Math.max(4, Math.ceil(Math.max(0, ...all.map((p) => p.missed_urgent)) / 2) * 2));
+	// Whole-number y ticks in even steps: 0, step, 2·step, 3·step, 4·step.
+	const yStep = $derived(Math.max(1, Math.ceil(Math.max(0, ...all.map((p) => p.missed_urgent)) / 4)));
+	const yMax = $derived(yStep * 4);
 	const sx = (v: number) => M.l + (v / xMax) * (W - M.l - M.r);
 	const sy = (v: number) => H - M.b - (v / yMax) * (H - M.t - M.b);
 	const xTicks = $derived(Array.from({ length: Math.round(xMax * 10) + 1 }, (_, i) => i / 10));
-	const yTicks = $derived(Array.from({ length: 5 }, (_, i) => Math.round((yMax / 4) * i)));
+	const yTicks = $derived(Array.from({ length: 5 }, (_, i) => yStep * i));
 
-	const path = (pts: CurvePoint[]) =>
-		pts.map((p, i) => `${i ? 'L' : 'M'}${sx(p.review_rate).toFixed(1)},${sy(p.missed_urgent).toFixed(1)}`).join('');
+	// Step line: hold each frontier count until the next review rate that lowers it.
+	const path = (pts: CurvePoint[], xEnd: number) =>
+		pts
+			.map((p, i) => `${i ? `H${sx(p.review_rate).toFixed(1)}V` : `M${sx(p.review_rate).toFixed(1)},`}${sy(p.missed_urgent).toFixed(1)}`)
+			.join('') + (pts.length ? `H${sx(xEnd).toFixed(1)}` : '');
 
-	// Direct labels just above each line's right end, nudged upward so they never overlap
-	// each other or the x-axis ticks.
+	// Direct labels just right of each line's end, stacked upward so they never overlap
+	// each other or the Policy marks.
 	const ends = $derived.by(() => {
 		const e = series
-			.filter((s) => s.points.length)
-			.map((s) => {
-				const last = s.points.at(-1)!;
-				return { a: s.a, x: sx(last.review_rate), y: sy(last.missed_urgent) - 12 };
-			})
+			.filter((s) => s.front.length)
+			.map((s) => ({ a: s.a, x: sx(s.xEnd) + 11, y: sy(s.front.at(-1)!.missed_urgent) }))
 			.sort((p, q) => q.y - p.y);
 		for (let i = 1; i < e.length; i++) if (e[i - 1].y - e[i].y < 14) e[i].y = e[i - 1].y - 14;
 		return e;
@@ -69,7 +76,8 @@
 		const el = e.currentTarget as SVGElement;
 		const box = el.closest('.chart-box')!.getBoundingClientRect();
 		const r = el.getBoundingClientRect();
-		tip = { x: r.left + r.width / 2 - box.left, y: r.top - box.top, text };
+		const sc = el.closest('.chart-scroll')!;
+		tip = { x: r.left + r.width / 2 - box.left + sc.scrollLeft, y: r.top - box.top, text };
 	}
 </script>
 
@@ -79,7 +87,7 @@
 			<li class:current={s.a === approach}><span class="sw-line" style="background: {COLORS[s.a]}"></span>{s.a} {APPROACH_NAME[s.a]}</li>
 		{/each}
 		<li><svg class="mk" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="4.5" fill="var(--text-2)" /></svg>Policy v1</li>
-		<li><svg class="mk" viewBox="0 0 12 12" aria-hidden="true"><rect x="1.5" y="1.5" width="9" height="9" fill="var(--text-2)" /></svg>Policy v2</li>
+		<li><svg class="mk" viewBox="0 0 12 12" aria-hidden="true"><rect x="1" y="1" width="10" height="10" fill="none" stroke="var(--text-2)" stroke-width="1.6" /></svg>Policy v2</li>
 		<li><span class="sw-dash"></span>25% review-rate target</li>
 	</ul>
 	<button class="btn btn-quiet" type="button" aria-pressed={asTable} onclick={() => (asTable = !asTable)}>
@@ -112,7 +120,7 @@
 		</table>
 	</div>
 {:else}
-	<div class="chart-box">
+	<div class="chart-box"><div class="chart-scroll">
 		<svg viewBox="0 0 {W} {H}" role="img" aria-labelledby="chart-desc" class="chart" onmouseleave={() => (tip = null)}>
 			<desc id="chart-desc">{summary}</desc>
 			<g class="grid" aria-hidden="true">
@@ -121,7 +129,7 @@
 					<text x={M.l - 8} y={sy(v)} dy="0.32em" text-anchor="end">{v}</text>
 				{/each}
 				{#each xTicks as v (v)}
-					<text x={sx(v)} y={H - M.b + 18} text-anchor="middle">{pct(v)}</text>
+					<text x={sx(v)} y={H - M.b + 22} text-anchor="middle">{pct(v)}</text>
 				{/each}
 				<line class="axis" x1={M.l} x2={W - M.r} y1={sy(0)} y2={sy(0)} />
 				<text class="axis-title" x={(M.l + W - M.r) / 2} y={H - 6} text-anchor="middle">Review rate</text>
@@ -132,28 +140,32 @@
 			</g>
 			{#each series as s (s.a)}
 				<g class="series" class:dim={s.a !== approach} style="--c: {COLORS[s.a]}">
-					<path d={path(s.points)} />
 					{#each s.points as p, i (i)}
+						<circle class="other" cx={sx(p.review_rate)} cy={sy(p.missed_urgent)} r="2" />
+					{/each}
+					<path d={path(s.front, s.xEnd)} />
+					{#each s.front as p, i (i)}
 						<circle class="hit" cx={sx(p.review_rate)} cy={sy(p.missed_urgent)} r="9" role="presentation" onmouseenter={(e) => show(e, describe(s.a, p))} />
 						<circle class="dot" cx={sx(p.review_rate)} cy={sy(p.missed_urgent)} r="3" />
 					{/each}
-					{#if s.v1}
-						<circle class="mark" cx={sx(s.v1.review_rate)} cy={sy(s.v1.missed_urgent)} r="6" role="presentation" onmouseenter={(e) => show(e, describe(s.a, s.v1!, 'v1'))} />
-					{/if}
 					{#if s.v2}
-						<rect class="mark" x={sx(s.v2.review_rate) - 5.5} y={sy(s.v2.missed_urgent) - 5.5 - (s.v1 && s.v1.review_rate === s.v2.review_rate && s.v1.missed_urgent === s.v2.missed_urgent ? 13 : 0)} width="11" height="11" role="presentation" onmouseenter={(e) => show(e, describe(s.a, s.v2!, 'v2'))} />
+						<rect class="mark2" x={sx(s.v2.review_rate) - 8} y={sy(s.v2.missed_urgent) - 8} width="16" height="16" role="presentation" onmouseenter={(e) => show(e, describe(s.a, s.v2!, 'v2'))} />
+					{/if}
+					{#if s.v1}
+						<circle class="mark" cx={sx(s.v1.review_rate)} cy={sy(s.v1.missed_urgent)} r="5" role="presentation" onmouseenter={(e) => show(e, describe(s.a, s.v1!, 'v1'))} />
 					{/if}
 				</g>
 			{/each}
 			{#each ends as e (e.a)}
-				<text class="end-label" x={e.x} y={e.y} dy="0.32em" text-anchor="middle" aria-hidden="true">{e.a}</text>
+				<text class="end-label" x={e.x} y={e.y} dy="0.32em" text-anchor="start" aria-hidden="true">{e.a}</text>
 			{/each}
 		</svg>
+		</div>
 		{#if tip}
 			<div class="tip" role="status" style="left: {tip.x}px; top: {tip.y}px">{tip.text}</div>
 		{/if}
 	</div>
-	<p class="chart-note">A v2 square drawn just above a v1 circle means both Policies chose the same Operating Point.</p>
+	<p class="chart-note">Each line is the fewest Missed Urgent reachable at that review rate; faint dots are the other threshold settings swept. A v1 circle inside a v2 square means both Policies chose the same Operating Point.</p>
 {/if}
 
 <style>
@@ -201,8 +213,12 @@
 	.chart-box {
 		position: relative;
 	}
+	.chart-scroll {
+		overflow-x: auto;
+	}
 	.chart {
 		width: 100%;
+		min-width: 560px; /* below this the 12px chart text shrinks past legibility; scroll instead */
 		max-width: 760px; /* keeps 12px chart text near 12px on wide screens */
 		height: auto;
 		display: block;
@@ -238,6 +254,16 @@
 		stroke: var(--surface);
 		stroke-width: 2;
 	}
+	.series .other {
+		fill: var(--c);
+		opacity: 0.28;
+	}
+	.series .mark2 {
+		fill: none;
+		stroke: var(--c);
+		stroke-width: 2;
+		cursor: default;
+	}
 	.series .hit {
 		fill: transparent;
 	}
@@ -248,7 +274,9 @@
 		cursor: default;
 	}
 	.series.dim path,
-	.series.dim .dot {
+	.series.dim .dot,
+	.series.dim .mark,
+	.series.dim .mark2 {
 		opacity: 0.55;
 	}
 	.end-label {
